@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="6">
+                <h:outputLabel value="#{bundle.CreateMateriaPrimaLabel_descripcion}" for="descripcion" />
+                <h:inputText id="descripcion" value="#{materiaPrimaController.selected.descripcion}" title="#{bundle.CreateMateriaPrimaTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateMateriaPrimaRequiredMessage_descripcion}"/>
+                <h:outputLabel value="#{bundle.CreateMateriaPrimaLabel_tipo}" for="tipo" />
+                <h:selectOneMenu id="tipo" value="#{materiaPrimaController.selected.tipo}" title="#{bundle.CreateMateriaPrimaTitle_tipo}" required="true" requiredMessage="#{bundle.CreateMateriaPrimaRequiredMessage_tipo}">
+                    <f:selectItem itemValue="" itemLabel="Elija un Tipo De Materia Prima" />
+                    <f:selectItem itemValue="Lamina" itemLabel="Lamina" />
+                    <f:selectItem itemValue="Viga" itemLabel="Viga" />
+                </h:selectOneMenu>
+                <h:outputLabel value="#{bundle.CreateMateriaPrimaLabel_pesoMl}" for="pesoMl" />
+                <h:inputText id="pesoMl" value="#{materiaPrimaController.selected.pesoMl}" title="#{bundle.CreateMateriaPrimaTitle_pesoMl}" required="true" requiredMessage="#{bundle.CreateMateriaPrimaRequiredMessage_pesoMl}"/>
+            </h:panelGrid>
+            <h:panelGrid columns="3" styleClass="link">
+                <h:commandLink action="#{materiaPrimaController.create}" value="#{bundle.CreateMateriaPrimaSaveLink}" />
+                <h:commandLink action="#{materiaPrimaController.prepareList}" value="#{bundle.CreateMateriaPrimaShowAllLink}" immediate="true"/>
+                <h:link outcome="/index" value="#{bundle.CreateMateriaPrimaIndexLink}"/>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

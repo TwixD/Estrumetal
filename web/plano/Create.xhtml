@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{bundle.CreatePlanoTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{bundle.CreatePlanoLabel_idPlano}" for="idPlano" />
+                <h:inputText id="idPlano" value="#{planoController.selected.idPlano}" title="#{bundle.CreatePlanoTitle_idPlano}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_idPlano}"/>
+                <h:outputLabel value="#{bundle.CreatePlanoLabel_nombre}" for="nombre" />
+                <h:inputText id="nombre" value="#{planoController.selected.nombre}" title="#{bundle.CreatePlanoTitle_nombre}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_nombre}"/>
+                <h:outputLabel value="#{bundle.CreatePlanoLabel_pesoUnitario}" for="pesoUnitario" />
+                <h:inputText id="pesoUnitario" value="#{planoController.selected.pesoUnitario}" title="#{bundle.CreatePlanoTitle_pesoUnitario}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_pesoUnitario}"/>
+                <h:outputLabel value="#{bundle.CreatePlanoLabel_areaUnitaria}" for="areaUnitaria" />
+                <h:inputText id="areaUnitaria" value="#{planoController.selected.areaUnitaria}" title="#{bundle.CreatePlanoTitle_areaUnitaria}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_areaUnitaria}"/>
+                <h:outputLabel value="#{bundle.CreatePlanoLabel_cantidad}" for="cantidad" />
+                <h:inputText id="cantidad" value="#{planoController.selected.cantidad}" title="#{bundle.CreatePlanoTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_cantidad}"/>
+                <h:outputLabel value="#{bundle.CreatePlanoLabel_revision}" for="revision" />
+                <h:inputText id="revision" value="#{planoController.selected.revision}" title="#{bundle.CreatePlanoTitle_revision}" />
+                <h:outputLabel value="#{bundle.CreatePlanoLabel_observacion}" for="observacion" />
+                <h:inputText id="observacion" value="#{planoController.selected.observacion}" title="#{bundle.CreatePlanoTitle_observacion}" />
+                <h:outputLabel value="#{bundle.CreatePlanoLabel_fecha}" for="fecha" />
+                <h:inputText id="fecha" value="#{planoController.selected.fecha}" title="#{bundle.CreatePlanoTitle_fecha}" >
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:inputText>
+                <h:outputLabel value="#{bundle.CreatePlanoLabel_OBRAidobra}" for="OBRAidobra" />
+                <h:selectOneMenu id="OBRAidobra" value="#{planoController.selected.OBRAidobra}" title="#{bundle.CreatePlanoTitle_OBRAidobra}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_OBRAidobra}">
+                    <f:selectItems value="#{obraController.itemsAvailableSelectOne}"/>
+                </h:selectOneMenu>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{planoController.create}" value="#{bundle.CreatePlanoSaveLink}" />
+            <br />
+            <br />
+            <h:commandLink action="#{planoController.prepareList}" value="#{bundle.CreatePlanoShowAllLink}" immediate="true"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.CreatePlanoIndexLink}"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

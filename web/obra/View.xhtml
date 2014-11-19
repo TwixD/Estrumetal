@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewObraTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+
+
+            <p:dataTable var="OBRA" value="" >  
+                <p:column headerText="#{bundle.ViewObraLabel_idObra}"> 
+                    <h:outputText value="#{obraController.selected.idObra}" title="#{bundle.ViewObraTitle_idObra}"/>
+                </p:column>  
+
+                <p:column headerText="#{bundle.ViewObraLabel_nombre}">  
+                    <h:outputText value="#{obraController.selected.nombre}" title="#{bundle.ViewObraTitle_nombre}"/>
+                </p:column>  
+
+            </p:dataTable> 
+
+            <h:panelGrid columns="6" styleClass="link">
+
+
+
+                <h:commandLink action="#{obraController.destroyAndView}" value="#{bundle.ViewObraDestroyLink}"/>
+
+                <h:link outcome="Edit" value="#{bundle.ViewObraEditLink}"/>
+
+                <h:commandLink action="#{obraController.prepareCreate}" value="#{bundle.ViewObraCreateLink}" />
+
+                <h:commandLink action="#{obraController.prepareList}" value="#{bundle.ViewObraShowAllLink}"/>
+
+                <h:link outcome="/index" value="#{bundle.ViewObraIndexLink}"/>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

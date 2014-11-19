@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{bundle.EditRegistroProduccionTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{bundle.EditRegistroProduccionLabel_idRegistroproduccion}" for="idRegistroproduccion" />
+                <h:inputText id="idRegistroproduccion" value="#{registroProduccionController.selected.idRegistroproduccion}" title="#{bundle.EditRegistroProduccionTitle_idRegistroproduccion}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_idRegistroproduccion}"/>
+                <h:outputLabel value="#{bundle.EditRegistroProduccionLabel_fechaInicio}" for="fechaInicio" />
+                <h:inputText id="fechaInicio" value="#{registroProduccionController.selected.fechaInicio}" title="#{bundle.EditRegistroProduccionTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_fechaInicio}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:inputText>
+                <h:outputLabel value="#{bundle.EditRegistroProduccionLabel_fechaTerminacion}" for="fechaTerminacion" />
+                <h:inputText id="fechaTerminacion" value="#{registroProduccionController.selected.fechaTerminacion}" title="#{bundle.EditRegistroProduccionTitle_fechaTerminacion}" >
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:inputText>
+                <h:outputLabel value="#{bundle.EditRegistroProduccionLabel_totalProduccion}" for="totalProduccion" />
+                <h:inputText id="totalProduccion" value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.EditRegistroProduccionTitle_totalProduccion}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_totalProduccion}"/>
+                <h:outputLabel value="#{bundle.EditRegistroProduccionLabel_USUARIOidusuario}" for="USUARIOidusuario" />
+                <h:selectOneMenu id="USUARIOidusuario" value="#{registroProduccionController.selected.USUARIOidusuario}" title="#{bundle.EditRegistroProduccionTitle_USUARIOidusuario}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_USUARIOidusuario}">
+                    <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                </h:selectOneMenu>
+                <h:outputLabel value="#{bundle.EditRegistroProduccionLabel_RUTAidruta}" for="RUTAidruta" />
+                <h:selectOneMenu id="RUTAidruta" value="#{registroProduccionController.selected.RUTAidruta}" title="#{bundle.EditRegistroProduccionTitle_RUTAidruta}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_RUTAidruta}">
+                    <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"/>
+                </h:selectOneMenu>
+            </h:panelGrid>
+            <h:commandLink action="#{registroProduccionController.update}" value="#{bundle.EditRegistroProduccionSaveLink}"/>
+            <br />
+            <br />
+            <h:link outcome="View" value="#{bundle.EditRegistroProduccionViewLink}"/>
+            <br />
+            <h:commandLink action="#{registroProduccionController.prepareList}" value="#{bundle.EditRegistroProduccionShowAllLink}" immediate="true"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.EditRegistroProduccionIndexLink}" />
+        </h:form>
+    </ui:define>
+</ui:composition>

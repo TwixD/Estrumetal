@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <p:dataTable var="MAQUINA" value="" >  
+                <p:column headerText="#{bundle.ViewMaquinaLabel_idMaquina}"> 
+                    <h:outputText value="#{maquinaController.selected.idMaquina}" title="#{bundle.ViewMaquinaTitle_idMaquina}"/> 
+                </p:column>  
+
+                <p:column headerText="#{bundle.ViewMaquinaLabel_nombre}">  
+                    <h:outputText value="#{maquinaController.selected.nombre}" title="#{bundle.ViewMaquinaTitle_nombre}"/> 
+                </p:column>  
+
+                <p:column headerText="#{bundle.ViewMaquinaLabel_ubicacion}">  
+                    <h:outputText value="#{maquinaController.selected.ubicacion}" title="#{bundle.ViewMaquinaTitle_ubicacion}"/>
+                </p:column> 
+                <p:column headerText="#{bundle.ViewMaquinaLabel_tipo}">  
+                    <h:outputText value="#{maquinaController.selected.tipo}" title="#{bundle.ViewMaquinaTitle_tipo}"/>
+                </p:column> 
+
+
+            </p:dataTable>                  
+            <h:panelGrid columns="6" styleClass="link">
+                <h:commandLink action="#{maquinaController.destroyAndView}" value="#{bundle.ViewMaquinaDestroyLink}"/>
+                <h:link outcome="Edit" value="#{bundle.ViewMaquinaEditLink}"/>
+                <h:commandLink action="#{maquinaController.prepareCreate}" value="#{bundle.ViewMaquinaCreateLink}" />
+                <h:commandLink action="#{maquinaController.prepareList}" value="#{bundle.ViewMaquinaShowAllLink}"/>
+                <h:link outcome="/index" value="#{bundle.ViewMaquinaIndexLink}"/>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

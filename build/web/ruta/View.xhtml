@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewRutaTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewRutaLabel_idRuta}"/>
+                <h:outputText value="#{rutaController.selected.idRuta}" title="#{bundle.ViewRutaTitle_idRuta}"/>
+                <h:outputText value="#{bundle.ViewRutaLabel_fechaProduccion}"/>
+                <h:outputText value="#{rutaController.selected.fechaProduccion}" title="#{bundle.ViewRutaTitle_fechaProduccion}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:outputText>
+                <h:outputText value="#{bundle.ViewRutaLabel_fechaTerminacion}"/>
+                <h:outputText value="#{rutaController.selected.fechaTerminacion}" title="#{bundle.ViewRutaTitle_fechaTerminacion}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:outputText>
+                <h:outputText value="#{bundle.ViewRutaLabel_MAQUINAidmaquina}"/>
+                <h:outputText value="#{rutaController.selected.MAQUINAidmaquina}" title="#{bundle.ViewRutaTitle_MAQUINAidmaquina}"/>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{rutaController.destroyAndView}" value="#{bundle.ViewRutaDestroyLink}"/>
+            <br />
+            <br />
+            <h:link outcome="Edit" value="#{bundle.ViewRutaEditLink}"/>
+            <br />
+            <h:commandLink action="#{rutaController.prepareCreate}" value="#{bundle.ViewRutaCreateLink}" />
+            <br />
+            <h:commandLink action="#{rutaController.prepareList}" value="#{bundle.ViewRutaShowAllLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ViewRutaIndexLink}"/>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListPiezaTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form styleClass="jsfcrud_list_form">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:outputText escape="false" value="#{bundle.ListPiezaEmpty}" rendered="#{piezaController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{piezaController.items.rowCount > 0}">
+                <h:outputText value="#{piezaController.pagination.pageFirstItem + 1}..#{piezaController.pagination.pageLastItem + 1}/#{piezaController.pagination.itemsCount}"/>&nbsp;
+                <h:commandLink action="#{piezaController.previous}" value="#{bundle.Previous} #{piezaController.pagination.pageSize}" rendered="#{piezaController.pagination.hasPreviousPage}"/>&nbsp;
+                <h:commandLink action="#{piezaController.next}" value="#{bundle.Next} #{piezaController.pagination.pageSize}" rendered="#{piezaController.pagination.hasNextPage}"/>&nbsp;
+                <h:dataTable value="#{piezaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPiezaTitle_idPieza}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPieza}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPiezaTitle_cantidad}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cantidad}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPiezaTitle_longitud}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.longitud}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPiezaTitle_ancho}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ancho}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPiezaTitle_cantidadPerforaciones}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cantidadPerforaciones}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPiezaTitle_areaCorte}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.areaCorte}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPiezaTitle_bisel}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.bisel}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPiezaTitle_PLANOidplano}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.PLANOidplano}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPiezaTitle_MATERIAPRIMAidmateriaprima}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.MATERIAPRIMAidmateriaprima}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{piezaController.prepareView}" value="#{bundle.ListPiezaViewLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{piezaController.prepareEdit}" value="#{bundle.ListPiezaEditLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{piezaController.destroy}" value="#{bundle.ListPiezaDestroyLink}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+            <br />
+            <h:commandLink action="#{piezaController.prepareCreate}" value="#{bundle.ListPiezaCreateLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ListPiezaIndexLink}"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

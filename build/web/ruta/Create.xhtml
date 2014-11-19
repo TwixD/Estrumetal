@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{bundle.CreateRutaTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{bundle.CreateRutaLabel_idRuta}" for="idRuta" />
+                <h:inputText id="idRuta" value="#{rutaController.selected.idRuta}" title="#{bundle.CreateRutaTitle_idRuta}" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_idRuta}"/>
+                <h:outputLabel value="#{bundle.CreateRutaLabel_fechaProduccion}" for="fechaProduccion" />
+                <h:inputText id="fechaProduccion" value="#{rutaController.selected.fechaProduccion}" title="#{bundle.CreateRutaTitle_fechaProduccion}" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_fechaProduccion}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:inputText>
+                <h:outputLabel value="#{bundle.CreateRutaLabel_fechaTerminacion}" for="fechaTerminacion" />
+                <h:inputText id="fechaTerminacion" value="#{rutaController.selected.fechaTerminacion}" title="#{bundle.CreateRutaTitle_fechaTerminacion}" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_fechaTerminacion}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:inputText>
+                <h:outputLabel value="#{bundle.CreateRutaLabel_MAQUINAidmaquina}" for="MAQUINAidmaquina" />
+                <h:selectOneMenu id="MAQUINAidmaquina" value="#{rutaController.selected.MAQUINAidmaquina}" title="#{bundle.CreateRutaTitle_MAQUINAidmaquina}" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_MAQUINAidmaquina}">
+                    <f:selectItems value="#{maquinaController.itemsAvailableSelectOne}"/>
+                </h:selectOneMenu>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{rutaController.create}" value="#{bundle.CreateRutaSaveLink}" />
+            <br />
+            <br />
+            <h:commandLink action="#{rutaController.prepareList}" value="#{bundle.CreateRutaShowAllLink}" immediate="true"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.CreateRutaIndexLink}"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

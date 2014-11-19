@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListMateriaPrimaTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form styleClass="jsfcrud_list_form">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <center>
+                <h:outputText escape="false" value="#{bundle.ListMateriaPrimaEmpty}" rendered="#{materiaPrimaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{materiaPrimaController.items.rowCount > 0}">
+                    <h:outputText value="#{materiaPrimaController.pagination.pageFirstItem + 1}..#{materiaPrimaController.pagination.pageLastItem + 1}/#{materiaPrimaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{materiaPrimaController.previous}" value="#{bundle.Previous} #{materiaPrimaController.pagination.pageSize}" rendered="#{materiaPrimaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{materiaPrimaController.next}" value="#{bundle.Next} #{materiaPrimaController.pagination.pageSize}" rendered="#{materiaPrimaController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{materiaPrimaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMateriaPrimaTitle_idMateriaprima}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idMateriaprima}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMateriaPrimaTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMateriaPrimaTitle_tipo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMateriaPrimaTitle_pesoMl}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pesoMl}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{materiaPrimaController.prepareView}" value="#{bundle.ListMateriaPrimaViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{materiaPrimaController.prepareEdit}" value="#{bundle.ListMateriaPrimaEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{materiaPrimaController.destroy}" value="#{bundle.ListMateriaPrimaDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </center>
+            <h:panelGrid columns="2" styleClass="link">
+
+                <h:commandLink action="#{materiaPrimaController.prepareCreate}" value="#{bundle.ListMateriaPrimaCreateLink}"/>
+
+                <h:link outcome="/index" value="#{bundle.ListMateriaPrimaIndexLink}"/>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

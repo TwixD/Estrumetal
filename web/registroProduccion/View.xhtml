@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ViewRegistroProduccionTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewRegistroProduccionLabel_idRegistroproduccion}"/>
+                <h:outputText value="#{registroProduccionController.selected.idRegistroproduccion}" title="#{bundle.ViewRegistroProduccionTitle_idRegistroproduccion}"/>
+                <h:outputText value="#{bundle.ViewRegistroProduccionLabel_fechaInicio}"/>
+                <h:outputText value="#{registroProduccionController.selected.fechaInicio}" title="#{bundle.ViewRegistroProduccionTitle_fechaInicio}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:outputText>
+                <h:outputText value="#{bundle.ViewRegistroProduccionLabel_fechaTerminacion}"/>
+                <h:outputText value="#{registroProduccionController.selected.fechaTerminacion}" title="#{bundle.ViewRegistroProduccionTitle_fechaTerminacion}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:outputText>
+                <h:outputText value="#{bundle.ViewRegistroProduccionLabel_totalProduccion}"/>
+                <h:outputText value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.ViewRegistroProduccionTitle_totalProduccion}"/>
+                <h:outputText value="#{bundle.ViewRegistroProduccionLabel_USUARIOidusuario}"/>
+                <h:outputText value="#{registroProduccionController.selected.USUARIOidusuario}" title="#{bundle.ViewRegistroProduccionTitle_USUARIOidusuario}"/>
+                <h:outputText value="#{bundle.ViewRegistroProduccionLabel_RUTAidruta}"/>
+                <h:outputText value="#{registroProduccionController.selected.RUTAidruta}" title="#{bundle.ViewRegistroProduccionTitle_RUTAidruta}"/>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{registroProduccionController.destroyAndView}" value="#{bundle.ViewRegistroProduccionDestroyLink}"/>
+            <br />
+            <br />
+            <h:link outcome="Edit" value="#{bundle.ViewRegistroProduccionEditLink}"/>
+            <br />
+            <h:commandLink action="#{registroProduccionController.prepareCreate}" value="#{bundle.ViewRegistroProduccionCreateLink}" />
+            <br />
+            <h:commandLink action="#{registroProduccionController.prepareList}" value="#{bundle.ViewRegistroProduccionShowAllLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ViewRegistroProduccionIndexLink}"/>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

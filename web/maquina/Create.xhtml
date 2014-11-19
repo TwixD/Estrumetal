@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+    </ui:define>
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle.CreateMaquinaTitle}" style="margin-left: 20px;"></h:outputText>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block" style="margin-left: 20px;">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <div class="formDiv">
+            <h:form>
+                <h:panelGrid columns="2" styleClass="panelGrid">
+                    <p:outputLabel value="#{bundle.CreateMaquinaLabel_nombre}" for="nombre" />
+                    <p:inputText id="nombre" value="#{maquinaController.selected.nombre}" title="#{bundle.CreateMaquinaTitle_nombre}" required="true" requiredMessage="#{bundle.CreateMaquinaRequiredMessage_nombre}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreateMaquinaLabel_ubicacion}" for="ubicacion" />
+                    <p:selectOneMenu id="ubicacion" value="#{maquinaController.selected.ubicacion}"  required="true" requiredMessage="#{bundle.CreateMaquinaRequiredMessage_ubicacion}" style="width: 230px;">
+                        <f:selectItem itemValue="" itemLabel="Elija un Ubicacion de maquina" />
+                        <f:selectItem itemValue="Preparacion" itemLabel="Preparacion" />
+                        <f:selectItem itemValue="Linea De Perfiles" itemLabel="Linea De Perfiles" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreateMaquinaLabel_tipo}" for="tipo" />
+                    <p:selectOneMenu id="tipo" value="#{maquinaController.selected.tipo}" required="true" requiredMessage="#{bundle.CreateMaquinaRequiredMessage_tipo}" style="width: 230px;">
+                        <f:selectItem itemValue="" itemLabel="Elija un tipo de maquina" />
+                        <f:selectItem itemValue="Corte" itemLabel="Corte" />
+                        <f:selectItem itemValue="Corte Y Perforacion" itemLabel="Corte y perforacion" />
+                        <f:selectItem itemValue="Perforacion" itemLabel="perforacion" />			
+                    </p:selectOneMenu>  
+                </h:panelGrid>
+                <h:panelGrid columns="2" styleClass="link">
+                    <p:commandButton action="#{maquinaController.create}" value="#{bundle.CreateMaquinaSaveLink}"  ajax="false" icon="ui-icon-disk"/> 
+                    <p:commandButton action="#{maquinaController.prepareList}" value="#{bundle.CreateMaquinaShowAllLink}" immediate="true" icon="ui-icon-clipboard"/>
+                </h:panelGrid>   
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

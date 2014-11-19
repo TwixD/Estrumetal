@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{bundle.EditObraTitle}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="4">
+                <h:outputLabel value="#{bundle.EditObraLabel_idObra}" for="idObra" />
+                <h:inputText id="idObra" value="#{obraController.selected.idObra}" title="#{bundle.EditObraTitle_idObra}" required="true" requiredMessage="#{bundle.EditObraRequiredMessage_idObra}" disabled="true"/>
+                <h:outputLabel value="#{bundle.EditObraLabel_nombre}" for="nombre" />
+                <h:inputText id="nombre" value="#{obraController.selected.nombre}" title="#{bundle.EditObraTitle_nombre}" required="true" requiredMessage="#{bundle.EditObraRequiredMessage_nombre}"/>
+            </h:panelGrid>
+            <h:panelGrid columns="4" styleClass="link">
+                <h:commandLink action="#{obraController.update}" value="#{bundle.EditObraSaveLink}"/>
+
+                <h:link outcome="View" value="#{bundle.EditObraViewLink}"/>
+
+                <h:commandLink action="#{obraController.prepareList}" value="#{bundle.EditObraShowAllLink}" immediate="true"/>
+
+                <h:link outcome="/index" value="#{bundle.EditObraIndexLink}" />
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

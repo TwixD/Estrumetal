@@ -1,0 +1,14 @@
+.footer{
+    color : firebrick;
+}
+body{
+    background: #D4D3D3;
+}
+
+.alignleft {
+    float: left;
+}
+.alignright {
+    float: right;
+}
+
