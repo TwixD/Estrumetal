@@ -4,45 +4,38 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.EditMateriaPrimaTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-        </h:panelGroup>
-        <h:form>
-            <h:panelGrid columns="8">
-                <h:outputLabel value="#{bundle.EditMateriaPrimaLabel_idMateriaprima}" for="idMateriaprima" />
-                <h:inputText id="idMateriaprima" value="#{materiaPrimaController.selected.idMateriaprima}" title="#{bundle.EditMateriaPrimaTitle_idMateriaprima}" required="true" requiredMessage="#{bundle.EditMateriaPrimaRequiredMessage_idMateriaprima}" disabled="true"/>
-                <h:outputLabel value="#{bundle.EditMateriaPrimaLabel_descripcion}" for="descripcion" />
-                <h:inputText id="descripcion" value="#{materiaPrimaController.selected.descripcion}" title="#{bundle.EditMateriaPrimaTitle_descripcion}" required="true" requiredMessage="#{bundle.EditMateriaPrimaRequiredMessage_descripcion}"/>
-                <h:outputLabel value="#{bundle.EditMateriaPrimaLabel_tipo}" for="tipo" />
-
-                <h:selectOneMenu id="tipo" value="#{materiaPrimaController.selected.tipo}" title="#{bundle.EditMateriaPrimaTitle_tipo}" required="true" requiredMessage="#{bundle.EditMateriaPrimaRequiredMessage_tipo}">
-                    <f:selectItem itemValue="" itemLabel="Elija un Tipo De Materia Prima" />
-                    <f:selectItem itemValue="Lamina" itemLabel="Lamina" />
-                    <f:selectItem itemValue="Viga" itemLabel="Viga" />
-                </h:selectOneMenu>
-                <h:outputLabel value="#{bundle.EditMateriaPrimaLabel_pesoMl}" for="pesoMl" />
-                <h:inputText id="pesoMl" value="#{materiaPrimaController.selected.pesoMl}" title="#{bundle.EditMateriaPrimaTitle_pesoMl}" required="true" requiredMessage="#{bundle.EditMateriaPrimaRequiredMessage_pesoMl}"/>
-            </h:panelGrid>
-            <h:panelGrid columns="8" styleClass="link">
-
-                <h:commandLink action="#{materiaPrimaController.update}" value="#{bundle.EditMateriaPrimaSaveLink}"/>
-
-
-                <h:link outcome="View" value="#{bundle.EditMateriaPrimaViewLink}"/>
-
-                <h:commandLink action="#{materiaPrimaController.prepareList}" value="#{bundle.EditMateriaPrimaShowAllLink}" immediate="true"/>
-
-                <h:link outcome="/index" value="#{bundle.EditMateriaPrimaIndexLink}" />
-            </h:panelGrid>
-        </h:form>
+        <p:panel id="basic" header="#{bundle.EditMateriaPrimaTitle}" footer="Máquina" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.EditMateriaPrimaLabel_idMateriaprima}" for="idMateriaprima" />
+                    <p:inputText id="idMateriaprima" value="#{materiaPrimaController.selected.idMateriaprima}" title="#{bundle.EditMateriaPrimaTitle_idMateriaprima}" required="true" requiredMessage="#{bundle.EditMateriaPrimaRequiredMessage_idMateriaprima}" disabled="true" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditMateriaPrimaLabel_descripcion}" for="descripcion" />
+                    <p:inputText id="descripcion" value="#{materiaPrimaController.selected.descripcion}" title="#{bundle.EditMateriaPrimaTitle_descripcion}" required="true" requiredMessage="#{bundle.EditMateriaPrimaRequiredMessage_descripcion}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditMateriaPrimaLabel_tipo}" for="tipo" />
+                    <p:selectOneMenu id="tipo" value="#{materiaPrimaController.selected.tipo}"  required="true" requiredMessage="#{bundle.EditMateriaPrimaRequiredMessage_tipo}" style="width: 230px;">
+                        <f:selectItem itemValue="" itemLabel="Elija un Tipo De Materia Prima" />
+                        <f:selectItem itemValue="Lamina" itemLabel="Lamina" />
+                        <f:selectItem itemValue="Viga" itemLabel="Viga" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.EditMateriaPrimaLabel_pesoMl}" for="pesoMl" />
+                    <p:inputText id="pesoMl" value="#{materiaPrimaController.selected.pesoMl}" title="#{bundle.EditMateriaPrimaTitle_pesoMl}" required="true" requiredMessage="#{bundle.EditMateriaPrimaRequiredMessage_pesoMl}" style="width: 220px;"/>
+                </h:panelGrid>
+                <h:panelGrid columns="3" styleClass="link">
+                    <p:commandButton action="#{materiaPrimaController.update}" value="#{bundle.EditMateriaPrimaSaveLink}" ajax="false" icon="ui-icon-pencil"/>
+                    <p:button outcome="View" value="#{bundle.EditMateriaPrimaViewLink}" icon="ui-icon-search" />
+                    <p:commandButton action="#{materiaPrimaController.prepareList}" value="#{bundle.EditMateriaPrimaShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

@@ -4,52 +4,45 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.ViewPiezaTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-        </h:panelGroup>
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputText value="#{bundle.ViewPiezaLabel_idPieza}"/>
-                <h:outputText value="#{piezaController.selected.idPieza}" title="#{bundle.ViewPiezaTitle_idPieza}"/>
-                <h:outputText value="#{bundle.ViewPiezaLabel_cantidad}"/>
-                <h:outputText value="#{piezaController.selected.cantidad}" title="#{bundle.ViewPiezaTitle_cantidad}"/>
-                <h:outputText value="#{bundle.ViewPiezaLabel_longitud}"/>
-                <h:outputText value="#{piezaController.selected.longitud}" title="#{bundle.ViewPiezaTitle_longitud}"/>
-                <h:outputText value="#{bundle.ViewPiezaLabel_ancho}"/>
-                <h:outputText value="#{piezaController.selected.ancho}" title="#{bundle.ViewPiezaTitle_ancho}"/>
-                <h:outputText value="#{bundle.ViewPiezaLabel_cantidadPerforaciones}"/>
-                <h:outputText value="#{piezaController.selected.cantidadPerforaciones}" title="#{bundle.ViewPiezaTitle_cantidadPerforaciones}"/>
-                <h:outputText value="#{bundle.ViewPiezaLabel_areaCorte}"/>
-                <h:outputText value="#{piezaController.selected.areaCorte}" title="#{bundle.ViewPiezaTitle_areaCorte}"/>
-                <h:outputText value="#{bundle.ViewPiezaLabel_bisel}"/>
-                <h:outputText value="#{piezaController.selected.bisel}" title="#{bundle.ViewPiezaTitle_bisel}"/>
-                <h:outputText value="#{bundle.ViewPiezaLabel_PLANOidplano}"/>
-                <h:outputText value="#{piezaController.selected.PLANOidplano}" title="#{bundle.ViewPiezaTitle_PLANOidplano}"/>
-                <h:outputText value="#{bundle.ViewPiezaLabel_MATERIAPRIMAidmateriaprima}"/>
-                <h:outputText value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}" title="#{bundle.ViewPiezaTitle_MATERIAPRIMAidmateriaprima}"/>
-            </h:panelGrid>
-            <br />
-            <h:commandLink action="#{piezaController.destroyAndView}" value="#{bundle.ViewPiezaDestroyLink}"/>
-            <br />
-            <br />
-            <h:link outcome="Edit" value="#{bundle.ViewPiezaEditLink}"/>
-            <br />
-            <h:commandLink action="#{piezaController.prepareCreate}" value="#{bundle.ViewPiezaCreateLink}" />
-            <br />
-            <h:commandLink action="#{piezaController.prepareList}" value="#{bundle.ViewPiezaShowAllLink}"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.ViewPiezaIndexLink}"/>
-
-        </h:form>
+        <p:panel id="basic" header="#{bundle.ViewPiezaTitle}" footer="Ver pieza" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.ViewPiezaLabel_idPieza}"/>
+                    <p:outputLabel value="#{piezaController.selected.idPieza}" title="#{bundle.ViewPiezaTitle_idPieza}"/>
+                    <p:outputLabel value="#{bundle.ViewPiezaLabel_cantidad}"/>
+                    <p:outputLabel value="#{piezaController.selected.cantidad}" title="#{bundle.ViewPiezaTitle_cantidad}"/>
+                    <p:outputLabel value="#{bundle.ViewPiezaLabel_longitud}"/>
+                    <p:outputLabel value="#{piezaController.selected.longitud}" title="#{bundle.ViewPiezaTitle_longitud}"/>
+                    <p:outputLabel value="#{bundle.ViewPiezaLabel_ancho}"/>
+                    <p:outputLabel value="#{piezaController.selected.ancho}" title="#{bundle.ViewPiezaTitle_ancho}"/>
+                    <p:outputLabel value="#{bundle.ViewPiezaLabel_cantidadPerforaciones}"/>
+                    <p:outputLabel value="#{piezaController.selected.cantidadPerforaciones}" title="#{bundle.ViewPiezaTitle_cantidadPerforaciones}"/>
+                    <p:outputLabel value="#{bundle.ViewPiezaLabel_areaCorte}"/>
+                    <p:outputLabel value="#{piezaController.selected.areaCorte}" title="#{bundle.ViewPiezaTitle_areaCorte}"/>
+                    <p:outputLabel value="#{bundle.ViewPiezaLabel_bisel}"/>
+                    <p:outputLabel value="#{piezaController.selected.bisel}" title="#{bundle.ViewPiezaTitle_bisel}"/>
+                    <p:outputLabel value="#{bundle.ViewPiezaLabel_PLANOidplano}"/>
+                    <p:outputLabel value="#{piezaController.selected.PLANOidplano}" title="#{bundle.ViewPiezaTitle_PLANOidplano}"/>
+                    <p:outputLabel value="#{bundle.ViewPiezaLabel_MATERIAPRIMAidmateriaprima}"/>
+                    <p:outputLabel value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}" title="#{bundle.ViewPiezaTitle_MATERIAPRIMAidmateriaprima}"/>
+                </p:panelGrid>
+                <h:panelGrid columns="4" styleClass="link">
+                    <p:commandButton action="#{piezaController.destroyAndView}"  value="#{bundle.ViewPiezaDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="#{loginBean.admin()}"/>
+                    <p:button outcome="Edit" value="#{bundle.ViewPiezaEditLink}" icon="ui-icon-pencil"/>
+                    <p:commandButton action="#{piezaController.prepareCreate()}" value="#{bundle.ViewPiezaCreateLink}" ajax="false" icon="ui-icon-plusthick" />
+                    <p:commandButton action="#{piezaController.prepareList()}" value="#{bundle.ViewPiezaShowAllLink}" ajax="false" icon="ui-icon-clipboard"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

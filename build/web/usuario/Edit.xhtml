@@ -4,52 +4,48 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.EditUsuarioTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-        </h:panelGroup>
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="#{bundle.EditUsuarioLabel_idUsuario}" for="idUsuario" />
-                <h:inputText id="idUsuario" value="#{usuarioController.selected.idUsuario}" title="#{bundle.EditUsuarioTitle_idUsuario}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_idUsuario}"/>
-                <h:outputLabel value="#{bundle.EditUsuarioLabel_user}" for="user" />
-                <h:inputText id="user" value="#{usuarioController.selected.user}" title="#{bundle.EditUsuarioTitle_user}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_user}"/>
-                <h:outputLabel value="#{bundle.EditUsuarioLabel_password}" for="password" />
-                <h:inputText id="password" value="#{usuarioController.selected.password}" title="#{bundle.EditUsuarioTitle_password}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_password}"/>
-                <h:outputLabel value="#{bundle.EditUsuarioLabel_nombre}" for="nombre" />
-                <h:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.EditUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_nombre}"/>
-                <h:outputLabel value="#{bundle.EditUsuarioLabel_tipoDocumento}" for="tipoDocumento" />
-                <h:inputText id="tipoDocumento" value="#{usuarioController.selected.tipoDocumento}" title="#{bundle.EditUsuarioTitle_tipoDocumento}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_tipoDocumento}"/>
-                <h:outputLabel value="#{bundle.EditUsuarioLabel_documento}" for="documento" />
-                <h:inputText id="documento" value="#{usuarioController.selected.documento}" title="#{bundle.EditUsuarioTitle_documento}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_documento}"/>
-                <h:outputLabel value="#{bundle.EditUsuarioLabel_estado}" for="estado" />
-                <h:inputText id="estado" value="#{usuarioController.selected.estado}" title="#{bundle.EditUsuarioTitle_estado}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_estado}"/>
-                <h:outputLabel value="#{bundle.EditUsuarioLabel_telefono}" for="telefono" />
-                <h:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundle.EditUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_telefono}"/>
-                <h:outputLabel value="#{bundle.EditUsuarioLabel_direccion}" for="direccion" />
-                <h:inputText id="direccion" value="#{usuarioController.selected.direccion}" title="#{bundle.EditUsuarioTitle_direccion}" />
-                <h:outputLabel value="#{bundle.EditUsuarioLabel_ROLidrol}" for="ROLidrol" />
-                <h:selectOneMenu id="ROLidrol" value="#{usuarioController.selected.ROLidrol}" title="#{bundle.EditUsuarioTitle_ROLidrol}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_ROLidrol}">
-                    <f:selectItems value="#{rolController.itemsAvailableSelectOne}"/>
-                </h:selectOneMenu>
-            </h:panelGrid>
-            <h:commandLink action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
-            <br />
-            <br />
-            <h:link outcome="View" value="#{bundle.EditUsuarioViewLink}"/>
-            <br />
-            <h:commandLink action="#{usuarioController.prepareList}" value="#{bundle.EditUsuarioShowAllLink}" immediate="true"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.EditUsuarioIndexLink}" />
-        </h:form>
+        <p:panel id="basic" header="#{bundle.EditUsuarioTitle}" footer="Editar usuario" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.EditUsuarioLabel_idUsuario}" for="idUsuario" rendered="false"/>
+                    <p:inputText id="idUsuario" value="#{usuarioController.selected.idUsuario}" title="#{bundle.EditUsuarioTitle_idUsuario}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_idUsuario}" rendered="false" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditUsuarioLabel_user}" for="user" />
+                    <p:inputText id="user" value="#{usuarioController.selected.user}" title="#{bundle.EditUsuarioTitle_user}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_user}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditUsuarioLabel_password}" for="password" />
+                    <p:inputText id="password" value="#{usuarioController.selected.password}" title="#{bundle.EditUsuarioTitle_password}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_password}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditUsuarioLabel_nombre}" for="nombre" />
+                    <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.EditUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_nombre}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditUsuarioLabel_tipoDocumento}" for="tipoDocumento" />
+                    <p:inputText id="tipoDocumento" value="#{usuarioController.selected.tipoDocumento}" title="#{bundle.EditUsuarioTitle_tipoDocumento}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_tipoDocumento}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditUsuarioLabel_documento}" for="documento" />
+                    <p:inputText id="documento" value="#{usuarioController.selected.documento}" title="#{bundle.EditUsuarioTitle_documento}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_documento}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditUsuarioLabel_estado}" for="estado" />
+                    <p:inputText id="estado" value="#{usuarioController.selected.estado}" title="#{bundle.EditUsuarioTitle_estado}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_estado}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditUsuarioLabel_telefono}" for="telefono" />
+                    <p:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundle.EditUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_telefono}"style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditUsuarioLabel_direccion}" for="direccion" />
+                    <p:inputText id="direccion" value="#{usuarioController.selected.direccion}" title="#{bundle.EditUsuarioTitle_direccion}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditUsuarioLabel_ROLidrol}" for="ROLidrol" />
+                    <p:selectOneMenu id="ROLidrol" value="#{usuarioController.selected.ROLidrol}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_ROLidrol}" style="width: 230px;">
+                        <f:selectItems value="#{rolController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <h:panelGrid columns="3" styleClass="link">
+                    <p:commandButton action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}" ajax="false" icon="ui-icon-pencil"/>
+                    <p:button outcome="View" value="#{bundle.EditUsuarioViewLink}" icon="ui-icon-search" />
+                    <p:commandButton action="#{usuarioController.prepareList}" value="#{bundle.EditUsuarioShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

@@ -7,6 +7,34 @@
 
     <f:view contentType="text/html">
         <h:head>
+            <script type="text/javascript">
+                PrimeFaces.locales['es'] = {
+                    closeText: 'Cerrar',
+                    prevText: 'Anterior',
+                    nextText: 'Siguiente',
+                    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                    dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+                    weekHeader: 'Semana',
+                    firstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: '',
+                    timeOnlyTitle: 'Sólo hora',
+                    timeText: 'Tiempo',
+                    hourText: 'Hora',
+                    minuteText: 'Minuto',
+                    secondText: 'Segundo',
+                    currentText: 'Fecha actual',
+                    ampm: false,
+                    month: 'Mes',
+                    week: 'Semana',
+                    day: 'Día',
+                    allDayText: 'Todo el día'
+                };
+            </script>
             <h:outputStylesheet name="css/index.css" />
             <h:outputStylesheet name="css/jsfcrud.css"/>
             <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.ico"/>
@@ -17,122 +45,113 @@
         </h:head>
         <h:body>
             <p:layout fullPage="true">
-                <p:layoutUnit  position="north" size="72" resizable="false" closable="false" collapsible="false" style="padding: 0px;">
-
-                    <p class="alignleft">
-                    <ui:insert name="img">
-                        <img src="resources/img/logolarge.png" style="margin-top: -10px;"/> 
-                    </ui:insert>    
-                    </p>
-                    <h:form>
-                        <p class="alignright">                   
-                        <h:outputLabel id="usernameLabel"  value="#{loginBean.userName} " style="font-size: 23px; background: #cf7a7a; border-radius: 3px; border: none; margin-right: 15px; padding-bottom: 4px; padding-left: 7px; box-shadow: 1px 1px 5px #B6B6B6;"/>
-                        <p:commandButton id="logout" value="logout" icon="ui-icon-extlink" oncomplete="logout(xhr, status, args)" action="#{loginBean.logoutActionListener}" style="margin-right:15px;" ajax="true"/>
-                        <p:clock/>
-                        </p>
+                <p:layoutUnit  position="north" size="61" resizable="false" closable="false" collapsible="false" style="padding: 0px;">
+                    <h:form>  
+                        <p:growl id="messages"/>
+                        <p:menubar>
+                            <p:menuitem value="Sistema Administración Estrumetal SAE" style="color: white; font-family: sans-serif; font-size: 20px; font-weight: bold;" url="http://localhost:8080/projectEstrumetal/faces/index.xhtml"/>
+                            <p:graphicImage height="24" width="24" value="resources/img/logolarge.png" style="border:none" />  
+                            <f:facet name="options">
+                                <h:outputLabel id="usernameLabel"  value="#{loginBean.userName} " style="font-size: 20px; background: #cf7a7a; border-radius: 3px; border: none; margin-right: 15px; padding-bottom: 4px; padding-left: 7px; box-shadow: 1px 1px 5px #B6B6B6;"/>
+                                <p:commandButton id="logout" value="Salir" icon="ui-icon-extlink" oncomplete="logout(xhr, status, args)" action="#{loginBean.logoutActionListener}" style="margin-right:15px;" ajax="true"/>
+                            </f:facet>
+                        </p:menubar>
                     </h:form>
                 </p:layoutUnit>
-                <p:layoutUnit position="south" size="70" closable="true" collapsible="true" id="footer">
-                    <center>SAE Sistema Administración Estrumetal©</center>
+                <p:layoutUnit position="south" size="65" closable="true" collapsible="true" id="footer">
+                    <center>
+                        <ui:insert name="img">
+                            <img src="resources/img/logolarge.png"/> 
+                        </ui:insert>    
+                    </center>
                 </p:layoutUnit>
+                <p:layoutUnit id="menuLayout" position="west" size="230" header="Menú" collapsible="true">
+                    <h:form>
+                        <p:accordionPanel id="menuPanel" activeIndex="null">
+                            <p:tab id="tabMaquina" title="Máquina">
+                                <p:menu style="height: 53px; width: 190px;">
+                                    <p:menuitem value="Crear máquina"  icon="ui-icon-disk" outcome="/maquina/Create"/>
+                                    <p:menuitem value="Listar máquinas"  icon="ui-icon-clipboard" outcome="/maquina/List"/>
+                                </p:menu>
+                            </p:tab>
+                        </p:accordionPanel> 
 
-                <p:layoutUnit id="menuLayout" position="west" size="230" header="Menu" collapsible="true">
+                        <p:accordionPanel id="menuPanel2" activeIndex="null">
+                            <p:tab id="tabMateriaPrima" title="Materia prima">
+                                <p:menu style="height: 53px; width: 190px;">
+                                    <p:menuitem value="Crear materia prima"  icon="ui-icon-disk" outcome="/materiaPrima/Create"/>
+                                    <p:menuitem value="Listar materia prima"  icon="ui-icon-clipboard" outcome="/materiaPrima/List"/>
+                                </p:menu>
+                            </p:tab>
+                        </p:accordionPanel> 
 
-                    <p:accordionPanel id="menuPanel" activeIndex="null">
-                        <p:tab id="tabMaquina" title="Máquina">
-                            <p:menu style="height: 89px;">
-                                <p:menuitem value="Crear"  icon="ui-icon-disk" outcome="/maquina/Create"/>
-                                <p:menuitem value="Editar"  icon="ui-icon-pencil" outcome="/maquina/Edit"/>
-                                <p:menuitem value="Listar"  icon="ui-icon-clipboard" outcome="/maquina/List"/>
-                            </p:menu>
-                        </p:tab>
-                    </p:accordionPanel> 
+                        <p:accordionPanel id="menuPanel3" activeIndex="null">
+                            <p:tab id="tabObra" title="Obra">
+                                <p:menu style="height: 53px; width: 190px;">
+                                    <p:menuitem value="Crear obra"  icon="ui-icon-disk" outcome="/obra/Create"/>
+                                    <p:menuitem value="Listar obra"  icon="ui-icon-clipboard" outcome="/obra/List"/>
+                                </p:menu>
+                            </p:tab>
+                        </p:accordionPanel> 
 
-                    <p:accordionPanel id="menuPanel2" activeIndex="null">
-                        <p:tab id="tabMateriaPrima" title="Materia prima">
-                            <p:menu style="height: 89px;">
-                                <p:menuitem value="Crear"  icon="ui-icon-disk" outcome="/materiaPrima/Create"/>
-                                <p:menuitem value="Editar"  icon="ui-icon-pencil" outcome="/materiaPrima/Edit"/>
-                                <p:menuitem value="Listar"  icon="ui-icon-clipboard" outcome="/materiaPrima/List"/>
-                            </p:menu>
-                        </p:tab>
-                    </p:accordionPanel> 
-
-                    <p:accordionPanel id="menuPanel3" activeIndex="null">
-                        <p:tab id="tabObra" title="Obra">
-                            <p:menu style="height: 89px;">
-                                <p:menuitem value="Crear"  icon="ui-icon-disk" outcome="/obra/Create"/>
-                                <p:menuitem value="Editar"  icon="ui-icon-pencil" outcome="/obra/Edit"/>
-                                <p:menuitem value="Listar"  icon="ui-icon-clipboard" outcome="/obra/List"/>
-                            </p:menu>
-                        </p:tab>
-                    </p:accordionPanel> 
-
-                    <p:accordionPanel id="menuPanel4" activeIndex="null">
-                        <p:tab id="tabOrdenDeProduccion" title="Orden de producción">
-                            <p:menu style="height: 89px;">
-                                <p:menuitem value="Crear"  icon="ui-icon-disk" outcome="/ordenProduccion/Create"/>
-                                <p:menuitem value="Editar"  icon="ui-icon-pencil" outcome="/ordenProduccion/Edit"/>
-                                <p:menuitem value="Listar"  icon="ui-icon-clipboard" outcome="/ordenProduccion/List"/>
-                            </p:menu>
-                        </p:tab>
-                    </p:accordionPanel> 
-                    <p:accordionPanel id="menuPanel5" activeIndex="null">
-                        <p:tab id="tabOrdenDeProduccion" title="Pieza">
-                            <p:menu style="height: 89px;">
-                                <p:menuitem value="Crear"  icon="ui-icon-disk" outcome="/pieza/Create"/>
-                                <p:menuitem value="Editar"  icon="ui-icon-pencil" outcome="/pieza/Edit"/>
-                                <p:menuitem value="Listar"  icon="ui-icon-clipboard" outcome="/pieza/List"/>
-                            </p:menu>
-                        </p:tab>
-                    </p:accordionPanel> 
-                    <p:accordionPanel id="menuPanel6" activeIndex="null">
-                        <p:tab id="tabPlano" title="Plano">
-                            <p:menu style="height: 89px;">
-                                <p:menuitem value="Crear"  icon="ui-icon-disk" outcome="/plano/Create"/>
-                                <p:menuitem value="Editar"  icon="ui-icon-pencil" outcome="/plano/Edit"/>
-                                <p:menuitem value="Listar"  icon="ui-icon-clipboard" outcome="/plano/List"/>
-                            </p:menu>
-                        </p:tab>
-                    </p:accordionPanel> 
-                    <p:accordionPanel id="menuPanel7" activeIndex="null">
-                        <p:tab id="tabRegistroProduccion" title="Registro producción">
-                            <p:menu style="height: 89px;">
-                                <p:menuitem value="Crear"  icon="ui-icon-disk" outcome="/plano/Create"/>
-                                <p:menuitem value="Editar"  icon="ui-icon-pencil" outcome="/plano/Edit"/>
-                                <p:menuitem value="Listar"  icon="ui-icon-clipboard" outcome="/plano/List"/>
-                            </p:menu>
-                        </p:tab>
-                    </p:accordionPanel> 
-                    <p:accordionPanel id="menuPanel8" activeIndex="null" rendered="#{loginBean.admin()}">
-                        <p:tab id="tabRol" title="Rol">
-                            <p:menu style="height: 89px;">
-                                <p:menuitem value="Crear"  icon="ui-icon-disk" outcome="/rol/Create"/>
-                                <p:menuitem value="Editar"  icon="ui-icon-pencil" outcome="/rol/Edit"/>
-                                <p:menuitem value="Listar"  icon="ui-icon-clipboard" outcome="/rol/List"/>
-                            </p:menu>
-                        </p:tab>
-                    </p:accordionPanel> 
-                    <p:accordionPanel id="menuPanel9" activeIndex="null">
-                        <p:tab id="tabRuta" title="Ruta">
-                            <p:menu style="height: 89px;">
-                                <p:menuitem value="Crear"  icon="ui-icon-disk" outcome="/ruta/Create"/>
-                                <p:menuitem value="Editar"  icon="ui-icon-pencil" outcome="/ruta/Edit"/>
-                                <p:menuitem value="Listar"  icon="ui-icon-clipboard" outcome="/ruta/List"/>
-                            </p:menu>
-                        </p:tab>
-                    </p:accordionPanel> 
-                    <p:accordionPanel id="menuPanel10" activeIndex="null" rendered="#{loginBean.admin()}">
-                        <p:tab id="tabUsuario" title="Usuario">
-                            <p:menu style="height: 89px;">
-                                <p:menuitem value="Crear"  icon="ui-icon-disk" outcome="/usuario/Create"/>
-                                <p:menuitem value="Editar"  icon="ui-icon-pencil" outcome="/usuario/Edit"/>
-                                <p:menuitem value="Listar"  icon="ui-icon-clipboard" outcome="/usuario/List"/>
-                            </p:menu>
-                        </p:tab>
-                    </p:accordionPanel> 
+                        <p:accordionPanel id="menuPanel4" activeIndex="null">
+                            <p:tab id="tabOrdenDeProduccion" title="Orden de producción">
+                                <p:menu style="height: 53px; width: 190px;">
+                                    <p:menuitem value="Crear orden de producción"  icon="ui-icon-disk" outcome="/ordenProduccion/Create"/>
+                                    <p:menuitem value="Listar ordenes de producción"  icon="ui-icon-clipboard" outcome="/ordenProduccion/List"/>
+                                </p:menu>
+                            </p:tab>
+                        </p:accordionPanel> 
+                        <p:accordionPanel id="menuPanel5" activeIndex="null">
+                            <p:tab id="tabOrdenDeProduccion" title="Pieza">
+                                <p:menu style="height: 53px; width: 190px;">
+                                    <p:menuitem value="Crear pieza"  icon="ui-icon-disk" outcome="/pieza/Create"/>
+                                    <p:menuitem value="Listar pieza"  icon="ui-icon-clipboard" outcome="/pieza/List"/>
+                                </p:menu>
+                            </p:tab>
+                        </p:accordionPanel> 
+                        <p:accordionPanel id="menuPanel6" activeIndex="null">
+                            <p:tab id="tabPlano" title="Plano">
+                                <p:menu style="height: 53px; width: 190px;">">
+                                    <p:menuitem value="Crear plano"  icon="ui-icon-disk" outcome="/plano/Create"/>
+                                    <p:menuitem value="Listar plano"  icon="ui-icon-clipboard" outcome="/plano/List"/>
+                                </p:menu>
+                            </p:tab>
+                        </p:accordionPanel> 
+                        <p:accordionPanel id="menuPanel7" activeIndex="null">
+                            <p:tab id="tabRegistroProduccion" title="Registro producción">
+                                <p:menu style="height: 53px; width: 190px;">
+                                    <p:menuitem value="Crear registro producción"  icon="ui-icon-disk" outcome="/plano/Create"/>
+                                    <p:menuitem value="Listar registro producción"  icon="ui-icon-clipboard" outcome="/plano/List"/>
+                                </p:menu>
+                            </p:tab>
+                        </p:accordionPanel> 
+                        <p:accordionPanel id="menuPanel8" activeIndex="null" rendered="#{loginBean.admin()}">
+                            <p:tab id="tabRol" title="Rol">
+                                <p:menu style="height: 53px; width: 190px;">
+                                    <p:menuitem value="Crear rol"  icon="ui-icon-disk" outcome="/rol/Create"/>
+                                    <p:menuitem value="Listar rol"  icon="ui-icon-clipboard" outcome="/rol/List"/>
+                                </p:menu>
+                            </p:tab>
+                        </p:accordionPanel> 
+                        <p:accordionPanel id="menuPanel9" activeIndex="null">
+                            <p:tab id="tabRuta" title="Ruta">
+                                <p:menu style="height: 53px; width: 190px;">
+                                    <p:menuitem value="Crear ruta"  icon="ui-icon-disk" outcome="/ruta/Create"/>
+                                    <p:menuitem value="Listar ruta"  icon="ui-icon-clipboard" outcome="/ruta/List"/>
+                                </p:menu>
+                            </p:tab>
+                        </p:accordionPanel> 
+                        <p:accordionPanel id="menuPanel10" activeIndex="null" rendered="#{loginBean.admin()}">
+                            <p:tab id="tabUsuario" title="Usuario">
+                                <p:menu style="height: 53px; width: 190px;">
+                                    <p:menuitem value="Crear usuario" icon="ui-icon-disk" outcome="/usuario/Create"/>
+                                    <p:menuitem value="Listar usuario"  icon="ui-icon-clipboard" outcome="/usuario/List"/>
+                                </p:menu>
+                            </p:tab>
+                        </p:accordionPanel> 
+                    </h:form>
                 </p:layoutUnit>
-
                 <p:layoutUnit position="center">
                     <h2>
                         <ui:insert name="title"></ui:insert>
@@ -140,18 +159,15 @@
                     <ui:insert name="body"></ui:insert>
                 </p:layoutUnit>
             </p:layout>
-            <p:dock position="bottom">
-                <p:menuitem value="Home" icon="/resources/img/home.png" url="http://localhost:8080/projectEstrumetal/faces/index.xhtml"/>
-            </p:dock>
         </h:body>
         <script type="text/javascript">
-            //<![CDATA[
+
             function logout(xhr, status, args) {
                 setTimeout(function() {
                     window.location = 'http://127.0.0.1:8080/projectEstrumetal/';
                 }, 500);
             }
-            //]]>
+
         </script>
     </f:view>
 </html>

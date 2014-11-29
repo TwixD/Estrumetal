@@ -4,82 +4,105 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.ListRegistroProduccionTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:form styleClass="jsfcrud_list_form">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:outputText escape="false" value="#{bundle.ListRegistroProduccionEmpty}" rendered="#{registroProduccionController.items.rowCount == 0}"/>
-            <h:panelGroup rendered="#{registroProduccionController.items.rowCount > 0}">
-                <h:outputText value="#{registroProduccionController.pagination.pageFirstItem + 1}..#{registroProduccionController.pagination.pageLastItem + 1}/#{registroProduccionController.pagination.itemsCount}"/>&nbsp;
-                <h:commandLink action="#{registroProduccionController.previous}" value="#{bundle.Previous} #{registroProduccionController.pagination.pageSize}" rendered="#{registroProduccionController.pagination.hasPreviousPage}"/>&nbsp;
-                <h:commandLink action="#{registroProduccionController.next}" value="#{bundle.Next} #{registroProduccionController.pagination.pageSize}" rendered="#{registroProduccionController.pagination.hasNextPage}"/>&nbsp;
-                <h:dataTable value="#{registroProduccionController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                    <h:column>
+        <p:panel id="basic" header="#{bundle.ListRegistroProduccionTitle}" footer="Lista detallada de registros de producción" style="margin-bottom:20px">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <table>
+                    <td>
+                        <p:outputLabel value="Exportar   EXCEL"></p:outputLabel>
+                    </td>
+                    <th><h:commandLink>
+                            <img src="../resources/img/excel.png" width="24"/> 
+                            <p:dataExporter type="xls" target="tbl" fileName="registrosProduccion"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="PDF"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/pdf.png" width="24"/> 
+                            <p:dataExporter type="pdf" target="tbl" fileName="registrosProduccion"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="CSV"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/csv.png" width="24"/> 
+                            <p:dataExporter type="csv" target="tbl" fileName="registrosProduccion"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="XML"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/xml.png" width="24"/> 
+                            <p:dataExporter type="xml" target="tbl" fileName="registrosProduccion"/>
+                        </h:commandLink>
+                    </th>
+                </table>
+                <p:dataTable id="tbl" var="item" value="#{registroProduccionController.items}"  emptyMessage="La máquina no se encuentra registrada"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                             paginator="true" rows="10" style="margin-bottom:20px;" 
+                             >
+                    <p:column filterBy="#{item.idRegistroproduccion}"  filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListRegistroProduccionTitle_idRegistroproduccion}"/>
                         </f:facet>
                         <h:outputText value="#{item.idRegistroproduccion}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListRegistroProduccionTitle_fechaInicio}"/>
                         </f:facet>
                         <h:outputText value="#{item.fechaInicio}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListRegistroProduccionTitle_fechaTerminacion}"/>
                         </f:facet>
                         <h:outputText value="#{item.fechaTerminacion}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListRegistroProduccionTitle_totalProduccion}"/>
                         </f:facet>
                         <h:outputText value="#{item.totalProduccion}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListRegistroProduccionTitle_USUARIOidusuario}"/>
                         </f:facet>
                         <h:outputText value="#{item.USUARIOidusuario}"/>
-                    </h:column>
+                    </p:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListRegistroProduccionTitle_RUTAidruta}"/>
                         </f:facet>
                         <h:outputText value="#{item.RUTAidruta}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="&nbsp;"/>
-                        </f:facet>
-                        <h:commandLink action="#{registroProduccionController.prepareView}" value="#{bundle.ListRegistroProduccionViewLink}"/>
-                        <h:outputText value=" "/>
-                        <h:commandLink action="#{registroProduccionController.prepareEdit}" value="#{bundle.ListRegistroProduccionEditLink}"/>
-                        <h:outputText value=" "/>
-                        <h:commandLink action="#{registroProduccionController.destroy}" value="#{bundle.ListRegistroProduccionDestroyLink}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:panelGroup>
-            <br />
-            <h:commandLink action="#{registroProduccionController.prepareCreate}" value="#{bundle.ListRegistroProduccionCreateLink}"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.ListRegistroProduccionIndexLink}"/>
-        </h:form>
+                        </p:column>
+                        <p:column exportable="false">
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{registroProduccionController.prepareView}" value="#{bundle.ListRegistroProduccionViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{registroProduccionController.prepareEdit}" value="#{bundle.ListRegistroProduccionEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{registroProduccionController.destroy}" value="#{bundle.ListRegistroProduccionDestroyLink}"/>
+                        </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

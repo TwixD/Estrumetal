@@ -5,15 +5,41 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    template="/template.xhtml">
+    template="/template.xhtml"
+    xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="title">
         <h:outputText value="Bienvenido al Sistema de Administración Estrumetal SAE"></h:outputText>
     </ui:define>
 
     <ui:define name="body">
-        AQUI SE VA METER INFO DE LA EMPRESA O 
-        ALGO QUE SE QUIERA MOSTRAR EN EL INDEX 
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:fieldset legend="Estrumetal S.A" style="margin-bottom:12px">
+                <h:panelGrid columns="1" cellpadding="0">
+                    <h3>Misión</h3>
+                    <h:outputText value="
+                                  Construir estructuras de acero con calidad, buen precio, buscando el 
+                                  beneficio del cliente, de los empleados, proveedores y accionistas."/>
+                    <h3>Visión</h3>
+                    <h:outputText value="
+                                  En el año 2015 construiremos 15.000 ton de estructuras de acero."/>
+                    <h3>Objetivos</h3>
+                    <ul>
+                        <li type="disc">Orientar los procesos y el personal al cumplimiento de nuestros compromisos con los clientes, buscando satisfacer sus necesidades.</li>
+                        <li type="disc">Aumentar el valor de empresa y de la marca.</li>
+                        <li type="disc">Aumentar las ventas de la compañía ingresando a nuevos mercados.</li>
+                        <li type="disc">Fortalecimiento y mejora continua de los procesos internos de la compañía, buscando la excelencia operacional.</li>
+                        <li type="disc">Mantener las competencias del personal de acuerdo a los requerimientos de los mercados atendidos.</li>
+                        <li type="disc">Desarrollar y mantener altos estándares de seguridad y salud ocupacional.</li>
+                        <li type="disc">Posicionarnos como una empresa ambientalmente responsable.</li>
+                        <li type="disc">Ser una empresa socialmente responsable.</li>
+                    </ul>
+                </h:panelGrid>
+            </p:fieldset>
+            <p:galleria value="#{loginBean.images}" var="image" panelWidth="500" panelHeight="310" showCaption="true">
+                <p:graphicImage name="img/#{image.img}" alt="#{image.desc}" title="#{image.title}"/>  
+            </p:galleria>
+        </h:panelGrid>
     </ui:define>
 
 </ui:composition>

@@ -8,38 +8,31 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-        </h:panelGroup>
-        <h:form>
-            <p:dataTable var="MAQUINA" value="" >  
-                <p:column headerText="#{bundle.ViewMaquinaLabel_idMaquina}"> 
-                    <h:outputText value="#{maquinaController.selected.idMaquina}" title="#{bundle.ViewMaquinaTitle_idMaquina}"/> 
-                </p:column>  
-
-                <p:column headerText="#{bundle.ViewMaquinaLabel_nombre}">  
-                    <h:outputText value="#{maquinaController.selected.nombre}" title="#{bundle.ViewMaquinaTitle_nombre}"/> 
-                </p:column>  
-
-                <p:column headerText="#{bundle.ViewMaquinaLabel_ubicacion}">  
-                    <h:outputText value="#{maquinaController.selected.ubicacion}" title="#{bundle.ViewMaquinaTitle_ubicacion}"/>
-                </p:column> 
-                <p:column headerText="#{bundle.ViewMaquinaLabel_tipo}">  
-                    <h:outputText value="#{maquinaController.selected.tipo}" title="#{bundle.ViewMaquinaTitle_tipo}"/>
-                </p:column> 
-
-
-            </p:dataTable>                  
-            <h:panelGrid columns="6" styleClass="link">
-                <h:commandLink action="#{maquinaController.destroyAndView}" value="#{bundle.ViewMaquinaDestroyLink}"/>
-                <h:link outcome="Edit" value="#{bundle.ViewMaquinaEditLink}"/>
-                <h:commandLink action="#{maquinaController.prepareCreate}" value="#{bundle.ViewMaquinaCreateLink}" />
-                <h:commandLink action="#{maquinaController.prepareList}" value="#{bundle.ViewMaquinaShowAllLink}"/>
-                <h:link outcome="/index" value="#{bundle.ViewMaquinaIndexLink}"/>
-            </h:panelGrid>
-        </h:form>
+        <p:panel id="basic" header="#{bundle.ViewMaquinaTitle}" footer="Máquina" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.ViewMaquinaLabel_idMaquina}"/>
+                    <p:outputLabel value="#{maquinaController.selected.idMaquina}" title="#{bundle.ViewMaquinaTitle_idMaquina}"/>
+                    <p:outputLabel value="#{bundle.ViewMaquinaLabel_nombre}"/>
+                    <p:outputLabel value="#{maquinaController.selected.nombre}" title="#{bundle.ViewMaquinaTitle_nombre}"/> 
+                    <p:outputLabel value="#{bundle.ViewMaquinaLabel_ubicacion}"/>
+                    <p:outputLabel value="#{maquinaController.selected.ubicacion}" title="#{bundle.ViewMaquinaTitle_ubicacion}"/> 
+                    <p:outputLabel value="#{bundle.ViewMaquinaLabel_tipo}"/>
+                    <p:outputLabel value="#{maquinaController.selected.tipo}" title="#{bundle.ViewMaquinaTitle_tipo}"/> 
+                </h:panelGrid>
+                <h:panelGrid columns="4" styleClass="link">
+                    <p:commandButton action="#{maquinaController.destroyAndView}"  value="#{bundle.ViewMaquinaDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="#{loginBean.admin()}"/>
+                    <p:button outcome="Edit" value="#{bundle.ViewMaquinaEditLink}" icon="ui-icon-pencil"/>
+                    <p:commandButton action="#{maquinaController.prepareCreate()}" value="#{bundle.ViewMaquinaCreateLink}" ajax="false" icon="ui-icon-plusthick" />
+                    <p:commandButton action="#{maquinaController.prepareList()}" value="#{bundle.ViewMaquinaShowAllLink}" ajax="false" icon="ui-icon-clipboard"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

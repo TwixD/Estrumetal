@@ -109,8 +109,7 @@ public class Rol implements Serializable {
 
     @Override
     public String toString() {
-        return "com.estrumetal.jpa.Rol[ idRol=" + idRol + " ]";
-        //return nombre;
+        return nombre + "";
     }
 
 }

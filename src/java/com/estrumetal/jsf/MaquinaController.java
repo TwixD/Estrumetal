@@ -6,6 +6,7 @@ import com.estrumetal.jsf.util.PaginationHelper;
 import com.estrumetal.jpacontroller.MaquinaFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -24,6 +25,7 @@ public class MaquinaController implements Serializable {
 
     private Maquina current;
     private DataModel items = null;
+
     @EJB
     private com.estrumetal.jpacontroller.MaquinaFacade ejbFacade;
     private PaginationHelper pagination;
@@ -46,7 +48,7 @@ public class MaquinaController implements Serializable {
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
-            pagination = new PaginationHelper(9999999) {
+            pagination = new PaginationHelper(999999) {
 
                 @Override
                 public int getItemsCount() {

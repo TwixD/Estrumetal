@@ -4,86 +4,114 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.ListUsuarioTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:form styleClass="jsfcrud_list_form">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:outputText escape="false" value="#{bundle.ListUsuarioEmpty}" rendered="#{usuarioController.items.rowCount == 0}"/>
-            <h:panelGroup rendered="#{usuarioController.items.rowCount > 0}">
-                <h:outputText value="#{usuarioController.pagination.pageFirstItem + 1}..#{usuarioController.pagination.pageLastItem + 1}/#{usuarioController.pagination.itemsCount}"/>&nbsp;
-                <h:commandLink action="#{usuarioController.previous}" value="#{bundle.Previous} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasPreviousPage}"/>&nbsp;
-                <h:commandLink action="#{usuarioController.next}" value="#{bundle.Next} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasNextPage}"/>&nbsp;
-                <h:dataTable value="#{usuarioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                    <h:column>
+        <p:panel id="basic" header="#{bundle.ListUsuarioTitle}" footer="Lista detallada de usuarios" style="margin-bottom:20px">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <table>
+                    <td>
+                        <p:outputLabel value="Exportar   EXCEL"></p:outputLabel>
+                    </td>
+                    <th><h:commandLink>
+                            <img src="../resources/img/excel.png" width="24"/> 
+                            <p:dataExporter type="xls" target="tbl" fileName="usuarios"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="PDF"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/pdf.png" width="24"/> 
+                            <p:dataExporter type="pdf" target="tbl" fileName="usuarios"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="CSV"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/csv.png" width="24"/> 
+                            <p:dataExporter type="csv" target="tbl" fileName="usuarios"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="XML"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/xml.png" width="24"/> 
+                            <p:dataExporter type="xml" target="tbl" fileName="usuarios"/>
+                        </h:commandLink>
+                    </th>
+                </table>
+                <p:dataTable id="tbl" var="item" value="#{usuarioController.items}"  emptyMessage="El usuario no se encuentra registrado"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                             paginator="true" rows="10" style="margin-bottom:20px;" 
+                             >
+                    <p:column filterBy="#{item.idUsuario}"  filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUsuarioTitle_idUsuario}"/>
                         </f:facet>
                         <h:outputText value="#{item.idUsuario}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUsuarioTitle_user}"/>
                         </f:facet>
                         <h:outputText value="#{item.user}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUsuarioTitle_password}"/>
                         </f:facet>
                         <h:outputText value="#{item.password}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUsuarioTitle_nombre}"/>
                         </f:facet>
                         <h:outputText value="#{item.nombre}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUsuarioTitle_tipoDocumento}"/>
                         </f:facet>
                         <h:outputText value="#{item.tipoDocumento}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUsuarioTitle_documento}"/>
                         </f:facet>
                         <h:outputText value="#{item.documento}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUsuarioTitle_estado}"/>
                         </f:facet>
                         <h:outputText value="#{item.estado}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUsuarioTitle_telefono}"/>
                         </f:facet>
                         <h:outputText value="#{item.telefono}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUsuarioTitle_direccion}"/>
                         </f:facet>
                         <h:outputText value="#{item.direccion}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUsuarioTitle_ROLidrol}"/>
                         </f:facet>
                         <h:outputText value="#{item.ROLidrol}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column exportable="false"> 
                         <f:facet name="header">
                             <h:outputText value="&nbsp;"/>
                         </f:facet>
@@ -92,14 +120,9 @@
                         <h:commandLink action="#{usuarioController.prepareEdit}" value="#{bundle.ListUsuarioEditLink}"/>
                         <h:outputText value=" "/>
                         <h:commandLink action="#{usuarioController.destroy}" value="#{bundle.ListUsuarioDestroyLink}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:panelGroup>
-            <br />
-            <h:commandLink action="#{usuarioController.prepareCreate}" value="#{bundle.ListUsuarioCreateLink}"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.ListUsuarioIndexLink}"/>
-        </h:form>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

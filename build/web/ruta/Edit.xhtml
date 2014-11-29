@@ -4,44 +4,36 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.EditRutaTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-        </h:panelGroup>
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="#{bundle.EditRutaLabel_idRuta}" for="idRuta" />
-                <h:inputText id="idRuta" value="#{rutaController.selected.idRuta}" title="#{bundle.EditRutaTitle_idRuta}" required="true" requiredMessage="#{bundle.EditRutaRequiredMessage_idRuta}"/>
-                <h:outputLabel value="#{bundle.EditRutaLabel_fechaProduccion}" for="fechaProduccion" />
-                <h:inputText id="fechaProduccion" value="#{rutaController.selected.fechaProduccion}" title="#{bundle.EditRutaTitle_fechaProduccion}" required="true" requiredMessage="#{bundle.EditRutaRequiredMessage_fechaProduccion}">
-                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                </h:inputText>
-                <h:outputLabel value="#{bundle.EditRutaLabel_fechaTerminacion}" for="fechaTerminacion" />
-                <h:inputText id="fechaTerminacion" value="#{rutaController.selected.fechaTerminacion}" title="#{bundle.EditRutaTitle_fechaTerminacion}" required="true" requiredMessage="#{bundle.EditRutaRequiredMessage_fechaTerminacion}">
-                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                </h:inputText>
-                <h:outputLabel value="#{bundle.EditRutaLabel_MAQUINAidmaquina}" for="MAQUINAidmaquina" />
-                <h:selectOneMenu id="MAQUINAidmaquina" value="#{rutaController.selected.MAQUINAidmaquina}" title="#{bundle.EditRutaTitle_MAQUINAidmaquina}" required="true" requiredMessage="#{bundle.EditRutaRequiredMessage_MAQUINAidmaquina}">
-                    <f:selectItems value="#{maquinaController.itemsAvailableSelectOne}"/>
-                </h:selectOneMenu>
-            </h:panelGrid>
-            <h:commandLink action="#{rutaController.update}" value="#{bundle.EditRutaSaveLink}"/>
-            <br />
-            <br />
-            <h:link outcome="View" value="#{bundle.EditRutaViewLink}"/>
-            <br />
-            <h:commandLink action="#{rutaController.prepareList}" value="#{bundle.EditRutaShowAllLink}" immediate="true"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.EditRutaIndexLink}" />
-        </h:form>
+        <p:panel id="basic" header="#{bundle.EditRutaTitle}" footer="Editar ruta" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.EditRutaLabel_idRuta}" for="idRuta" rendered="false"/>
+                    <p:inputText id="idRuta" value="#{rutaController.selected.idRuta}" title="#{bundle.EditRutaTitle_idRuta}" required="true" requiredMessage="#{bundle.EditRutaRequiredMessage_idRuta}" style="width: 220px;" rendered="false"/>
+                    <p:outputLabel value="#{bundle.EditRutaLabel_fechaProduccion}" for="fechaProduccion" />
+                    <p:calendar id="fechaProduccion" locale="es" value="#{rutaController.selected.fechaProduccion}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.EditRutaRequiredMessage_fechaProduccion}" style="width: 220px;"/>     
+                    <p:outputLabel value="#{bundle.EditRutaLabel_fechaTerminacion}" for="fechaTerminacion" />
+                    <p:calendar id="fechaTerminacion" locale="es" value="#{rutaController.selected.fechaTerminacion}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.EditRutaRequiredMessage_fechaTerminacion}" style="width: 220px;"/>     
+                    <p:outputLabel value="#{bundle.EditRutaLabel_MAQUINAidmaquina}" for="MAQUINAidmaquina" />
+                    <p:selectOneMenu id="MAQUINAidmaquina" value="#{rutaController.selected.MAQUINAidmaquina}" required="true" requiredMessage="#{bundle.EditRutaRequiredMessage_MAQUINAidmaquina}" style="width: 230px;">
+                        <f:selectItems value="#{maquinaController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <h:panelGrid columns="3" styleClass="link">
+                    <p:commandButton action="#{rutaController.update}" value="#{bundle.EditRutaSaveLink}" ajax="false" icon="ui-icon-pencil"/>
+                    <p:button outcome="View" value="#{bundle.EditRutaViewLink}" icon="ui-icon-search" />
+                    <p:commandButton action="#{rutaController.prepareList}" value="#{bundle.EditRutaShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

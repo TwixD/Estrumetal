@@ -214,7 +214,7 @@ public class Plano implements Serializable {
 
     @Override
     public String toString() {
-        return "com.estrumetal.jpa.Plano[ idPlano=" + idPlano + " ]";
+        return idPlano+"";
     }
     
 }

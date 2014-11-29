@@ -4,54 +4,47 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.ViewUsuarioTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-        </h:panelGroup>
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputText value="#{bundle.ViewUsuarioLabel_idUsuario}"/>
-                <h:outputText value="#{usuarioController.selected.idUsuario}" title="#{bundle.ViewUsuarioTitle_idUsuario}"/>
-                <h:outputText value="#{bundle.ViewUsuarioLabel_user}"/>
-                <h:outputText value="#{usuarioController.selected.user}" title="#{bundle.ViewUsuarioTitle_user}"/>
-                <h:outputText value="#{bundle.ViewUsuarioLabel_password}"/>
-                <h:outputText value="#{usuarioController.selected.password}" title="#{bundle.ViewUsuarioTitle_password}"/>
-                <h:outputText value="#{bundle.ViewUsuarioLabel_nombre}"/>
-                <h:outputText value="#{usuarioController.selected.nombre}" title="#{bundle.ViewUsuarioTitle_nombre}"/>
-                <h:outputText value="#{bundle.ViewUsuarioLabel_tipoDocumento}"/>
-                <h:outputText value="#{usuarioController.selected.tipoDocumento}" title="#{bundle.ViewUsuarioTitle_tipoDocumento}"/>
-                <h:outputText value="#{bundle.ViewUsuarioLabel_documento}"/>
-                <h:outputText value="#{usuarioController.selected.documento}" title="#{bundle.ViewUsuarioTitle_documento}"/>
-                <h:outputText value="#{bundle.ViewUsuarioLabel_estado}"/>
-                <h:outputText value="#{usuarioController.selected.estado}" title="#{bundle.ViewUsuarioTitle_estado}"/>
-                <h:outputText value="#{bundle.ViewUsuarioLabel_telefono}"/>
-                <h:outputText value="#{usuarioController.selected.telefono}" title="#{bundle.ViewUsuarioTitle_telefono}"/>
-                <h:outputText value="#{bundle.ViewUsuarioLabel_direccion}"/>
-                <h:outputText value="#{usuarioController.selected.direccion}" title="#{bundle.ViewUsuarioTitle_direccion}"/>
-                <h:outputText value="#{bundle.ViewUsuarioLabel_ROLidrol}"/>
-                <h:outputText value="#{usuarioController.selected.ROLidrol}" title="#{bundle.ViewUsuarioTitle_ROLidrol}"/>
-            </h:panelGrid>
-            <br />
-            <h:commandLink action="#{usuarioController.destroyAndView}" value="#{bundle.ViewUsuarioDestroyLink}"/>
-            <br />
-            <br />
-            <h:link outcome="Edit" value="#{bundle.ViewUsuarioEditLink}"/>
-            <br />
-            <h:commandLink action="#{usuarioController.prepareCreate}" value="#{bundle.ViewUsuarioCreateLink}" />
-            <br />
-            <h:commandLink action="#{usuarioController.prepareList}" value="#{bundle.ViewUsuarioShowAllLink}"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.ViewUsuarioIndexLink}"/>
-
-        </h:form>
+        <p:panel id="basic" header="#{bundle.ViewUsuarioTitle}" footer="Ver usuario" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.ViewUsuarioLabel_idUsuario}"/>
+                    <p:outputLabel value="#{usuarioController.selected.idUsuario}" title="#{bundle.ViewUsuarioTitle_idUsuario}"/>
+                    <p:outputLabel value="#{bundle.ViewUsuarioLabel_user}"/>
+                    <p:outputLabel value="#{usuarioController.selected.user}" title="#{bundle.ViewUsuarioTitle_user}"/>
+                    <p:outputLabel value="#{bundle.ViewUsuarioLabel_password}"/>
+                    <p:outputLabel value="#{usuarioController.selected.password}" title="#{bundle.ViewUsuarioTitle_password}"/>
+                    <p:outputLabel value="#{bundle.ViewUsuarioLabel_nombre}"/>
+                    <p:outputLabel value="#{usuarioController.selected.nombre}" title="#{bundle.ViewUsuarioTitle_nombre}"/>
+                    <p:outputLabel value="#{bundle.ViewUsuarioLabel_tipoDocumento}"/>
+                    <p:outputLabel value="#{usuarioController.selected.tipoDocumento}" title="#{bundle.ViewUsuarioTitle_tipoDocumento}"/>
+                    <p:outputLabel value="#{bundle.ViewUsuarioLabel_documento}"/>
+                    <p:outputLabel value="#{usuarioController.selected.documento}" title="#{bundle.ViewUsuarioTitle_documento}"/>
+                    <p:outputLabel value="#{bundle.ViewUsuarioLabel_estado}"/>
+                    <p:outputLabel value="#{usuarioController.selected.estado}" title="#{bundle.ViewUsuarioTitle_estado}"/>
+                    <p:outputLabel value="#{bundle.ViewUsuarioLabel_telefono}"/>
+                    <p:outputLabel value="#{usuarioController.selected.telefono}" title="#{bundle.ViewUsuarioTitle_telefono}"/>
+                    <p:outputLabel value="#{bundle.ViewUsuarioLabel_direccion}"/>
+                    <p:outputLabel value="#{usuarioController.selected.direccion}" title="#{bundle.ViewUsuarioTitle_direccion}"/>
+                    <p:outputLabel value="#{bundle.ViewUsuarioLabel_ROLidrol}"/>
+                    <p:outputLabel value="#{usuarioController.selected.ROLidrol}" title="#{bundle.ViewUsuarioTitle_ROLidrol}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="4" styleClass="link">
+                    <p:commandButton action="#{usuarioController.destroyAndView}"  value="#{bundle.ViewUsuarioDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="#{loginBean.admin()}"/>
+                    <p:button outcome="Edit" value="#{bundle.ViewUsuarioEditLink}" icon="ui-icon-pencil"/>
+                    <p:commandButton action="#{usuarioController.prepareCreate()}" value="#{bundle.ViewUsuarioCreateLink}" ajax="false" icon="ui-icon-plusthick" />
+                    <p:commandButton action="#{usuarioController.prepareList()}" value="#{bundle.ViewUsuarioShowAllLink}" ajax="false" icon="ui-icon-clipboard"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

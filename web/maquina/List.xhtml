@@ -8,77 +8,90 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.ListMaquinaTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:form styleClass="jsfcrud_list_form">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:commandLink style="margin-right: 5px;">
-                <img src="../resources/img/excel.png" width="24"/> 
-                <p:dataExporter type="xls" target="tbl" fileName="maquinas"/>
-            </h:commandLink>
-            <h:commandLink style="margin-right: 5px;">
-                <img src="../resources/img/pdf.png" width="24"/> 
-                <p:dataExporter type="pdf" target="tbl" fileName="maquinas"/>
-            </h:commandLink>
-            <h:commandLink style="margin-right: 5px;">  
-                <img src="../resources/img/csv.png" width="24"/> 
-                <p:dataExporter type="csv" target="tbl" fileName="maquinas"/>
-            </h:commandLink>
-            <h:commandLink style="margin-right: 5px;">
-                <img src="../resources/img/xml.png" width="24"/> 
-                <p:dataExporter type="xml" target="tbl" fileName="maquinas"/>
-            </h:commandLink>
-            <p:dataTable id="tbl" var="item" value="#{maquinaController.items}"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-                         paginator="true" rows="10">
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="#{bundle.ListMaquinaTitle_idMaquina}" />
-                    </f:facet>
-                    <h:outputText value="#{item.idMaquina}" />
-                </p:column>
+        <p:panel id="basic" header="#{bundle.ListMaquinaTitle}" footer="Lista detallada de las máquinas" style="margin-bottom:20px">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <table>
+                    <td>
+                        <p:outputLabel value="Exportar   EXCEL"></p:outputLabel>
+                    </td>
+                    <th><h:commandLink>
+                            <img src="../resources/img/excel.png" width="24"/> 
+                            <p:dataExporter type="xls" target="tbl" fileName="maquinas"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="PDF"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/pdf.png" width="24"/> 
+                            <p:dataExporter type="pdf" target="tbl" fileName="maquinas"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="CSV"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/csv.png" width="24"/> 
+                            <p:dataExporter type="csv" target="tbl" fileName="maquinas"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="XML"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/xml.png" width="24"/> 
+                            <p:dataExporter type="xml" target="tbl" fileName="maquinas"/>
+                        </h:commandLink>
+                    </th>
+                </table>
+                <p:dataTable id="tbl" var="item" value="#{maquinaController.items}"  emptyMessage="La máquina no se encuentra registrada"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                             paginator="true" rows="10" style="margin-bottom:20px;" 
+                             >
+                    <p:column filterBy="#{item.idMaquina}"  filterMatchMode="contains"> 
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListMaquinaTitle_idMaquina}"/>
+                        </f:facet>   
+                        <h:outputText value="#{item.idMaquina}" />
+                    </p:column>
 
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="#{bundle.ListMaquinaTitle_nombre}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.nombre}" />
-                </p:column>
+                    <p:column filterBy="#{item.nombre}" filterMatchMode="contains"> 
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListMaquinaTitle_nombre}"/>
+                        </f:facet>  
+                        <h:outputText value="#{item.nombre}" />
+                    </p:column>
 
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="#{bundle.ListMaquinaTitle_ubicacion}" />
-                    </f:facet>
-                    <h:outputText value="#{item.ubicacion}" />
-                </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListMaquinaTitle_ubicacion}" />
+                        </f:facet>
+                        <h:outputText value="#{item.ubicacion}" />
+                    </p:column>
 
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="#{bundle.ListMaquinaTitle_tipo}" />
-                    </f:facet>
-                    <h:outputText value="#{item.tipo}" />
-                </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListMaquinaTitle_tipo}" />
+                        </f:facet>
+                        <h:outputText value="#{item.tipo}" />
+                    </p:column>
 
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="&nbsp;"/>
-                    </f:facet>
-                    <h:commandLink action="#{maquinaController.prepareView}" value="#{bundle.ListMaquinaViewLink}"/>
-                    <h:outputText value=" "/>
-                    <h:commandLink action="#{maquinaController.prepareEdit}" value="#{bundle.ListMaquinaEditLink}"/>
-                    <h:outputText value=" "/>
-                    <h:commandLink action="#{maquinaController.destroy}" value="#{bundle.ListMaquinaDestroyLink}"/>
-                </p:column>
-
-            </p:dataTable>
-
-        </h:form>
+                    <p:column exportable="false">
+                        <f:facet name="header" >
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{maquinaController.prepareView}" value="#{bundle.ListMaquinaViewLink}" />
+                        <p:outputLabel value=" "/>
+                        <h:commandLink action="#{maquinaController.prepareEdit}" value="#{bundle.ListMaquinaEditLink}"/>
+                        <p:outputLabel value=" "/>
+                        <h:commandLink action="#{maquinaController.destroy}" value="#{bundle.ListMaquinaDestroyLink}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>
 

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.estrumetal.jpa;
 
 import java.io.Serializable;
@@ -12,6 +11,9 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -31,13 +33,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OrdenProduccion.findAll", query = "SELECT o FROM OrdenProduccion o"),
-    @NamedQuery(name = "OrdenProduccion.findByIdOrdenproduccion", query = "SELECT o FROM OrdenProduccion o WHERE o.ordenProduccionPK.idOrdenproduccion = :idOrdenproduccion"),
+    @NamedQuery(name = "OrdenProduccion.findByIdOrdenproduccion", query = "SELECT o FROM OrdenProduccion o WHERE o.idOrdenproduccion = :idOrdenproduccion"),
     @NamedQuery(name = "OrdenProduccion.findByFecha", query = "SELECT o FROM OrdenProduccion o WHERE o.fecha = :fecha"),
-    @NamedQuery(name = "OrdenProduccion.findByCantidad", query = "SELECT o FROM OrdenProduccion o WHERE o.ordenProduccionPK.cantidad = :cantidad")})
+    @NamedQuery(name = "OrdenProduccion.findByCantidad", query = "SELECT o FROM OrdenProduccion o WHERE o.cantidad = :cantidad")})
 public class OrdenProduccion implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected OrdenProduccionPK ordenProduccionPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_ordenproduccion")
+    private Integer idOrdenproduccion;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "cantidad")
+    private int cantidad;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha")
@@ -53,25 +63,16 @@ public class OrdenProduccion implements Serializable {
     public OrdenProduccion() {
     }
 
-    public OrdenProduccion(OrdenProduccionPK ordenProduccionPK) {
-        this.ordenProduccionPK = ordenProduccionPK;
+    public OrdenProduccion(Integer idOrdenproduccion) {
+        this.idOrdenproduccion = idOrdenproduccion;
     }
 
-    public OrdenProduccion(OrdenProduccionPK ordenProduccionPK, Date fecha) {
-        this.ordenProduccionPK = ordenProduccionPK;
+    public OrdenProduccion(Integer idOrdenproduccion, int cantidad, Date fecha, Ruta rUTAidruta, Plano pLANOidplano) {
+        this.idOrdenproduccion = idOrdenproduccion;
+        this.cantidad = cantidad;
         this.fecha = fecha;
-    }
-
-    public OrdenProduccion(int idOrdenproduccion, int cantidad) {
-        this.ordenProduccionPK = new OrdenProduccionPK(idOrdenproduccion, cantidad);
-    }
-
-    public OrdenProduccionPK getOrdenProduccionPK() {
-        return ordenProduccionPK;
-    }
-
-    public void setOrdenProduccionPK(OrdenProduccionPK ordenProduccionPK) {
-        this.ordenProduccionPK = ordenProduccionPK;
+        this.rUTAidruta = rUTAidruta;
+        this.pLANOidplano = pLANOidplano;
     }
 
     public Date getFecha() {
@@ -98,13 +99,30 @@ public class OrdenProduccion implements Serializable {
         this.pLANOidplano = pLANOidplano;
     }
 
+    public int getIdOrdenproduccion() {
+        return idOrdenproduccion;
+    }
+
+    public void setIdOrdenproduccion(int idOrdenproduccion) {
+        this.idOrdenproduccion = idOrdenproduccion;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+ 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (ordenProduccionPK != null ? ordenProduccionPK.hashCode() : 0);
+        hash += (idOrdenproduccion != null ? idOrdenproduccion.hashCode() : 0);
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -112,7 +130,7 @@ public class OrdenProduccion implements Serializable {
             return false;
         }
         OrdenProduccion other = (OrdenProduccion) object;
-        if ((this.ordenProduccionPK == null && other.ordenProduccionPK != null) || (this.ordenProduccionPK != null && !this.ordenProduccionPK.equals(other.ordenProduccionPK))) {
+        if ((this.idOrdenproduccion == null && other.idOrdenproduccion != null) || (this.idOrdenproduccion != null && !this.idOrdenproduccion.equals(other.idOrdenproduccion))) {
             return false;
         }
         return true;
@@ -120,7 +138,7 @@ public class OrdenProduccion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.estrumetal.jpa.OrdenProduccion[ ordenProduccionPK=" + ordenProduccionPK + " ]";
+        return idOrdenproduccion + "";
     }
-    
+
 }

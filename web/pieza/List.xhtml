@@ -4,80 +4,108 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.ListPiezaTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:form styleClass="jsfcrud_list_form">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:outputText escape="false" value="#{bundle.ListPiezaEmpty}" rendered="#{piezaController.items.rowCount == 0}"/>
-            <h:panelGroup rendered="#{piezaController.items.rowCount > 0}">
-                <h:outputText value="#{piezaController.pagination.pageFirstItem + 1}..#{piezaController.pagination.pageLastItem + 1}/#{piezaController.pagination.itemsCount}"/>&nbsp;
-                <h:commandLink action="#{piezaController.previous}" value="#{bundle.Previous} #{piezaController.pagination.pageSize}" rendered="#{piezaController.pagination.hasPreviousPage}"/>&nbsp;
-                <h:commandLink action="#{piezaController.next}" value="#{bundle.Next} #{piezaController.pagination.pageSize}" rendered="#{piezaController.pagination.hasNextPage}"/>&nbsp;
-                <h:dataTable value="#{piezaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                    <h:column>
+        <p:panel id="basic" header="#{bundle.ListPiezaTitle}" footer="Lista detallada de piezas" style="margin-bottom:20px">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <table>
+                    <td>
+                        <p:outputLabel value="Exportar   EXCEL"></p:outputLabel>
+                    </td>
+                    <th><h:commandLink>
+                            <img src="../resources/img/excel.png" width="24"/> 
+                            <p:dataExporter type="xls" target="tbl" fileName="piezas"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="PDF"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/pdf.png" width="24"/> 
+                            <p:dataExporter type="pdf" target="tbl" fileName="piezas"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="CSV"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/csv.png" width="24"/> 
+                            <p:dataExporter type="csv" target="tbl" fileName="piezas"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="XML"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/xml.png" width="24"/> 
+                            <p:dataExporter type="xml" target="tbl" fileName="piezas"/>
+                        </h:commandLink>
+                    </th>
+                </table>
+                <p:dataTable id="tbl" var="item" value="#{piezaController.items}"  emptyMessage="La máquina no se encuentra registrada"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                             paginator="true" rows="10" style="margin-bottom:20px;" 
+                             >
+                    <p:column filterBy="#{item.idPieza}"  filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPiezaTitle_idPieza}"/>
                         </f:facet>
                         <h:outputText value="#{item.idPieza}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPiezaTitle_cantidad}"/>
                         </f:facet>
                         <h:outputText value="#{item.cantidad}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPiezaTitle_longitud}"/>
                         </f:facet>
                         <h:outputText value="#{item.longitud}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPiezaTitle_ancho}"/>
                         </f:facet>
                         <h:outputText value="#{item.ancho}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPiezaTitle_cantidadPerforaciones}"/>
                         </f:facet>
                         <h:outputText value="#{item.cantidadPerforaciones}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPiezaTitle_areaCorte}"/>
                         </f:facet>
                         <h:outputText value="#{item.areaCorte}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPiezaTitle_bisel}"/>
                         </f:facet>
                         <h:outputText value="#{item.bisel}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPiezaTitle_PLANOidplano}"/>
                         </f:facet>
                         <h:outputText value="#{item.PLANOidplano}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPiezaTitle_MATERIAPRIMAidmateriaprima}"/>
                         </f:facet>
                         <h:outputText value="#{item.MATERIAPRIMAidmateriaprima}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column exportable="false">
                         <f:facet name="header">
                             <h:outputText value="&nbsp;"/>
                         </f:facet>
@@ -86,14 +114,9 @@
                         <h:commandLink action="#{piezaController.prepareEdit}" value="#{bundle.ListPiezaEditLink}"/>
                         <h:outputText value=" "/>
                         <h:commandLink action="#{piezaController.destroy}" value="#{bundle.ListPiezaDestroyLink}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:panelGroup>
-            <br />
-            <h:commandLink action="#{piezaController.prepareCreate}" value="#{bundle.ListPiezaCreateLink}"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.ListPiezaIndexLink}"/>
-        </h:form>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

@@ -4,52 +4,46 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.EditPlanoTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-        </h:panelGroup>
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="#{bundle.EditPlanoLabel_idPlano}" for="idPlano" />
-                <h:inputText id="idPlano" value="#{planoController.selected.idPlano}" title="#{bundle.EditPlanoTitle_idPlano}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_idPlano}"/>
-                <h:outputLabel value="#{bundle.EditPlanoLabel_nombre}" for="nombre" />
-                <h:inputText id="nombre" value="#{planoController.selected.nombre}" title="#{bundle.EditPlanoTitle_nombre}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_nombre}"/>
-                <h:outputLabel value="#{bundle.EditPlanoLabel_pesoUnitario}" for="pesoUnitario" />
-                <h:inputText id="pesoUnitario" value="#{planoController.selected.pesoUnitario}" title="#{bundle.EditPlanoTitle_pesoUnitario}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_pesoUnitario}"/>
-                <h:outputLabel value="#{bundle.EditPlanoLabel_areaUnitaria}" for="areaUnitaria" />
-                <h:inputText id="areaUnitaria" value="#{planoController.selected.areaUnitaria}" title="#{bundle.EditPlanoTitle_areaUnitaria}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_areaUnitaria}"/>
-                <h:outputLabel value="#{bundle.EditPlanoLabel_cantidad}" for="cantidad" />
-                <h:inputText id="cantidad" value="#{planoController.selected.cantidad}" title="#{bundle.EditPlanoTitle_cantidad}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_cantidad}"/>
-                <h:outputLabel value="#{bundle.EditPlanoLabel_revision}" for="revision" />
-                <h:inputText id="revision" value="#{planoController.selected.revision}" title="#{bundle.EditPlanoTitle_revision}" />
-                <h:outputLabel value="#{bundle.EditPlanoLabel_observacion}" for="observacion" />
-                <h:inputText id="observacion" value="#{planoController.selected.observacion}" title="#{bundle.EditPlanoTitle_observacion}" />
-                <h:outputLabel value="#{bundle.EditPlanoLabel_fecha}" for="fecha" />
-                <h:inputText id="fecha" value="#{planoController.selected.fecha}" title="#{bundle.EditPlanoTitle_fecha}" >
-                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                </h:inputText>
-                <h:outputLabel value="#{bundle.EditPlanoLabel_OBRAidobra}" for="OBRAidobra" />
-                <h:selectOneMenu id="OBRAidobra" value="#{planoController.selected.OBRAidobra}" title="#{bundle.EditPlanoTitle_OBRAidobra}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_OBRAidobra}">
-                    <f:selectItems value="#{obraController.itemsAvailableSelectOne}"/>
-                </h:selectOneMenu>
-            </h:panelGrid>
-            <h:commandLink action="#{planoController.update}" value="#{bundle.EditPlanoSaveLink}"/>
-            <br />
-            <br />
-            <h:link outcome="View" value="#{bundle.EditPlanoViewLink}"/>
-            <br />
-            <h:commandLink action="#{planoController.prepareList}" value="#{bundle.EditPlanoShowAllLink}" immediate="true"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.EditPlanoIndexLink}" />
-        </h:form>
+        <p:panel id="basic" header="#{bundle.EditPlanoTitle}" footer="Editar plano" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.EditPlanoLabel_idPlano}" for="idPlano" />
+                    <p:inputText id="idPlano" value="#{planoController.selected.idPlano}" title="#{bundle.EditPlanoTitle_idPlano}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_idPlano}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPlanoLabel_nombre}" for="nombre" />
+                    <p:inputText id="nombre" value="#{planoController.selected.nombre}" title="#{bundle.EditPlanoTitle_nombre}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_nombre}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPlanoLabel_pesoUnitario}" for="pesoUnitario" />
+                    <p:inputText id="pesoUnitario" value="#{planoController.selected.pesoUnitario}" title="#{bundle.EditPlanoTitle_pesoUnitario}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_pesoUnitario}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPlanoLabel_areaUnitaria}" for="areaUnitaria" />
+                    <p:inputText id="areaUnitaria" value="#{planoController.selected.areaUnitaria}" title="#{bundle.EditPlanoTitle_areaUnitaria}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_areaUnitaria}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPlanoLabel_cantidad}" for="cantidad" />
+                    <p:inputText id="cantidad" value="#{planoController.selected.cantidad}" title="#{bundle.EditPlanoTitle_cantidad}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_cantidad}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPlanoLabel_revision}" for="revision" />
+                    <p:inputText id="revision" value="#{planoController.selected.revision}" title="#{bundle.EditPlanoTitle_revision}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPlanoLabel_observacion}" for="observacion" />
+                    <p:inputText id="observacion" value="#{planoController.selected.observacion}" title="#{bundle.EditPlanoTitle_observacion}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPlanoLabel_fecha}" for="fecha" />
+                    <p:calendar id="fecha" locale="es" value="#{planoController.selected.fecha}" navigator="true" pattern="MM/dd/yyyy" />
+                    <p:outputLabel value="#{bundle.EditPlanoLabel_OBRAidobra}" for="OBRAidobra" />
+                    <p:selectOneMenu id="OBRAidobra" value="#{planoController.selected.OBRAidobra}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_OBRAidobra}" style="width: 230px;">
+                        <f:selectItems value="#{obraController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <h:panelGrid columns="3" styleClass="link">
+                    <p:commandButton action="#{planoController.update}" value="#{bundle.EditPlanoSaveLink}" ajax="false" icon="ui-icon-pencil"/>
+                    <p:button outcome="View" value="#{bundle.EditPlanoViewLink}" icon="ui-icon-search" />
+                    <p:commandButton action="#{planoController.prepareList}" value="#{bundle.EditPlanoShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

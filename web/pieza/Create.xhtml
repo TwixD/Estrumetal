@@ -4,51 +4,47 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.CreatePiezaTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-        </h:panelGroup>
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="#{bundle.CreatePiezaLabel_idPieza}" for="idPieza" />
-                <h:inputText id="idPieza" value="#{piezaController.selected.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_idPieza}"/>
-                <h:outputLabel value="#{bundle.CreatePiezaLabel_cantidad}" for="cantidad" />
-                <h:inputText id="cantidad" value="#{piezaController.selected.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_cantidad}"/>
-                <h:outputLabel value="#{bundle.CreatePiezaLabel_longitud}" for="longitud" />
-                <h:inputText id="longitud" value="#{piezaController.selected.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_longitud}"/>
-                <h:outputLabel value="#{bundle.CreatePiezaLabel_ancho}" for="ancho" />
-                <h:inputText id="ancho" value="#{piezaController.selected.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" />
-                <h:outputLabel value="#{bundle.CreatePiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
-                <h:inputText id="cantidadPerforaciones" value="#{piezaController.selected.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" />
-                <h:outputLabel value="#{bundle.CreatePiezaLabel_areaCorte}" for="areaCorte" />
-                <h:inputText id="areaCorte" value="#{piezaController.selected.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" />
-                <h:outputLabel value="#{bundle.CreatePiezaLabel_bisel}" for="bisel" />
-                <h:inputText id="bisel" value="#{piezaController.selected.bisel}" title="#{bundle.CreatePiezaTitle_bisel}" />
-                <h:outputLabel value="#{bundle.CreatePiezaLabel_PLANOidplano}" for="PLANOidplano" />
-                <h:selectOneMenu id="PLANOidplano" value="#{piezaController.selected.PLANOidplano}" title="#{bundle.CreatePiezaTitle_PLANOidplano}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_PLANOidplano}">
-                    <f:selectItems value="#{planoController.itemsAvailableSelectOne}"/>
-                </h:selectOneMenu>
-                <h:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                <h:selectOneMenu id="MATERIAPRIMAidmateriaprima" value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}" title="#{bundle.CreatePiezaTitle_MATERIAPRIMAidmateriaprima}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}">
-                    <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
-                </h:selectOneMenu>
-            </h:panelGrid>
-            <br />
-            <h:commandLink action="#{piezaController.create}" value="#{bundle.CreatePiezaSaveLink}" />
-            <br />
-            <br />
-            <h:commandLink action="#{piezaController.prepareList}" value="#{bundle.CreatePiezaShowAllLink}" immediate="true"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.CreatePiezaIndexLink}"/>
-        </h:form>
+        <p:panel id="basic" header="#{bundle.CreatePiezaTitle}" footer="Pieza" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.CreatePiezaLabel_idPieza}" for="idPieza" rendered="false"/>
+                    <p:inputText id="idPieza" value="#{piezaController.selected.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidad}" for="cantidad" />
+                    <p:inputText id="cantidad" value="#{piezaController.selected.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_cantidad}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreatePiezaLabel_longitud}" for="longitud" />
+                    <p:inputText id="longitud" value="#{piezaController.selected.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_longitud}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreatePiezaLabel_ancho}" for="ancho" />
+                    <p:inputText id="ancho" value="#{piezaController.selected.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
+                    <p:inputText id="cantidadPerforaciones" value="#{piezaController.selected.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreatePiezaLabel_areaCorte}" for="areaCorte" />
+                    <p:inputText id="areaCorte" value="#{piezaController.selected.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreatePiezaLabel_bisel}" for="bisel" />
+                    <p:inputText id="bisel" value="#{piezaController.selected.bisel}" title="#{bundle.CreatePiezaTitle_bisel}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreatePiezaLabel_PLANOidplano}" for="PLANOidplano" />
+                    <p:selectOneMenu id="PLANOidplano" value="#{piezaController.selected.PLANOidplano}"  required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_PLANOidplano}" style="width: 230px;">
+                        <f:selectItems value="#{planoController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
+                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima" value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}"  required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                        <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <h:panelGrid columns="2" styleClass="link">
+                    <p:commandButton action="#{piezaController.create}" value="#{bundle.CreatePiezaSaveLink}"  ajax="false" icon="ui-icon-disk"/> 
+                    <p:commandButton action="#{piezaController.prepareList}" value="#{bundle.CreatePiezaShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                </h:panelGrid>   
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

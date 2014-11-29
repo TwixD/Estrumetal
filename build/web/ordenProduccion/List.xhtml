@@ -4,58 +4,87 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.ListOrdenProduccionTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:form styleClass="jsfcrud_list_form">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:outputText escape="false" value="#{bundle.ListOrdenProduccionEmpty}" rendered="#{ordenProduccionController.items.rowCount == 0}"/>
-            <h:panelGroup rendered="#{ordenProduccionController.items.rowCount > 0}">
-                <h:outputText value="#{ordenProduccionController.pagination.pageFirstItem + 1}..#{ordenProduccionController.pagination.pageLastItem + 1}/#{ordenProduccionController.pagination.itemsCount}"/>&nbsp;
-                <h:commandLink action="#{ordenProduccionController.previous}" value="#{bundle.Previous} #{ordenProduccionController.pagination.pageSize}" rendered="#{ordenProduccionController.pagination.hasPreviousPage}"/>&nbsp;
-                <h:commandLink action="#{ordenProduccionController.next}" value="#{bundle.Next} #{ordenProduccionController.pagination.pageSize}" rendered="#{ordenProduccionController.pagination.hasNextPage}"/>&nbsp;
-                <h:dataTable value="#{ordenProduccionController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                    <h:column>
+        <p:panel id="basic" header="#{bundle.ListOrdenProduccionTitle}" footer="Lista detallada de las ordenes de producción" style="margin-bottom:20px">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <table>
+                    <td>
+                        <p:outputLabel value="Exportar   EXCEL"></p:outputLabel>
+                    </td>
+                    <th><h:commandLink>
+                            <img src="../resources/img/excel.png" width="24"/> 
+                            <p:dataExporter type="xls" target="tbl" fileName="ordenProduccion"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="PDF"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/pdf.png" width="24"/> 
+                            <p:dataExporter type="pdf" target="tbl" fileName="ordenProduccion"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="CSV"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/csv.png" width="24"/> 
+                            <p:dataExporter type="csv" target="tbl" fileName="ordenProduccion"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="XML"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/xml.png" width="24"/> 
+                            <p:dataExporter type="xml" target="tbl" fileName="ordenProduccion"/>
+                        </h:commandLink>
+                    </th>
+                </table>
+                <p:dataTable id="tbl" var="item" value="#{ordenProduccionController.items}" 
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                             paginator="true" rows="10" style="margin-bottom:20px;"
+                             >
+                    <p:column filterBy="#{item.idOrdenproduccion}" filterMatchMode="contains"> 
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListOrdenProduccionTitle_ordenProduccionPK_idOrdenproduccion}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.ordenProduccionPK.idOrdenproduccion}"/>
-                    </h:column>
-                    <h:column>
+                        </f:facet>   
+                        <h:outputText value="#{item.idOrdenproduccion}" />
+                    </p:column>
+
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListOrdenProduccionTitle_ordenProduccionPK_cantidad}"/>
                         </f:facet>
-                        <h:outputText value="#{item.ordenProduccionPK.cantidad}"/>
-                    </h:column>
-                    <h:column>
+                        <h:outputText value="#{item.cantidad}"/>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListOrdenProduccionTitle_fecha}"/>
                         </f:facet>
                         <h:outputText value="#{item.fecha}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column filterBy="#{item.RUTAidruta}" filterMatchMode="contains"> 
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListOrdenProduccionTitle_RUTAidruta}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.RUTAidruta}"/>
-                    </h:column>
-                    <h:column>
+                        </f:facet>                    
+                        <h:outputText value="#{item.RUTAidruta}" />
+                    </p:column>
+                    <p:column filterBy="#{item.PLANOidplano}" filterMatchMode="contains"> 
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListOrdenProduccionTitle_PLANOidplano}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.PLANOidplano}"/>
-                    </h:column>
-                    <h:column>
+                        </f:facet>    
+                        <h:outputText value="#{item.PLANOidplano}" />
+                    </p:column>
+                    <p:column exportable="false">
                         <f:facet name="header">
                             <h:outputText value="&nbsp;"/>
                         </f:facet>
@@ -63,15 +92,10 @@
                         <h:outputText value=" "/>
                         <h:commandLink action="#{ordenProduccionController.prepareEdit}" value="#{bundle.ListOrdenProduccionEditLink}"/>
                         <h:outputText value=" "/>
-                        <h:commandLink action="#{ordenProduccionController.destroy}" value="#{bundle.ListOrdenProduccionDestroyLink}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:panelGroup>
-            <br />
-            <h:commandLink action="#{ordenProduccionController.prepareCreate}" value="#{bundle.ListOrdenProduccionCreateLink}"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.ListOrdenProduccionIndexLink}"/>
-        </h:form>
+                        <h:commandLink action="#{ordenProduccionController.destroy}" value="#{bundle.ListOrdenProduccionDestroyLink}" rendered="#{loginBean.admin()}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

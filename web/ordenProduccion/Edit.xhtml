@@ -4,46 +4,39 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.EditOrdenProduccionTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-        </h:panelGroup>
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="#{bundle.EditOrdenProduccionLabel_ordenProduccionPK_cantidad}" for="ordenProduccionPK_cantidad" />
-                <h:inputText id="ordenProduccionPK_cantidad" value="#{ordenProduccionController.selected.ordenProduccionPK.cantidad}" title="#{bundle.EditOrdenProduccionTitle_ordenProduccionPK_cantidad}" required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_ordenProduccionPK_cantidad}"/>
-                <h:outputLabel value="#{bundle.EditOrdenProduccionLabel_ordenProduccionPK_idOrdenproduccion}" for="ordenProduccionPK_idOrdenproduccion" />
-                <h:inputText id="ordenProduccionPK_idOrdenproduccion" value="#{ordenProduccionController.selected.ordenProduccionPK.idOrdenproduccion}" title="#{bundle.EditOrdenProduccionTitle_ordenProduccionPK_idOrdenproduccion}" required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_ordenProduccionPK_idOrdenproduccion}"/>
-                <h:outputLabel value="#{bundle.EditOrdenProduccionLabel_fecha}" for="fecha" />
-                <h:inputText id="fecha" value="#{ordenProduccionController.selected.fecha}" title="#{bundle.EditOrdenProduccionTitle_fecha}" required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_fecha}">
-                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                </h:inputText>
-                <h:outputLabel value="#{bundle.EditOrdenProduccionLabel_RUTAidruta}" for="RUTAidruta" />
-                <h:selectOneMenu id="RUTAidruta" value="#{ordenProduccionController.selected.RUTAidruta}" title="#{bundle.EditOrdenProduccionTitle_RUTAidruta}" required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_RUTAidruta}">
-                    <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"/>
-                </h:selectOneMenu>
-                <h:outputLabel value="#{bundle.EditOrdenProduccionLabel_PLANOidplano}" for="PLANOidplano" />
-                <h:selectOneMenu id="PLANOidplano" value="#{ordenProduccionController.selected.PLANOidplano}" title="#{bundle.EditOrdenProduccionTitle_PLANOidplano}" required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_PLANOidplano}">
-                    <f:selectItems value="#{planoController.itemsAvailableSelectOne}"/>
-                </h:selectOneMenu>
-            </h:panelGrid>
-            <h:commandLink action="#{ordenProduccionController.update}" value="#{bundle.EditOrdenProduccionSaveLink}"/>
-            <br />
-            <br />
-            <h:link outcome="View" value="#{bundle.EditOrdenProduccionViewLink}"/>
-            <br />
-            <h:commandLink action="#{ordenProduccionController.prepareList}" value="#{bundle.EditOrdenProduccionShowAllLink}" immediate="true"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.EditOrdenProduccionIndexLink}" />
-        </h:form>
+        <p:panel id="basic" header="#{bundle.EditOrdenProduccionTitle}" footer="Orden de producción" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.EditOrdenProduccionLabel_ordenProduccionPK_cantidad}" for="ordenProduccionPK_cantidad" />
+                    <p:inputText id="ordenProduccionPK_cantidad" value="#{ordenProduccionController.selected.cantidad}" title="#{bundle.EditOrdenProduccionTitle_ordenProduccionPK_cantidad}" required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_ordenProduccionPK_cantidad}" style="width: 220px;"/>
+                    <p:inputText id="ordenProduccionPK_idOrdenproduccion" value="#{ordenProduccionController.selected.idOrdenproduccion}" title="#{bundle.EditOrdenProduccionTitle_ordenProduccionPK_idOrdenproduccion}" required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_ordenProduccionPK_idOrdenproduccion}" rendered="false" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditOrdenProduccionLabel_RUTAidruta}" for="RUTAidruta" />
+                    <p:selectOneMenu id="RUTAidruta" value="#{ordenProduccionController.selected.RUTAidruta}"  required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">
+                        <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.EditOrdenProduccionLabel_PLANOidplano}" for="PLANOidplano" />
+                    <p:selectOneMenu id="PLANOidplano" value="#{ordenProduccionController.selected.PLANOidplano}"  required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_PLANOidplano}" style="width: 230px;">
+                        <f:selectItems value="#{planoController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.EditOrdenProduccionLabel_fecha}" for="fecha" />
+                    <p:calendar id="fecha" locale="es" value="#{ordenProduccionController.selected.fecha}" required="true" navigator="true" pattern="MM/dd/yyyy" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_fecha}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="3" styleClass="link">
+                    <p:commandButton action="#{ordenProduccionController.update}" value="#{bundle.EditOrdenProduccionSaveLink}" ajax="false" icon="ui-icon-pencil"/>
+                    <p:button outcome="View" value="#{bundle.EditOrdenProduccionViewLink}" icon="ui-icon-search" />
+                    <p:commandButton action="#{ordenProduccionController.prepareList}" value="#{bundle.EditOrdenProduccionShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.estrumetal.jpa;
 
 import java.io.Serializable;
@@ -39,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "MateriaPrima.findByTipo", query = "SELECT m FROM MateriaPrima m WHERE m.tipo = :tipo"),
     @NamedQuery(name = "MateriaPrima.findByPesoMl", query = "SELECT m FROM MateriaPrima m WHERE m.pesoMl = :pesoMl")})
 public class MateriaPrima implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -140,7 +140,7 @@ public class MateriaPrima implements Serializable {
 
     @Override
     public String toString() {
-        return "com.estrumetal.jpa.MateriaPrima[ idMateriaprima=" + idMateriaprima + " ]";
+        return idMateriaprima +" - "+ descripcion;
     }
-    
+
 }

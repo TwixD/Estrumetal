@@ -8,48 +8,31 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.ViewMateriaPrimaTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-        </h:panelGroup>
-        <h:form>
-            <p:dataTable var="MATERIA_PRIMA" value="" >  
-                <p:column headerText="#{bundle.ViewMateriaPrimaLabel_idMateriaprima}"> 
-                    <h:outputText value="#{materiaPrimaController.selected.idMateriaprima}" title="#{bundle.ViewMateriaPrimaTitle_idMateriaprima}"/>
-                </p:column>  
-
-                <p:column headerText="#{bundle.ViewMateriaPrimaLabel_descripcion}">  
-                    <h:outputText value="#{materiaPrimaController.selected.descripcion}" title="#{bundle.ViewMateriaPrimaTitle_descripcion}"/>
-                </p:column>  
-
-                <p:column headerText="#{bundle.ViewMateriaPrimaLabel_tipo}">  
-                    <h:outputText value="#{materiaPrimaController.selected.tipo}" title="#{bundle.ViewMateriaPrimaTitle_tipo}"/>
-                </p:column> 
-                <p:column headerText="#{bundle.ViewMateriaPrimaLabel_pesoMl}">  
-                    <h:outputText value="#{materiaPrimaController.selected.pesoMl}" title="#{bundle.ViewMateriaPrimaTitle_pesoMl}"/>
-                </p:column> 
-
-
-            </p:dataTable> 
-
-            <h:panelGrid columns="6" styleClass="link">
-
-
-                <h:commandLink action="#{materiaPrimaController.destroyAndView}" value="#{bundle.ViewMateriaPrimaDestroyLink}"/>
-
-                <h:link outcome="Edit" value="#{bundle.ViewMateriaPrimaEditLink}"/>
-
-                <h:commandLink action="#{materiaPrimaController.prepareCreate}" value="#{bundle.ViewMateriaPrimaCreateLink}" />
-
-                <h:commandLink action="#{materiaPrimaController.prepareList}" value="#{bundle.ViewMateriaPrimaShowAllLink}"/>
-
-                <h:link outcome="/index" value="#{bundle.ViewMateriaPrimaIndexLink}"/>
-            </h:panelGrid>
-        </h:form>
+        <p:panel id="basic" header="#{bundle.ViewMateriaPrimaTitle}" footer="Materia prima" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.ViewMateriaPrimaLabel_idMateriaprima}"/>
+                    <p:outputLabel value="#{materiaPrimaController.selected.idMateriaprima}" title="#{bundle.ViewMateriaPrimaTitle_idMateriaprima}"/>
+                    <p:outputLabel value="#{bundle.ViewMateriaPrimaLabel_descripcion}"/>
+                    <p:outputLabel value="#{materiaPrimaController.selected.descripcion}" title="#{bundle.ViewMateriaPrimaTitle_descripcion}"/>
+                    <p:outputLabel value="#{bundle.ViewMateriaPrimaLabel_tipo}"/>
+                    <p:outputLabel value="#{materiaPrimaController.selected.tipo}" title="#{bundle.tipo}"/>
+                    <p:outputLabel value="#{bundle.ViewMateriaPrimaLabel_pesoMl}"/>
+                    <p:outputLabel value="#{materiaPrimaController.selected.pesoMl}" title="#{bundle.ViewMateriaPrimaTitle_pesoMl}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="4" styleClass="link">
+                    <p:commandButton action="#{materiaPrimaController.destroyAndView}"  value="#{bundle.ViewMateriaPrimaDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="#{loginBean.admin()}"/>
+                    <p:button outcome="Edit" value="#{bundle.ViewMateriaPrimaEditLink}" icon="ui-icon-pencil"/>
+                    <p:commandButton action="#{materiaPrimaController.prepareCreate()}" value="#{bundle.ViewMateriaPrimaCreateLink}" ajax="false" icon="ui-icon-plusthick" />
+                    <p:commandButton action="#{materiaPrimaController.prepareList()}" value="#{bundle.ViewMateriaPrimaShowAllLink}" ajax="false" icon="ui-icon-clipboard"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

@@ -4,82 +4,110 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.ListPlanoTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:form styleClass="jsfcrud_list_form">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:outputText escape="false" value="#{bundle.ListPlanoEmpty}" rendered="#{planoController.items.rowCount == 0}"/>
-            <h:panelGroup rendered="#{planoController.items.rowCount > 0}">
-                <h:outputText value="#{planoController.pagination.pageFirstItem + 1}..#{planoController.pagination.pageLastItem + 1}/#{planoController.pagination.itemsCount}"/>&nbsp;
-                <h:commandLink action="#{planoController.previous}" value="#{bundle.Previous} #{planoController.pagination.pageSize}" rendered="#{planoController.pagination.hasPreviousPage}"/>&nbsp;
-                <h:commandLink action="#{planoController.next}" value="#{bundle.Next} #{planoController.pagination.pageSize}" rendered="#{planoController.pagination.hasNextPage}"/>&nbsp;
-                <h:dataTable value="#{planoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                    <h:column>
+        <p:panel id="basic" header="#{bundle.ListPlanoTitle}" footer="Lista detallada de las planos" style="margin-bottom:20px">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <table>
+                    <td>
+                        <p:outputLabel value="Exportar   EXCEL"></p:outputLabel>
+                    </td>
+                    <th><h:commandLink>
+                            <img src="../resources/img/excel.png" width="24"/> 
+                            <p:dataExporter type="xls" target="tbl" fileName="planos"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="PDF"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/pdf.png" width="24"/> 
+                            <p:dataExporter type="pdf" target="tbl" fileName="planos"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="CSV"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/csv.png" width="24"/> 
+                            <p:dataExporter type="csv" target="tbl" fileName="planos"/>
+                        </h:commandLink>
+                    </th>
+                    <td><p:outputLabel value="XML"></p:outputLabel></td>
+                    <th>
+                        <h:commandLink>
+                            <img src="../resources/img/xml.png" width="24"/> 
+                            <p:dataExporter type="xml" target="tbl" fileName="planos"/>
+                        </h:commandLink>
+                    </th>
+                </table>     
+                <p:dataTable id="tbl" var="item" value="#{planoController.items}"  emptyMessage="El plano no se encuentra registrado"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                             paginator="true" rows="10" style="margin-bottom:20px;" 
+                             >
+                    <p:column filterBy="#{item.idPlano}"  filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_idPlano}"/>
                         </f:facet>
                         <h:outputText value="#{item.idPlano}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_nombre}"/>
                         </f:facet>
                         <h:outputText value="#{item.nombre}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_pesoUnitario}"/>
                         </f:facet>
                         <h:outputText value="#{item.pesoUnitario}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_areaUnitaria}"/>
                         </f:facet>
                         <h:outputText value="#{item.areaUnitaria}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_cantidad}"/>
                         </f:facet>
                         <h:outputText value="#{item.cantidad}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_revision}"/>
                         </f:facet>
                         <h:outputText value="#{item.revision}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_observacion}"/>
                         </f:facet>
                         <h:outputText value="#{item.observacion}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_fecha}"/>
                         </f:facet>
                         <h:outputText value="#{item.fecha}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_OBRAidobra}"/>
                         </f:facet>
                         <h:outputText value="#{item.OBRAidobra}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column exportable="false">
                         <f:facet name="header">
                             <h:outputText value="&nbsp;"/>
                         </f:facet>
@@ -88,14 +116,9 @@
                         <h:commandLink action="#{planoController.prepareEdit}" value="#{bundle.ListPlanoEditLink}"/>
                         <h:outputText value=" "/>
                         <h:commandLink action="#{planoController.destroy}" value="#{bundle.ListPlanoDestroyLink}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:panelGroup>
-            <br />
-            <h:commandLink action="#{planoController.prepareCreate}" value="#{bundle.ListPlanoCreateLink}"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.ListPlanoIndexLink}"/>
-        </h:form>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

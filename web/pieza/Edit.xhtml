@@ -4,52 +4,48 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/template.xhtml">
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="img">
-        <img src="../resources/img/logolarge.png" style="margin-top: -10px;"/> 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{bundle.EditPiezaTitle}"></h:outputText>
+        <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-        </h:panelGroup>
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="#{bundle.EditPiezaLabel_idPieza}" for="idPieza" />
-                <h:inputText id="idPieza" value="#{piezaController.selected.idPieza}" title="#{bundle.EditPiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_idPieza}"/>
-                <h:outputLabel value="#{bundle.EditPiezaLabel_cantidad}" for="cantidad" />
-                <h:inputText id="cantidad" value="#{piezaController.selected.cantidad}" title="#{bundle.EditPiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_cantidad}"/>
-                <h:outputLabel value="#{bundle.EditPiezaLabel_longitud}" for="longitud" />
-                <h:inputText id="longitud" value="#{piezaController.selected.longitud}" title="#{bundle.EditPiezaTitle_longitud}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_longitud}"/>
-                <h:outputLabel value="#{bundle.EditPiezaLabel_ancho}" for="ancho" />
-                <h:inputText id="ancho" value="#{piezaController.selected.ancho}" title="#{bundle.EditPiezaTitle_ancho}" />
-                <h:outputLabel value="#{bundle.EditPiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
-                <h:inputText id="cantidadPerforaciones" value="#{piezaController.selected.cantidadPerforaciones}" title="#{bundle.EditPiezaTitle_cantidadPerforaciones}" />
-                <h:outputLabel value="#{bundle.EditPiezaLabel_areaCorte}" for="areaCorte" />
-                <h:inputText id="areaCorte" value="#{piezaController.selected.areaCorte}" title="#{bundle.EditPiezaTitle_areaCorte}" />
-                <h:outputLabel value="#{bundle.EditPiezaLabel_bisel}" for="bisel" />
-                <h:inputText id="bisel" value="#{piezaController.selected.bisel}" title="#{bundle.EditPiezaTitle_bisel}" />
-                <h:outputLabel value="#{bundle.EditPiezaLabel_PLANOidplano}" for="PLANOidplano" />
-                <h:selectOneMenu id="PLANOidplano" value="#{piezaController.selected.PLANOidplano}" title="#{bundle.EditPiezaTitle_PLANOidplano}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_PLANOidplano}">
-                    <f:selectItems value="#{planoController.itemsAvailableSelectOne}"/>
-                </h:selectOneMenu>
-                <h:outputLabel value="#{bundle.EditPiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                <h:selectOneMenu id="MATERIAPRIMAidmateriaprima" value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}" title="#{bundle.EditPiezaTitle_MATERIAPRIMAidmateriaprima}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_MATERIAPRIMAidmateriaprima}">
-                    <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
-                </h:selectOneMenu>
-            </h:panelGrid>
-            <h:commandLink action="#{piezaController.update}" value="#{bundle.EditPiezaSaveLink}"/>
-            <br />
-            <br />
-            <h:link outcome="View" value="#{bundle.EditPiezaViewLink}"/>
-            <br />
-            <h:commandLink action="#{piezaController.prepareList}" value="#{bundle.EditPiezaShowAllLink}" immediate="true"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.EditPiezaIndexLink}" />
-        </h:form>
+        <p:panel id="basic" header="#{bundle.EditPiezaTitle}" footer="Editar pieza" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.EditPiezaLabel_idPieza}" for="idPieza" rendered="false"/>
+                    <p:inputText id="idPieza" value="#{piezaController.selected.idPieza}" title="#{bundle.EditPiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:outputLabel value="#{bundle.EditPiezaLabel_cantidad}" for="cantidad" />
+                    <p:inputText id="cantidad" value="#{piezaController.selected.cantidad}" title="#{bundle.EditPiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_cantidad}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPiezaLabel_longitud}" for="longitud" />
+                    <p:inputText id="longitud" value="#{piezaController.selected.longitud}" title="#{bundle.EditPiezaTitle_longitud}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_longitud}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPiezaLabel_ancho}" for="ancho" />
+                    <p:inputText id="ancho" value="#{piezaController.selected.ancho}" title="#{bundle.EditPiezaTitle_ancho}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
+                    <p:inputText id="cantidadPerforaciones" value="#{piezaController.selected.cantidadPerforaciones}" title="#{bundle.EditPiezaTitle_cantidadPerforaciones}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPiezaLabel_areaCorte}" for="areaCorte" />
+                    <p:inputText id="areaCorte" value="#{piezaController.selected.areaCorte}" title="#{bundle.EditPiezaTitle_areaCorte}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPiezaLabel_bisel}" for="bisel" />
+                    <p:inputText id="bisel" value="#{piezaController.selected.bisel}" title="#{bundle.EditPiezaTitle_bisel}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditPiezaLabel_PLANOidplano}" for="PLANOidplano" />
+                    <p:selectOneMenu id="PLANOidplano" value="#{piezaController.selected.PLANOidplano}"  required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_PLANOidplano}" style="width: 230px;">
+                        <f:selectItems value="#{planoController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.EditPiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
+                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima" value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                        <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <h:panelGrid columns="3" styleClass="link">
+                    <p:commandButton action="#{piezaController.update}" value="#{bundle.EditPiezaSaveLink}" ajax="false" icon="ui-icon-pencil"/>
+                    <p:button outcome="View" value="#{bundle.EditPiezaViewLink}" icon="ui-icon-search" />
+                    <p:commandButton action="#{piezaController.prepareList}" value="#{bundle.EditPiezaShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

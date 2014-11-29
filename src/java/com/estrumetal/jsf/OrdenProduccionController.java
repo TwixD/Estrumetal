@@ -35,7 +35,6 @@ public class OrdenProduccionController implements Serializable {
     public OrdenProduccion getSelected() {
         if (current == null) {
             current = new OrdenProduccion();
-            current.setOrdenProduccionPK(new com.estrumetal.jpa.OrdenProduccionPK());
             selectedItemIndex = -1;
         }
         return current;
@@ -47,7 +46,7 @@ public class OrdenProduccionController implements Serializable {
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
-            pagination = new PaginationHelper(10) {
+            pagination = new PaginationHelper(9999999) {
 
                 @Override
                 public int getItemsCount() {
@@ -76,7 +75,6 @@ public class OrdenProduccionController implements Serializable {
 
     public String prepareCreate() {
         current = new OrdenProduccion();
-        current.setOrdenProduccionPK(new com.estrumetal.jpa.OrdenProduccionPK());
         selectedItemIndex = -1;
         return "Create";
     }
@@ -193,9 +191,6 @@ public class OrdenProduccionController implements Serializable {
     @FacesConverter(forClass = OrdenProduccion.class)
     public static class OrdenProduccionControllerConverter implements Converter {
 
-        private static final String SEPARATOR = "#";
-        private static final String SEPARATOR_ESCAPED = "\\#";
-
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
@@ -206,20 +201,15 @@ public class OrdenProduccionController implements Serializable {
             return controller.ejbFacade.find(getKey(value));
         }
 
-        com.estrumetal.jpa.OrdenProduccionPK getKey(String value) {
-            com.estrumetal.jpa.OrdenProduccionPK key;
-            String values[] = value.split(SEPARATOR_ESCAPED);
-            key = new com.estrumetal.jpa.OrdenProduccionPK();
-            key.setIdOrdenproduccion(Integer.parseInt(values[0]));
-            key.setCantidad(Integer.parseInt(values[1]));
+        java.lang.Integer getKey(String value) {
+            java.lang.Integer key;
+            key = Integer.valueOf(value);
             return key;
         }
 
-        String getStringKey(com.estrumetal.jpa.OrdenProduccionPK value) {
+        String getStringKey(java.lang.Integer value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value.getIdOrdenproduccion());
-            sb.append(SEPARATOR);
-            sb.append(value.getCantidad());
+            sb.append(value);
             return sb.toString();
         }
 
@@ -230,12 +220,11 @@ public class OrdenProduccionController implements Serializable {
             }
             if (object instanceof OrdenProduccion) {
                 OrdenProduccion o = (OrdenProduccion) object;
-                return getStringKey(o.getOrdenProduccionPK());
+                return getStringKey(o.getIdOrdenproduccion());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + OrdenProduccion.class.getName());
             }
         }
-
     }
 
 }

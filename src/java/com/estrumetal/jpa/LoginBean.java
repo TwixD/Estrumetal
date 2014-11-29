@@ -6,7 +6,11 @@
 package com.estrumetal.jpa;
 
 import com.estrumetal.jpacontroller.UsuarioFacade;
+import com.estrumetal.jsf.GalleriController;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -28,6 +32,70 @@ public class LoginBean implements Serializable {
     private String clave;
     private boolean logeado = false;
     private int rol = 99;
+    private String galleriImg = "", galleriDesc = "", galleriTitle = "";
+    GalleriController galleriController;
+    private List<GalleriController> images;
+
+    @PostConstruct
+    public void init() {
+
+        images = new ArrayList<GalleriController>();
+        for (int i = 1; i <= 11; i++) {
+            galleriImg = "index" + i + ".png";
+            switch (i) {
+                case 1:
+                    galleriTitle = "Calima Centro Comercial";
+                    galleriDesc = "Ubicación: Cra. 30 en Calles 19 y 22  Bogotá - Colombia";
+                    break;
+                case 2:
+                    galleriTitle = "Destilería Ingenio Manuelita";
+                    galleriDesc = "Planta de Alcohol Carburante Manuelita.";
+                    break;
+                case 3:
+                    galleriTitle = "Planta Cervecería Del Valle - Bavaria";
+                    galleriDesc = "Ubicación: ACOPI - Yumbo   Valle del Cauca - Colombia";
+                    break;
+                case 4:
+                    galleriTitle = "Complejo Vial Calle 25 con Carrera 15";
+                    galleriDesc = "Puente vehicular y peatonal  Santiago de Cali - Colombia";
+                    break;
+                case 5:
+                    galleriTitle = "Planta Cementos San Marcos";
+                    galleriDesc = "Yumbo corregimiento de San Marcos Valle del Cauca";
+                    break;
+                case 6:
+                    galleriTitle = "Centro Comercial Centenario";
+                    galleriDesc = "Ubicación: Oeste Cali  Santiago de Cali -  Colombia";
+                    break;
+                case 7:
+                    galleriTitle = "Complejo Vida Centro Profesional de Salud";
+                    galleriDesc = "Ubicación: Cll. 5D No. 38A-35 B. Tequendama  Santiago de Cali - Colombia";
+                    break;
+                case 8:
+                    galleriTitle = "Ciudadela educativa Nuevo Latir";
+                    galleriDesc = "Valle del Cauca - Colombia";
+                    break;
+                case 9:
+                    galleriTitle = "Edificio de Cogeneración Ingenio Providencia";
+                    galleriDesc = "Valle del Cauca - Colombia";
+                    break;
+                case 10:
+                    galleriTitle = "Edificio de Caldera y Economizador Planta Propal";
+                    galleriDesc = "Carvajal pulpa y papel";
+                    break;
+                case 11:
+                    galleriTitle = "Complejo Acuático Simón Bolívar";
+                    galleriDesc = "Ubicación: Calle 63 Nº 47 - 00, Bogotá";
+                    break;
+            }
+            galleriController = new GalleriController(galleriImg, galleriTitle, galleriDesc);
+            images.add(galleriController);
+        }
+    }
+
+    public List<GalleriController> getImages() {
+        return images;
+    }
 
     public boolean estaLogeado() {
         return logeado;
