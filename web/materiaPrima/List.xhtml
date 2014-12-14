@@ -85,7 +85,7 @@
                         <h:outputText value=" "/>
                         <h:commandLink action="#{materiaPrimaController.prepareEdit}" value="#{bundle.ListMateriaPrimaEditLink}"/>
                         <h:outputText value=" "/>
-                        <h:commandLink action="#{materiaPrimaController.destroy}" value="#{bundle.ListMateriaPrimaDestroyLink}"/>
+                        <h:commandLink action="#{materiaPrimaController.destroy}" value="#{bundle.ListMateriaPrimaDestroyLink}" rendered="#{loginBean.admin()}"/>
                     </p:column>
                 </p:dataTable>      
             </h:form>

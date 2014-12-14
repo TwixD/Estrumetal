@@ -90,5 +90,21 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
             return "failure";
         }
     }
+    
+    public Boolean validateUSer(String userName) {
+        String PERSISTENCE_UNIT_NAME = "projectEstrumetalPU";
+        EntityManagerFactory factory;
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        EntityManager emx = factory.createEntityManager();
+        Query q = emx.createQuery("SELECT u FROM Usuario u WHERE u.user = :user");
+        q.setParameter("user", userName);
+        try {
+            Usuario usuario;
+            usuario  = (Usuario) q.getSingleResult();
+            return false;
+        } catch (NoResultException e) {
+            return true;
+        }
+    }
 
 }

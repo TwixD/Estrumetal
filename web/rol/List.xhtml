@@ -71,7 +71,7 @@
                         <h:outputText value=" "/>
                         <h:commandLink action="#{rolController.prepareEdit}" value="#{bundle.ListRolEditLink}"/>
                         <h:outputText value=" "/>
-                        <h:commandLink action="#{rolController.destroy}" value="#{bundle.ListRolDestroyLink}"/>
+                        <h:commandLink action="#{rolController.destroy}" value="#{bundle.ListRolDestroyLink}" rendered="#{loginBean.admin()}"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

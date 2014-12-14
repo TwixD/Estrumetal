@@ -6,11 +6,11 @@ import com.estrumetal.jsf.util.PaginationHelper;
 import com.estrumetal.jpacontroller.MaquinaFacade;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -158,7 +158,8 @@ public class MaquinaController implements Serializable {
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
-            System.out.println(items.getRowCount());
+        } else {
+            items = getPagination().createPageDataModel();
         }
         return items;
     }

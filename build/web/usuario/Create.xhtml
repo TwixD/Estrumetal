@@ -26,13 +26,21 @@
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}" for="nombre" />
                     <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.CreateUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nombre}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_tipoDocumento}" for="tipoDocumento" />
-                    <p:inputText id="tipoDocumento" value="#{usuarioController.selected.tipoDocumento}" title="#{bundle.CreateUsuarioTitle_tipoDocumento}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_tipoDocumento}" style="width: 220px;"/>
+                    <p:selectOneMenu id="tipoDocumento" value="#{usuarioController.selected.tipoDocumento}"  required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_tipoDocumento}" style="width: 230px;">
+                        <f:selectItem itemValue="" itemLabel="Seleccione el tipo de documento" />
+                        <f:selectItem itemValue="CC" itemLabel="Cedula" />
+                        <f:selectItem itemValue="TI" itemLabel="Tarjeta identidad" />
+                        <f:selectItem itemValue="RC" itemLabel="Registro civil" />
+                    </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_documento}" for="documento" />
-                    <p:inputText id="documento" value="#{usuarioController.selected.documento}" title="#{bundle.CreateUsuarioTitle_documento}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_documento}" style="width: 220px;"/>
+                    <p:inputText  id="documento" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{usuarioController.selected.documento}" title="#{bundle.CreateUsuarioTitle_documento}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_documento}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_estado}" for="estado" />
-                    <p:inputText id="estado" value="#{usuarioController.selected.estado}" title="#{bundle.CreateUsuarioTitle_estado}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_estado}" style="width: 220px;"/>
+                    <p:selectOneMenu id="estado" value="#{usuarioController.selected.estado}"  required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_estado}" style="width: 230px;">
+                        <f:selectItem itemValue="A" itemLabel="Activo" />
+                        <f:selectItem itemValue="I" itemLabel="Inactivo" />
+                    </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_telefono}" for="telefono" />
-                    <p:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundle.CreateUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_telefono}" style="width: 220px;"/>
+                    <p:inputText id="telefono" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{usuarioController.selected.telefono}" title="#{bundle.CreateUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_telefono}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_direccion}" for="direccion" />
                     <p:inputText id="direccion" value="#{usuarioController.selected.direccion}" title="#{bundle.CreateUsuarioTitle_direccion}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_ROLidrol}" for="ROLidrol" />

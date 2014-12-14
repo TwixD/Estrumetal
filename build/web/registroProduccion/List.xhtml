@@ -85,22 +85,22 @@
                         </f:facet>
                         <h:outputText value="#{item.USUARIOidusuario}"/>
                     </p:column>
-                    <h:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListRegistroProduccionTitle_RUTAidruta}"/>
                         </f:facet>
                         <h:outputText value="#{item.RUTAidruta}"/>
-                        </p:column>
-                        <p:column exportable="false">
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{registroProduccionController.prepareView}" value="#{bundle.ListRegistroProduccionViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{registroProduccionController.prepareEdit}" value="#{bundle.ListRegistroProduccionEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{registroProduccionController.destroy}" value="#{bundle.ListRegistroProduccionDestroyLink}"/>
-                        </p:column>
+                    </p:column>
+                    <p:column exportable="false">
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{registroProduccionController.prepareView}" value="#{bundle.ListRegistroProduccionViewLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{registroProduccionController.prepareEdit}" value="#{bundle.ListRegistroProduccionEditLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{registroProduccionController.destroy}" value="#{bundle.ListRegistroProduccionDestroyLink}" rendered="#{loginBean.admin()}"/>
+                    </p:column>
                 </p:dataTable>
             </h:form>
         </p:panel>

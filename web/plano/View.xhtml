@@ -40,7 +40,7 @@
                 </h:panelGrid>
                 <h:panelGrid columns="4" styleClass="link">
                     <p:commandButton action="#{planoController.destroyAndView}"  value="#{bundle.ViewPlanoDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="#{loginBean.admin()}"/>
-                    <p:button outcome="Edit" value="#{bundle.ViewPlanoEditLink}" icon="ui-icon-pencil"/>
+                    <p:button outcome="Edit" value="#{bundle.ViewPlanoEditLink}" icon="ui-icon-pencil" rendered="#{loginBean.admin()}"/>
                     <p:commandButton action="#{planoController.prepareCreate()}" value="#{bundle.ViewPlanoCreateLink}" ajax="false" icon="ui-icon-plusthick" />
                     <p:commandButton action="#{planoController.prepareList()}" value="#{bundle.ViewPlanoShowAllLink}" ajax="false" icon="ui-icon-clipboard"/>
                 </h:panelGrid>

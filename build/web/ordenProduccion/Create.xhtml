@@ -18,7 +18,7 @@
             <h:form>      
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.CreateOrdenProduccionLabel_ordenProduccionPK_cantidad}" for="ordenProduccionPK_cantidad" />
-                    <p:inputText id="ordenProduccionPK_cantidad" value="#{ordenProduccionController.selected.cantidad}" title="#{bundle.CreateOrdenProduccionTitle_ordenProduccionPK_cantidad}" required="true" requiredMessage="#{bundle.CreateOrdenProduccionRequiredMessage_ordenProduccionPK_cantidad}" style="width: 220px;"/>   
+                    <p:inputText onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" id="ordenProduccionPK_cantidad" value="#{ordenProduccionController.selected.cantidad}" title="#{bundle.CreateOrdenProduccionTitle_ordenProduccionPK_cantidad}" required="true" requiredMessage="#{bundle.CreateOrdenProduccionRequiredMessage_ordenProduccionPK_cantidad}" style="width: 220px;"/>   
                     <p:inputText id="ordenProduccionPK_idOrdenproduccion" value="#{ordenProduccionController.selected.idOrdenproduccion}" title="#{bundle.CreateOrdenProduccionTitle_ordenProduccionPK_idOrdenproduccion}" required="true" requiredMessage="#{bundle.CreateOrdenProduccionRequiredMessage_ordenProduccionPK_idOrdenproduccion}" style="width: 220px;" rendered="false"/>
                     <p:outputLabel value="#{bundle.CreateOrdenProduccionLabel_RUTAidruta}" for="RUTAidruta" />
                     <p:selectOneMenu id="RUTAidruta" value="#{ordenProduccionController.selected.RUTAidruta}"  required="true" requiredMessage="#{bundle.CreateOrdenProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">

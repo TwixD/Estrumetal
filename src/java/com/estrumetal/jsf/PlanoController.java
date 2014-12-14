@@ -1,6 +1,8 @@
 package com.estrumetal.jsf;
 
+import com.estrumetal.jpa.Pieza;
 import com.estrumetal.jpa.Plano;
+import com.estrumetal.jpacontroller.PiezaFacade;
 import com.estrumetal.jsf.util.JsfUtil;
 import com.estrumetal.jsf.util.PaginationHelper;
 import com.estrumetal.jpacontroller.PlanoFacade;
@@ -44,6 +46,7 @@ public class PlanoController implements Serializable {
         return ejbFacade;
     }
 
+
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(999999) {
@@ -85,10 +88,11 @@ public class PlanoController implements Serializable {
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PlanoCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage("El código de plano se encuentra ya registrado.");
             return null;
         }
     }
+
 
     public String prepareEdit() {
         current = (Plano) getItems().getRowData();
@@ -155,6 +159,8 @@ public class PlanoController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
+            items = getPagination().createPageDataModel();
+        } else {
             items = getPagination().createPageDataModel();
         }
         return items;

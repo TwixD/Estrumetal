@@ -28,6 +28,7 @@ public class UsuarioController implements Serializable {
     private com.estrumetal.jpacontroller.UsuarioFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    UsuarioFacade usuarioFacade;
 
     public UsuarioController() {
     }
@@ -80,10 +81,17 @@ public class UsuarioController implements Serializable {
     }
 
     public String create() {
+        usuarioFacade = new UsuarioFacade();
         try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
-            return prepareCreate();
+            if (usuarioFacade.validateUSer(current.getUser())) {
+                System.out.println("entre");
+                getFacade().create(current);
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
+                return prepareCreate();
+            }else{
+                JsfUtil.addErrorMessage("El login o usuario de usuario ya existe, intente con otro.");
+            }
+            return null;
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -155,6 +163,8 @@ public class UsuarioController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
+            items = getPagination().createPageDataModel();
+        } else {
             items = getPagination().createPageDataModel();
         }
         return items;

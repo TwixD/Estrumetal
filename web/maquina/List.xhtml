@@ -50,6 +50,7 @@
                 <p:dataTable id="tbl" var="item" value="#{maquinaController.items}"  emptyMessage="La máquina no se encuentra registrada"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
                              paginator="true" rows="10" style="margin-bottom:20px;" 
+                             rowKey="item.idMaquina"
                              >
                     <p:column filterBy="#{item.idMaquina}"  filterMatchMode="contains"> 
                         <f:facet name="header">
@@ -87,7 +88,7 @@
                         <p:outputLabel value=" "/>
                         <h:commandLink action="#{maquinaController.prepareEdit}" value="#{bundle.ListMaquinaEditLink}"/>
                         <p:outputLabel value=" "/>
-                        <h:commandLink action="#{maquinaController.destroy}" value="#{bundle.ListMaquinaDestroyLink}"/>
+                        <h:commandLink action="#{maquinaController.destroy}" value="#{bundle.ListMaquinaDestroyLink}" rendered="#{loginBean.admin()}"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

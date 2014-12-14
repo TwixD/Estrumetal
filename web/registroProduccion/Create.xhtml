@@ -18,13 +18,13 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_idRegistroproduccion}" for="idRegistroproduccion" />
-                    <p:inputText id="idRegistroproduccion" value="#{registroProduccionController.selected.idRegistroproduccion}" title="#{bundle.CreateRegistroProduccionTitle_idRegistroproduccion}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_idRegistroproduccion}" style="width: 220px;"/>
+                    <p:inputText id="idRegistroproduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.idRegistroproduccion}" title="#{bundle.CreateRegistroProduccionTitle_idRegistroproduccion}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_idRegistroproduccion}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_fechaInicio}" for="fechaInicio" />
                     <p:calendar id="fechaInicio" locale="es" value="#{registroProduccionController.selected.fechaInicio}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_fechaInicio}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_fechaTerminacion}" for="fechaTerminacion" />
                     <p:calendar id="fechaTerminacion" locale="es" value="#{registroProduccionController.selected.fechaTerminacion}" navigator="true" pattern="MM/dd/yyyy" />
                     <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_totalProduccion}" for="totalProduccion" />
-                    <p:inputText id="totalProduccion" value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.CreateRegistroProduccionTitle_totalProduccion}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_totalProduccion}" style="width: 220px;"/>
+                    <p:inputText id="totalProduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.CreateRegistroProduccionTitle_totalProduccion}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_totalProduccion}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_USUARIOidusuario}" for="USUARIOidusuario" />
                     <p:selectOneMenu id="USUARIOidusuario" value="#{registroProduccionController.selected.USUARIOidusuario}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_USUARIOidusuario}" style="width: 230px;">
                         <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>

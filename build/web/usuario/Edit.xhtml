@@ -28,13 +28,13 @@
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_tipoDocumento}" for="tipoDocumento" />
                     <p:inputText id="tipoDocumento" value="#{usuarioController.selected.tipoDocumento}" title="#{bundle.EditUsuarioTitle_tipoDocumento}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_tipoDocumento}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_documento}" for="documento" />
-                    <p:inputText id="documento" value="#{usuarioController.selected.documento}" title="#{bundle.EditUsuarioTitle_documento}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_documento}" style="width: 220px;"/>
+                    <p:inputText id="documento" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{usuarioController.selected.documento}" title="#{bundle.EditUsuarioTitle_documento}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_documento}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_estado}" for="estado" />
                     <p:inputText id="estado" value="#{usuarioController.selected.estado}" title="#{bundle.EditUsuarioTitle_estado}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_estado}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_telefono}" for="telefono" />
                     <p:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundle.EditUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_telefono}"style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_direccion}" for="direccion" />
-                    <p:inputText id="direccion" value="#{usuarioController.selected.direccion}" title="#{bundle.EditUsuarioTitle_direccion}" style="width: 220px;"/>
+                    <p:inputText id="direccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{usuarioController.selected.direccion}" title="#{bundle.EditUsuarioTitle_direccion}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_ROLidrol}" for="ROLidrol" />
                     <p:selectOneMenu id="ROLidrol" value="#{usuarioController.selected.ROLidrol}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_ROLidrol}" style="width: 230px;">
                         <f:selectItems value="#{rolController.itemsAvailableSelectOne}"/>

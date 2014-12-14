@@ -53,7 +53,7 @@
                             <p:graphicImage height="24" width="24" value="resources/img/logolarge.png" style="border:none" />  
                             <f:facet name="options">
                                 <h:outputLabel id="usernameLabel"  value="#{loginBean.userName} " style="font-size: 20px; background: #cf7a7a; border-radius: 3px; border: none; margin-right: 15px; padding-bottom: 4px; padding-left: 7px; box-shadow: 1px 1px 5px #B6B6B6;"/>
-                                <p:commandButton id="logout" value="Salir" icon="ui-icon-extlink" oncomplete="logout(xhr, status, args)" action="#{loginBean.logoutActionListener}" style="margin-right:15px;" ajax="true"/>
+                                <p:commandButton id="logout" value="Salir" icon="ui-icon-power" oncomplete="logout(xhr, status, args)" action="#{loginBean.logoutActionListener}" style="margin-right:15px;" ajax="true"/>
                             </f:facet>
                         </p:menubar>
                     </h:form>
@@ -112,8 +112,9 @@
                         </p:accordionPanel> 
                         <p:accordionPanel id="menuPanel6" activeIndex="null">
                             <p:tab id="tabPlano" title="Plano">
-                                <p:menu style="height: 53px; width: 190px;">">
+                                <p:menu style="height: 79px; width: 190px;">
                                     <p:menuitem value="Crear plano"  icon="ui-icon-disk" outcome="/plano/Create"/>
+                                    <p:menuitem value="Crear plano/piezas"  icon="ui-icon-disk" outcome="/plano/CreatePlanoPieza"/>
                                     <p:menuitem value="Listar plano"  icon="ui-icon-clipboard" outcome="/plano/List"/>
                                 </p:menu>
                             </p:tab>
@@ -121,8 +122,8 @@
                         <p:accordionPanel id="menuPanel7" activeIndex="null">
                             <p:tab id="tabRegistroProduccion" title="Registro producción">
                                 <p:menu style="height: 53px; width: 190px;">
-                                    <p:menuitem value="Crear registro producción"  icon="ui-icon-disk" outcome="/plano/Create"/>
-                                    <p:menuitem value="Listar registro producción"  icon="ui-icon-clipboard" outcome="/plano/List"/>
+                                    <p:menuitem value="Crear registro producción"  icon="ui-icon-disk" outcome="/registroProduccion/Create"/>
+                                    <p:menuitem value="Listar registro producción"  icon="ui-icon-clipboard" outcome="/registroProduccion/List"/>
                                 </p:menu>
                             </p:tab>
                         </p:accordionPanel> 
@@ -145,7 +146,7 @@
                         <p:accordionPanel id="menuPanel10" activeIndex="null" rendered="#{loginBean.admin()}">
                             <p:tab id="tabUsuario" title="Usuario">
                                 <p:menu style="height: 53px; width: 190px;">
-                                    <p:menuitem value="Crear usuario" icon="ui-icon-disk" outcome="/usuario/Create"/>
+                                    <p:menuitem value="Crear usuario" icon="ui-icon-person" outcome="/usuario/Create"/>
                                     <p:menuitem value="Listar usuario"  icon="ui-icon-clipboard" outcome="/usuario/List"/>
                                 </p:menu>
                             </p:tab>
@@ -167,7 +168,6 @@
                     window.location = 'http://127.0.0.1:8080/projectEstrumetal/';
                 }, 500);
             }
-
         </script>
     </f:view>
 </html>

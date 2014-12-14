@@ -113,9 +113,9 @@
                         </f:facet>
                         <h:commandLink action="#{planoController.prepareView}" value="#{bundle.ListPlanoViewLink}"/>
                         <h:outputText value=" "/>
-                        <h:commandLink action="#{planoController.prepareEdit}" value="#{bundle.ListPlanoEditLink}"/>
+                        <h:commandLink action="#{planoController.prepareEdit}" value="#{bundle.ListPlanoEditLink}" rendered="#{loginBean.admin()}"/>
                         <h:outputText value=" "/>
-                        <h:commandLink action="#{planoController.destroy}" value="#{bundle.ListPlanoDestroyLink}"/>
+                        <h:commandLink action="#{planoController.destroy}" value="#{bundle.ListPlanoDestroyLink}" rendered="#{loginBean.admin()}"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

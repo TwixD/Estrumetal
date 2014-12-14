@@ -39,7 +39,7 @@
                     </p:selectOneMenu>
                 </h:panelGrid>
                 <h:panelGrid columns="3" styleClass="link">
-                    <p:commandButton action="#{planoController.update}" value="#{bundle.EditPlanoSaveLink}" ajax="false" icon="ui-icon-pencil"/>
+                    <p:commandButton action="#{planoController.update}" value="#{bundle.EditPlanoSaveLink}" ajax="false" icon="ui-icon-pencil" rendered="#{loginBean.admin()}"/>
                     <p:button outcome="View" value="#{bundle.EditPlanoViewLink}" icon="ui-icon-search" />
                     <p:commandButton action="#{planoController.prepareList}" value="#{bundle.EditPlanoShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
                 </h:panelGrid>

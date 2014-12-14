@@ -144,7 +144,7 @@ public class LoginBean implements Serializable {
         } else {
             rol = 99;
             logeado = false;
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error ingreso",
                     "Credenciales no válidas");
         }
         FacesContext.getCurrentInstance().addMessage(null, msg);

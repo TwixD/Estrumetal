@@ -18,15 +18,15 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_idPlano}" for="idPlano" />
-                    <p:inputText id="idPlano" value="#{planoController.selected.idPlano}" title="#{bundle.CreatePlanoTitle_idPlano}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_idPlano}" style="width: 220px;"/>
+                    <p:inputText id="idPlano" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.selected.idPlano}" title="#{bundle.CreatePlanoTitle_idPlano}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_idPlano}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_nombre}" for="nombre" />
                     <p:inputText id="nombre" value="#{planoController.selected.nombre}" title="#{bundle.CreatePlanoTitle_nombre}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_nombre}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_pesoUnitario}" for="pesoUnitario" />
-                    <p:inputText id="pesoUnitario" value="#{planoController.selected.pesoUnitario}" title="#{bundle.CreatePlanoTitle_pesoUnitario}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_pesoUnitario}" style="width: 220px;"/>
+                    <p:inputText id="pesoUnitario" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.selected.pesoUnitario}" title="#{bundle.CreatePlanoTitle_pesoUnitario}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_pesoUnitario}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_areaUnitaria}" for="areaUnitaria" />
-                    <p:inputText id="areaUnitaria" value="#{planoController.selected.areaUnitaria}" title="#{bundle.CreatePlanoTitle_areaUnitaria}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_areaUnitaria}" style="width: 220px;"/>
+                    <p:inputText id="areaUnitaria" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.selected.areaUnitaria}" title="#{bundle.CreatePlanoTitle_areaUnitaria}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_areaUnitaria}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_cantidad}" for="cantidad" />
-                    <p:inputText id="cantidad" value="#{planoController.selected.cantidad}" title="#{bundle.CreatePlanoTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_cantidad}" style="width: 220px;"/>
+                    <p:inputText id="cantidad" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.selected.cantidad}" title="#{bundle.CreatePlanoTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_cantidad}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_revision}" for="revision" />
                     <p:inputText id="revision" value="#{planoController.selected.revision}" title="#{bundle.CreatePlanoTitle_revision}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_observacion}" for="observacion" />

@@ -18,7 +18,7 @@ and open the template in the editor.
         <h:outputStylesheet name="css/login.css"/>
     </h:head>
     <h:body style="text-align:left">
-        <p:growl id="mensajes" showDetail="true" life="2000" />
+        <p:growl id="mensajes" showDetail="true" life="3000"  autoUpdate="false" />
         
         <div class="wrapper">   
             <h1>Estrumetal</h1>
@@ -29,11 +29,11 @@ and open the template in the editor.
                         <h3>Login</h3>
                         <div>
                             <h:outputLabel value="Usuario:" />
-                            <p:inputText value="#{loginBean.nombre}" id="username" required="true"/>
+                            <p:inputText value="#{loginBean.nombre}" id="username" required="true" title="Usuario" requiredMessage="Ingrese el usuario"  />
                         </div>
                         <div>
                             <h:outputLabel value="Clave:" />
-                            <p:password value="#{loginBean.clave}" id="password" required="true"/>
+                            <p:password value="#{loginBean.clave}" id="password" required="true" title="Clave" requiredMessage="Ingrese la clave" />
                         </div>
                         <div class="bottom" style="text-align: right; height: 56px; padding-top:15px; padding-right: 10px;" >
                             <p:commandButton id="loginButton" value="Login"

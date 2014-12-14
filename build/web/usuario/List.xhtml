@@ -119,7 +119,7 @@
                         <h:outputText value=" "/>
                         <h:commandLink action="#{usuarioController.prepareEdit}" value="#{bundle.ListUsuarioEditLink}"/>
                         <h:outputText value=" "/>
-                        <h:commandLink action="#{usuarioController.destroy}" value="#{bundle.ListUsuarioDestroyLink}"/>
+                        <h:commandLink action="#{usuarioController.destroy}" value="#{bundle.ListUsuarioDestroyLink}" rendered="#{loginBean.admin()}"/>
                     </p:column>
                 </p:dataTable>
             </h:form>
