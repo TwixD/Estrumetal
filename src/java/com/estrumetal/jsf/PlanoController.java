@@ -6,8 +6,9 @@ import com.estrumetal.jpacontroller.PiezaFacade;
 import com.estrumetal.jsf.util.JsfUtil;
 import com.estrumetal.jsf.util.PaginationHelper;
 import com.estrumetal.jpacontroller.PlanoFacade;
-
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -25,9 +26,27 @@ import javax.faces.model.SelectItem;
 public class PlanoController implements Serializable {
 
     private Plano current;
+    private Pieza pieza = new Pieza();
+    private Pieza pieza1 = new Pieza();
+    private Pieza pieza2 = new Pieza();
+    private Pieza pieza3 = new Pieza();
+    private Pieza pieza4 = new Pieza();
+    private Pieza pieza5 = new Pieza();
+    private Pieza pieza6 = new Pieza();
+    private Pieza pieza7 = new Pieza();
+    private Pieza pieza8 = new Pieza();
+    private Pieza pieza9 = new Pieza();
+    private String nombreOperario;
+    private String obra;
+    private String idPlano;
+    private String seccion;
+    
+
     private DataModel items = null;
     @EJB
     private com.estrumetal.jpacontroller.PlanoFacade ejbFacade;
+    @EJB
+    private com.estrumetal.jpacontroller.PiezaFacade ejbFacade2;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -39,6 +58,16 @@ public class PlanoController implements Serializable {
             current = new Plano();
             selectedItemIndex = -1;
         }
+        pieza.setPLANOidplano(current);
+        pieza1.setPLANOidplano(current);
+        pieza2.setPLANOidplano(current);
+        pieza3.setPLANOidplano(current);
+        pieza4.setPLANOidplano(current);
+        pieza5.setPLANOidplano(current);
+        pieza6.setPLANOidplano(current);
+        pieza7.setPLANOidplano(current);
+        pieza8.setPLANOidplano(current);
+        pieza9.setPLANOidplano(current);
         return current;
     }
 
@@ -46,6 +75,9 @@ public class PlanoController implements Serializable {
         return ejbFacade;
     }
 
+    private PiezaFacade getFacade2() {
+        return ejbFacade2;
+    }
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -82,6 +114,22 @@ public class PlanoController implements Serializable {
         return "Create";
     }
 
+    public String prepareCreatePlanoPieza() {
+        pieza = new Pieza();
+        pieza1 = new Pieza();
+        pieza2 = new Pieza();
+        pieza3 = new Pieza();
+        pieza4 = new Pieza();
+        pieza5 = new Pieza();
+        pieza6 = new Pieza();
+        pieza7 = new Pieza();
+        pieza8 = new Pieza();
+        pieza9 = new Pieza();
+        current = new Plano();
+        selectedItemIndex = -1;
+        return "CreatePlanoPieza";
+    }
+
     public String create() {
         try {
             getFacade().create(current);
@@ -93,6 +141,46 @@ public class PlanoController implements Serializable {
         }
     }
 
+    public String createPlanoPieza() {
+        try {
+            getFacade().create(current);
+            if (pieza.getMATERIAPRIMAidmateriaprima() != null) {
+                getFacade2().create(pieza);
+            }
+            if (pieza1.getMATERIAPRIMAidmateriaprima() != null) {
+                getFacade2().create(pieza1);
+            }
+            if (pieza2.getMATERIAPRIMAidmateriaprima() != null) {
+                getFacade2().create(pieza2);
+            }
+            if (pieza3.getMATERIAPRIMAidmateriaprima() != null) {
+                getFacade2().create(pieza3);
+            }
+            if (pieza4.getMATERIAPRIMAidmateriaprima() != null) {
+                getFacade2().create(pieza4);
+            }
+            if (pieza5.getMATERIAPRIMAidmateriaprima() != null) {
+                getFacade2().create(pieza5);
+            }
+            if (pieza6.getMATERIAPRIMAidmateriaprima() != null) {
+                getFacade2().create(pieza6);
+            }
+            if (pieza7.getMATERIAPRIMAidmateriaprima() != null) {
+                getFacade2().create(pieza7);
+            }
+            if (pieza8.getMATERIAPRIMAidmateriaprima() != null) {
+                getFacade2().create(pieza8);
+            }
+            if (pieza9.getMATERIAPRIMAidmateriaprima() != null) {
+                getFacade2().create(pieza9);
+            }
+            JsfUtil.addSuccessMessage("Plano creado con multiples piezas.");
+            return prepareCreatePlanoPieza();
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("El código de plano se encuentra ya registrado.");
+            return null;
+        }
+    }
 
     public String prepareEdit() {
         current = (Plano) getItems().getRowData();
@@ -107,6 +195,32 @@ public class PlanoController implements Serializable {
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
+
+    public String asignar() {
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat format2 = new SimpleDateFormat("dd-MM-yyyy");
+        if (!getFacade().asignar(Integer.parseInt(idPlano),"ASIGNADO["+nombreOperario+" - Fecha:["+format2.format(date)+"] - Hora:["+format.format(date)+"]- Seccion : "+seccion+" - OBRA : ["+obra+"]]").equals(null)) {
+            JsfUtil.addSuccessMessage("Plano asignado exitosamente");
+            return "AsignarPlano";
+        } else {
+            JsfUtil.addErrorMessage("El plano no se puedo asignar");
+            return null;
+        }
+    }
+    
+    public String recepcion() {
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat format2 = new SimpleDateFormat("dd-MM-yyyy");
+        if (!getFacade().asignar(Integer.parseInt(idPlano),"RECIBIDO["+nombreOperario+" - Fecha:["+format2.format(date)+"] - Hora:["+format.format(date)+"] - OBRA : ["+obra+"]]").equals(null)) {
+            JsfUtil.addSuccessMessage("Recepción de plano exitoso.");
+            return "RecepcionPlano";
+        } else {
+            JsfUtil.addErrorMessage("Recepción de plano con dificultades.");
             return null;
         }
     }
@@ -159,8 +273,6 @@ public class PlanoController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
-            items = getPagination().createPageDataModel();
-        } else {
             items = getPagination().createPageDataModel();
         }
         return items;
@@ -234,4 +346,149 @@ public class PlanoController implements Serializable {
 
     }
 
+    public Plano getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Plano current) {
+        this.current = current;
+    }
+
+    public Pieza getPieza() {
+        return pieza;
+    }
+
+    public void setPieza(Pieza pieza) {
+        this.pieza = pieza;
+    }
+
+    public Pieza getPieza1() {
+        return pieza1;
+    }
+
+    public void setPieza1(Pieza pieza1) {
+        this.pieza1 = pieza1;
+    }
+
+    public Pieza getPieza2() {
+        return pieza2;
+    }
+
+    public void setPieza2(Pieza pieza2) {
+        this.pieza2 = pieza2;
+    }
+
+    public Pieza getPieza3() {
+        return pieza3;
+    }
+
+    public void setPieza3(Pieza pieza3) {
+        this.pieza3 = pieza3;
+    }
+
+    public Pieza getPieza4() {
+        return pieza4;
+    }
+
+    public void setPieza4(Pieza pieza4) {
+        this.pieza4 = pieza4;
+    }
+
+    public Pieza getPieza5() {
+        return pieza5;
+    }
+
+    public void setPieza5(Pieza pieza5) {
+        this.pieza5 = pieza5;
+    }
+
+    public Pieza getPieza6() {
+        return pieza6;
+    }
+
+    public void setPieza6(Pieza pieza6) {
+        this.pieza6 = pieza6;
+    }
+
+    public Pieza getPieza7() {
+        return pieza7;
+    }
+
+    public void setPieza7(Pieza pieza7) {
+        this.pieza7 = pieza7;
+    }
+
+    public Pieza getPieza8() {
+        return pieza8;
+    }
+
+    public void setPieza8(Pieza pieza8) {
+        this.pieza8 = pieza8;
+    }
+
+    public Pieza getPieza9() {
+        return pieza9;
+    }
+
+    public void setPieza9(Pieza pieza9) {
+        this.pieza9 = pieza9;
+    }
+
+    public PlanoFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(PlanoFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public PiezaFacade getEjbFacade2() {
+        return ejbFacade2;
+    }
+
+    public void setEjbFacade2(PiezaFacade ejbFacade2) {
+        this.ejbFacade2 = ejbFacade2;
+    }
+
+    public int getSelectedItemIndex() {
+        return selectedItemIndex;
+    }
+
+    public void setSelectedItemIndex(int selectedItemIndex) {
+        this.selectedItemIndex = selectedItemIndex;
+    }
+
+    public String getNombreOperario() {
+        return nombreOperario;
+    }
+
+    public void setNombreOperario(String nombreOperario) {
+        this.nombreOperario = nombreOperario;
+    }
+
+    public String getObra() {
+        return obra;
+    }
+
+    public void setObra(String obra) {
+        this.obra = obra;
+    }
+
+    public String getIdPlano() {
+        return idPlano;
+    }
+
+    public void setIdPlano(String idPlano) {
+        this.idPlano = idPlano;
+    }
+
+    public String getSeccion() {
+        return seccion;
+    }
+
+    public void setSeccion(String seccion) {
+        this.seccion = seccion;
+    }
+    
+    
 }

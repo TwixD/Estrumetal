@@ -22,14 +22,14 @@
                     </td>
                     <th><h:commandLink>
                             <img src="../resources/img/excel.png" width="24"/> 
-                            <p:dataExporter type="xls" target="tbl" fileName="roles"/>
+                            <p:dataExporter type="xls" target="tbl" fileName="roles" postProcessor="#{customizedDocumentsView.postProcessXLS}"/>
                         </h:commandLink>
                     </th>
                     <td><p:outputLabel value="PDF"></p:outputLabel></td>
                     <th>
                         <h:commandLink>
                             <img src="../resources/img/pdf.png" width="24"/> 
-                            <p:dataExporter type="pdf" target="tbl" fileName="roles"/>
+                            <p:dataExporter type="pdf" target="tbl" fileName="roles" preProcessor="#{customizedDocumentsView.preProcessPDF}"/>
                         </h:commandLink>
                     </th>
                     <td><p:outputLabel value="CSV"></p:outputLabel></td>

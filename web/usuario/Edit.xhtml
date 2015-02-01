@@ -22,7 +22,7 @@
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_user}" for="user" />
                     <p:inputText id="user" value="#{usuarioController.selected.user}" title="#{bundle.EditUsuarioTitle_user}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_user}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_password}" for="password" />
-                    <p:inputText id="password" value="#{usuarioController.selected.password}" title="#{bundle.EditUsuarioTitle_password}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_password}" style="width: 220px;"/>
+                    <p:password feedback="true" id="password" value="#{usuarioController.selected.password}" title="#{bundle.EditUsuarioTitle_password}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_password}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_nombre}" for="nombre" />
                     <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.EditUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_nombre}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_tipoDocumento}" for="tipoDocumento" />
@@ -32,7 +32,7 @@
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_estado}" for="estado" />
                     <p:inputText id="estado" value="#{usuarioController.selected.estado}" title="#{bundle.EditUsuarioTitle_estado}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_estado}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_telefono}" for="telefono" />
-                    <p:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundle.EditUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_telefono}"style="width: 220px;"/>
+                    <p:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundle.EditUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_telefono}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_direccion}" for="direccion" />
                     <p:inputText id="direccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{usuarioController.selected.direccion}" title="#{bundle.EditUsuarioTitle_direccion}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_ROLidrol}" for="ROLidrol" />

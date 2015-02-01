@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png"/> 
+    </ui:define>
+    <ui:define name="body">
+        <p:panel id="basic" header="Reporte de la producción por máquina (Pendiente)" footer="Reporte de producción segun máquina" style="margin-bottom:20px">
+            <h:form>
+            <p:panel id="basic" header="Pendiente por producir máquina" style="margin-bottom:20px">
+                 <h:panelGrid columns="3" style="margin: 0 auto;">
+                    <p:outputLabel value="Código de máquina" for="idMaquina" />
+                    <p:inputText id="idMaquina" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.idMaquina}" title="Código de máquina" required="true" style="width: 220px;" requiredMessage="Ingrese el código de la máquina."/>
+                    <p:commandButton action="#{registroProduccionController.doPopulatePendiente()}" ajax="false" value="Consultar"  icon="ui-icon-search" update="maquinaRango"/> 
+                </h:panelGrid>
+            </p:panel>
+            <p:panel id="basic2" header="Resultado pendiente por producir máquina" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+                <h:panelGrid columns="1" style="margin: 0 auto;">
+                   
+                    <p:dataTable id="maquinaRango" value="#{registroProduccionController.listMaquinaRango1}" var="item" emptyMessage="Ingrese un rango de fechas donde se encuentren registros de producción.">
+
+                         <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="MAQUINA"/>
+                        </f:facet>
+                            <h:outputText value='#{item.split(",")[0]}'/>
+                        </p:column> 
+                        
+                        <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="OBRA"/>
+                        </f:facet>
+                            <h:outputText value='#{item.split(",")[1]}'/>
+                        </p:column>
+                        
+                        <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="PLANO"/>
+                        </f:facet>
+                        <h:outputText value='#{item.split(",")[2]}'/>
+                        </p:column>
+                        
+                        <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="PIEZA"/>
+                        </f:facet>
+                        <h:outputText value='#{item.split(",")[3]}'/>
+                        </p:column>
+                        
+                        <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="MATERIA PRIMA"/>
+                        </f:facet>
+                        <h:outputText value='#{item.split(",")[4]}'/>
+                        </p:column>
+                        
+                        <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="LONGITUD"/>
+                        </f:facet>
+                        <h:outputText value='#{item.split(",")[5]}'/>
+                        </p:column>
+                        
+                        <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ANCHO"/>
+                        </f:facet>
+                        <h:outputText value='#{item.split(",")[6]}'/>
+                        </p:column>
+                        
+                        <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="CANTIDAD PENDIENTE"/>
+                        </f:facet>
+                        <h:outputText value='#{item.split(",")[7]}'/>
+                        </p:column>
+                    
+                    </p:dataTable>
+                </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

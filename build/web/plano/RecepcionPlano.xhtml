@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png"/> 
+    </ui:define>
+    <ui:define name="body">
+        <p:panel id="basic" header="Observación de recepción plano" footer="Recepción de planos" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                 <h:panelGrid columns="2">
+                    <p:outputLabel value="Código obra" for="OBRAidobra" />
+                    <p:selectOneMenu id="OBRAidobra" value="#{planoController.obra}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_OBRAidobra}" style="width: 230px;">
+                        <f:selectItems value="#{obraController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel value="Código plano" for="idPlano" />
+                    <p:selectOneMenu id="idPlano" value="#{planoController.idPlano}" required="true" requiredMessage="Seleccione el código del plano" style="width: 230px;">
+                        <f:selectItems value="#{planoController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    
+                 </h:panelGrid>  
+                 <h:commandButton  value="#{planoController.setNombreOperario(loginBean.userName)}" rendered="false" disabled="true" />
+                 <h:panelGrid columns="3" styleClass="link">
+                 <p:commandButton action="#{planoController.recepcion}" value="Recepción" ajax="false" icon="ui-icon-arrowthickstop-1-s" />
+                 <p:commandButton action="#{planoController.prepareList}" value="#{bundle.CreatePlanoShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                 </h:panelGrid>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

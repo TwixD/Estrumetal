@@ -28,7 +28,6 @@ public class PiezaController implements Serializable {
     private com.estrumetal.jpacontroller.PiezaFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
     public PiezaController() {
     }
 
@@ -156,8 +155,6 @@ public class PiezaController implements Serializable {
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
-        } else {
-            items = getPagination().createPageDataModel();
         }
         return items;
     }
@@ -229,5 +226,4 @@ public class PiezaController implements Serializable {
         }
 
     }
-
 }

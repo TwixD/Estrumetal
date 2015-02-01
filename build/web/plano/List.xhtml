@@ -22,14 +22,14 @@
                     </td>
                     <th><h:commandLink>
                             <img src="../resources/img/excel.png" width="24"/> 
-                            <p:dataExporter type="xls" target="tbl" fileName="planos"/>
+                            <p:dataExporter type="xls" target="tbl" fileName="planos" postProcessor="#{customizedDocumentsView.postProcessXLS}"/>
                         </h:commandLink>
                     </th>
                     <td><p:outputLabel value="PDF"></p:outputLabel></td>
                     <th>
                         <h:commandLink>
                             <img src="../resources/img/pdf.png" width="24"/> 
-                            <p:dataExporter type="pdf" target="tbl" fileName="planos"/>
+                            <p:dataExporter type="pdf" target="tbl" fileName="planos" preProcessor="#{customizedDocumentsView.preProcessPDF}"/>
                         </h:commandLink>
                     </th>
                     <td><p:outputLabel value="CSV"></p:outputLabel></td>
@@ -50,6 +50,7 @@
                 <p:dataTable id="tbl" var="item" value="#{planoController.items}"  emptyMessage="El plano no se encuentra registrado"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
                              paginator="true" rows="10" style="margin-bottom:20px;" 
+                             resizableColumns="true"
                              >
                     <p:column filterBy="#{item.idPlano}"  filterMatchMode="contains">
                         <f:facet name="header">
@@ -75,19 +76,19 @@
                         </f:facet>
                         <h:outputText value="#{item.areaUnitaria}"/>
                     </p:column>
-                    <p:column>
+                    <p:column width="40">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_cantidad}"/>
                         </f:facet>
                         <h:outputText value="#{item.cantidad}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
+                    <p:column width="40">
+                        <f:facet name="header" >
                             <h:outputText value="#{bundle.ListPlanoTitle_revision}"/>
                         </f:facet>
                         <h:outputText value="#{item.revision}"/>
                     </p:column>
-                    <p:column>
+                    <p:column width="200">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_observacion}"/>
                         </f:facet>
@@ -101,7 +102,7 @@
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
                     </p:column>
-                    <p:column>
+                    <p:column filterBy="#{item.OBRAidobra}"  filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_OBRAidobra}"/>
                         </f:facet>

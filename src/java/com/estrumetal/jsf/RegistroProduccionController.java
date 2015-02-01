@@ -6,7 +6,16 @@ import com.estrumetal.jsf.util.PaginationHelper;
 import com.estrumetal.jpacontroller.RegistroProduccionFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -28,6 +37,13 @@ public class RegistroProduccionController implements Serializable {
     private com.estrumetal.jpacontroller.RegistroProduccionFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private Date fechaInicial;
+    private Date fechaFinal;
+    private int idMaquina;
+    List<String> listMaquinaRango1 = new ArrayList<String>();
+    List<String> listMaquinaRango2 = new ArrayList<String>();
+    List<String> listMaquinaRango3 = new ArrayList<String>();
+    List<String> listMaquinaRango4 = new ArrayList<String>();
 
     public RegistroProduccionController() {
     }
@@ -156,9 +172,7 @@ public class RegistroProduccionController implements Serializable {
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
-        } else {
-            items = getPagination().createPageDataModel();
-        }
+        } 
         return items;
     }
 
@@ -228,6 +242,104 @@ public class RegistroProduccionController implements Serializable {
             }
         }
 
+    }
+
+    public List<String> getListMaquinaRango1() {
+        return listMaquinaRango1;
+    }
+
+    public void setListMaquinaRango1(List<String> listMaquinaRango1) {
+        this.listMaquinaRango1 = listMaquinaRango1;
+    }
+
+    public List<String> getListMaquinaRango2() {
+        return listMaquinaRango2;
+    }
+
+    public void setListMaquinaRango2(List<String> listMaquinaRango2) {
+        this.listMaquinaRango2 = listMaquinaRango2;
+    }
+
+    public List<String> getListMaquinaRango3() {
+        return listMaquinaRango3;
+    }
+
+    public void setListMaquinaRango3(List<String> listMaquinaRango3) {
+        this.listMaquinaRango3 = listMaquinaRango3;
+    }
+
+    public List<String> getListMaquinaRango4() {
+        return listMaquinaRango4;
+    }
+
+    public void setListMaquinaRango4(List<String> listMaquinaRango4) {
+        this.listMaquinaRango4 = listMaquinaRango4;
+    }
+
+    public Date getFechaInicial() {
+        return fechaInicial;
+    }
+
+    public void setFechaInicial(Date fechaInicial) {
+        this.fechaInicial = fechaInicial;
+    }
+
+    public Date getFechaFinal() {
+        return fechaFinal;
+    }
+
+    public void setFechaFinal(Date fechaFinal) {
+        this.fechaFinal = fechaFinal;
+    }
+
+    public int getIdMaquina() {
+        return idMaquina;
+    }
+
+    public void setIdMaquina(int idMaquina) {
+        this.idMaquina = idMaquina;
+    }
+
+    public void doPopulateMaquinaRango() {
+        listMaquinaRango2.clear();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaInicialIn = df.format(fechaInicial);
+        String fechaFinalIn = df.format(fechaFinal);
+        List<Object> list = getFacade().listMaquinaProduccion(fechaInicialIn, fechaFinalIn);
+        for (int i = 0; i < list.size(); i++) {
+            Object[] row = (Object[]) list.get(i);
+            listMaquinaRango2.add(Arrays.toString(row).replace("[", "").replace("]", ""));
+        }
+    }
+
+    public void doPopulateOperarioRango() {
+        listMaquinaRango3.clear();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaInicialIn = df.format(fechaInicial);
+        String fechaFinalIn = df.format(fechaFinal);
+        List<Object> list = getFacade().listOperarioProduccion(fechaInicialIn, fechaFinalIn);
+        for (int i = 0; i < list.size(); i++) {
+            Object[] row = (Object[]) list.get(i);
+            listMaquinaRango3.add(Arrays.toString(row).replace("[", "").replace("]", ""));
+        }
+    }
+
+    public void doPopulateMaquina() {
+        listMaquinaRango4.clear();
+        List<Object> list = getFacade().listReporteProduccion(idMaquina);
+        for (int i = 0; i < list.size(); i++) {
+            Object[] row = (Object[]) list.get(i);
+            listMaquinaRango4.add(Arrays.toString(row).replace("[", "").replace("]", ""));
+        }
+    }
+
+    public void doPopulatePendiente() {
+        listMaquinaRango1.clear();
+        List<Object> list = getFacade().listPendienteProduccion(idMaquina);
+        for (int i = 0; i < list.size(); i++) {
+            Object[] row = (Object[]) list.get(i);
+            listMaquinaRango1.add(Arrays.toString(row).replace("[", "").replace("]", ""));
+        }
     }
 
 }

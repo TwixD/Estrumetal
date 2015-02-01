@@ -35,7 +35,7 @@
                     </p:selectOneMenu>
                 </h:panelGrid>
                 <h:panelGrid columns="3" styleClass="link">
-                    <p:commandButton action="#{registroProduccionController.update}" value="#{bundle.EditRegistroProduccionSaveLink}" ajax="false" icon="ui-icon-pencil"/>
+                    <p:commandButton action="#{registroProduccionController.update}" value="#{bundle.EditRegistroProduccionSaveLink}" ajax="false" icon="ui-icon-pencil" rendered="#{loginBean.admin()}"/>
                     <p:button outcome="View" value="#{bundle.EditRegistroProduccionViewLink}" icon="ui-icon-search" />
                     <p:commandButton action="#{registroProduccionController.prepareList}" value="#{bundle.EditRegistroProduccionShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
                 </h:panelGrid>

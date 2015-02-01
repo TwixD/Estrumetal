@@ -22,7 +22,7 @@
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_user}" for="user" />
                     <p:inputText id="user" value="#{usuarioController.selected.user}" title="#{bundle.CreateUsuarioTitle_user}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_user}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
-                    <p:inputText id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_password}" style="width: 220px;"/>
+                    <p:password feedback="true" id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_password}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}" for="nombre" />
                     <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.CreateUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nombre}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_tipoDocumento}" for="tipoDocumento" />

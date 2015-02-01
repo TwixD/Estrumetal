@@ -156,8 +156,6 @@ public class MateriaPrimaController implements Serializable {
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
-        }else {
-            items = getPagination().createPageDataModel();
         }
         return items;
     }

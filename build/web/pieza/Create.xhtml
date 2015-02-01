@@ -40,7 +40,7 @@
                         <f:selectItems value="#{planoController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima" value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}"  required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu  id="MATERIAPRIMAidmateriaprima"  value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}"  required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;" >
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>

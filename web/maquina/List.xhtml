@@ -22,14 +22,14 @@
                     </td>
                     <th><h:commandLink>
                             <img src="../resources/img/excel.png" width="24"/> 
-                            <p:dataExporter type="xls" target="tbl" fileName="maquinas"/>
+                            <p:dataExporter type="xls" target="tbl" fileName="maquinas" postProcessor="#{customizedDocumentsView.postProcessXLS}"/>
                         </h:commandLink>
                     </th>
                     <td><p:outputLabel value="PDF"></p:outputLabel></td>
                     <th>
                         <h:commandLink>
                             <img src="../resources/img/pdf.png" width="24"/> 
-                            <p:dataExporter type="pdf" target="tbl" fileName="maquinas"/>
+                            <p:dataExporter type="pdf" target="tbl" fileName="maquinas" preProcessor="#{customizedDocumentsView.preProcessPDF}"/>
                         </h:commandLink>
                     </th>
                     <td><p:outputLabel value="CSV"></p:outputLabel></td>
@@ -47,12 +47,17 @@
                         </h:commandLink>
                     </th>
                 </table>
-                <p:dataTable id="tbl" var="item" value="#{maquinaController.items}"  emptyMessage="La máquina no se encuentra registrada"
+                <p:dataTable id="tbl" 
+                             var="item" 
+                             value="#{maquinaController.items}"  
+                             emptyMessage="La máquina no se encuentra registrada"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
-                             paginator="true" rows="10" style="margin-bottom:20px;" 
+                             paginator="true" 
+                             rows="10" 
+                             style="margin-bottom:20px;" 
                              rowKey="item.idMaquina"
                              >
-                    <p:column filterBy="#{item.idMaquina}"  filterMatchMode="contains"> 
+                    <p:column filterBy="#{item.idMaquina}"  filterMatchMode="contains" > 
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListMaquinaTitle_idMaquina}"/>
                         </f:facet>   
@@ -62,6 +67,7 @@
                     <p:column filterBy="#{item.nombre}" filterMatchMode="contains"> 
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListMaquinaTitle_nombre}"/>
+
                         </f:facet>  
                         <h:outputText value="#{item.nombre}" />
                     </p:column>

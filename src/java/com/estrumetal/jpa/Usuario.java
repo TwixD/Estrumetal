@@ -227,7 +227,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.estrumetal.jpa.Usuario[ idUsuario=" + idUsuario + " ]";
+        return rOLidrol+"-"+nombre;
     }
 
 }

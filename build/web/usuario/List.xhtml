@@ -22,14 +22,14 @@
                     </td>
                     <th><h:commandLink>
                             <img src="../resources/img/excel.png" width="24"/> 
-                            <p:dataExporter type="xls" target="tbl" fileName="usuarios"/>
+                            <p:dataExporter type="xls" target="tbl" fileName="usuarios" postProcessor="#{customizedDocumentsView.postProcessXLS}"/>
                         </h:commandLink>
                     </th>
                     <td><p:outputLabel value="PDF"></p:outputLabel></td>
                     <th>
                         <h:commandLink>
                             <img src="../resources/img/pdf.png" width="24"/> 
-                            <p:dataExporter type="pdf" target="tbl" fileName="usuarios"/>
+                            <p:dataExporter type="pdf" target="tbl" fileName="usuarios" preProcessor="#{customizedDocumentsView.preProcessPDF}"/>
                         </h:commandLink>
                     </th>
                     <td><p:outputLabel value="CSV"></p:outputLabel></td>
@@ -81,7 +81,7 @@
                         </f:facet>
                         <h:outputText value="#{item.tipoDocumento}"/>
                     </p:column>
-                    <p:column>
+                    <p:column filterBy="#{item.documento}"  filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUsuarioTitle_documento}"/>
                         </f:facet>

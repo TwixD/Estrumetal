@@ -22,8 +22,8 @@
                     <p:outputLabel value="#{bundle.CreateMateriaPrimaLabel_tipo}" for="tipo" />
                     <p:selectOneMenu id="tipo" value="#{materiaPrimaController.selected.tipo}" required="true" requiredMessage="#{bundle.CreateMateriaPrimaRequiredMessage_tipo}" style="width: 230px;">
                         <f:selectItem itemValue="" itemLabel="Elija un tipo de materia prima" />
-                        <f:selectItem itemValue="Lamina" itemLabel="Lamina" />
-                        <f:selectItem itemValue="Viga" itemLabel="Viga" />
+                        <f:selectItem itemValue="LAMINA" itemLabel="Lamina" />
+                        <f:selectItem itemValue="VIGA" itemLabel="Viga" />
                     </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.CreateMateriaPrimaLabel_pesoMl}" for="pesoMl" />
                     <p:inputText id="pesoMl" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{materiaPrimaController.selected.pesoMl}" title="#{bundle.CreateMateriaPrimaTitle_pesoMl}" required="true" requiredMessage="#{bundle.CreateMateriaPrimaRequiredMessage_pesoMl}" style="width: 220px;"/>

@@ -112,18 +112,26 @@
                         </p:accordionPanel> 
                         <p:accordionPanel id="menuPanel6" activeIndex="null">
                             <p:tab id="tabPlano" title="Plano">
-                                <p:menu style="height: 79px; width: 190px;">
+                                <p:menu style="height: 160px; width: 190px;">
                                     <p:menuitem value="Crear plano"  icon="ui-icon-disk" outcome="/plano/Create"/>
                                     <p:menuitem value="Crear plano/piezas"  icon="ui-icon-disk" outcome="/plano/CreatePlanoPieza"/>
                                     <p:menuitem value="Listar plano"  icon="ui-icon-clipboard" outcome="/plano/List"/>
+                                    <p:menuitem value="Observación asignar plano"  icon="ui-icon-tag" outcome="/plano/AsignarPlano" rendered="#{loginBean.admin()}"/>
+                                    <p:menuitem value="Observación recepción plano"  icon="ui-icon-arrowthickstop-1-s" outcome="/plano/RecepcionPlano"/>
+                                    <p:menuitem value="Carga plano"  icon="ui-icon-image" outcome="/plano/CargaPlano"/>
                                 </p:menu>
                             </p:tab>
                         </p:accordionPanel> 
                         <p:accordionPanel id="menuPanel7" activeIndex="null">
                             <p:tab id="tabRegistroProduccion" title="Registro producción">
-                                <p:menu style="height: 53px; width: 190px;">
+                                <p:menu style="height: 185px; width: 190px;">
                                     <p:menuitem value="Crear registro producción"  icon="ui-icon-disk" outcome="/registroProduccion/Create"/>
                                     <p:menuitem value="Listar registro producción"  icon="ui-icon-clipboard" outcome="/registroProduccion/List"/>
+                                    <p:menuitem value="Programación de producción"  icon="ui-icon-clock" outcome="/registroProduccion/ProgramacionProduccion"/>
+                                    <p:menuitem value="Pendiente por producción"  icon="ui-icon-calculator" outcome="/registroProduccion/PendienteProduccion"/>
+                                    <p:menuitem value="Reporte producción"  icon="ui-icon-calculator" outcome="/registroProduccion/ReporteProduccion"/>
+                                    <p:menuitem value="Producción por máquina"  icon="ui-icon-calculator" outcome="/registroProduccion/ReporteMaquinaRango"/>
+                                    <p:menuitem value="Producción por operario"  icon="ui-icon-calculator" outcome="/registroProduccion/ReporteOperarioRango"/>
                                 </p:menu>
                             </p:tab>
                         </p:accordionPanel> 

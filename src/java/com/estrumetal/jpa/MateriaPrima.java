@@ -140,7 +140,7 @@ public class MateriaPrima implements Serializable {
 
     @Override
     public String toString() {
-        return idMateriaprima +" - "+ descripcion;
+        return  idMateriaprima + " - " + descripcion;
     }
 
 }
