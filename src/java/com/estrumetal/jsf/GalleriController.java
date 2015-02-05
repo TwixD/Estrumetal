@@ -11,11 +11,6 @@ public class GalleriController {
         this.title = title;
         this.desc = desc;
     }
-
-    public GalleriController() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public String getImg() {
         return img;
     }

@@ -21,7 +21,7 @@ import javax.faces.model.SelectItem;
 @ManagedBean(name = "usuarioController")
 @SessionScoped
 public class UsuarioController implements Serializable {
-
+    //Current de tipo usuario
     private Usuario current;
     private DataModel items = null;
     @EJB

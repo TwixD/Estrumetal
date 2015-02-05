@@ -164,6 +164,7 @@ public class LoginControllFilter implements Filter {
         if (urlStr.indexOf("/faces/resources/") != -1) {
             return true;
         }
+        
         return false;
     }
 

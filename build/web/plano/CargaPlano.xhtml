@@ -6,28 +6,33 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/template.xhtml"
                 xmlns:p="http://primefaces.org/ui">
-
     <ui:define name="img">
         <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <p:panel id="basic" header="Carga de planos" footer="Carga de planos" style="margin-bottom:20px">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form enctype="multipart/form-data">
-                <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload(event)}" 
-                              label="Escoger"
-                              invalidSizeMessage="El archivo no puede pasar de  45 MB "
-                              invalidFileMessage="Tipo de archivo invalido. Solo gif,jpg y png son soportados."
-                              mode="simple" dragDropSupport="false"
-                              sizeLimit="52428800"
-                              update="messages"  allowTypes="/(\.|\/)(gif|jpg|png)$/" 
-                              showButtons="false"
-                              />
-                <p:growl id="messages" showDetail="true" />
-                <p:commandButton value="Submit" ajax="false" action="#{fileUploadView.handleFileUpload(event)}" />
-            </h:form>
-        </p:panel>
+        <h:form enctype="multipart/form-data">
+            <h3>*No disponible version 1.</h3>
+            <p:growl id="messages" showDetail="true" />
+            <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload(event)}" 
+                          label="Escoger"
+                          invalidSizeMessage="El archivo no puede pasar de  45 MB "
+                          invalidFileMessage="Tipo de archivo invalido. Solo gif,jpg y png son soportados."
+                          mode="advance" dragDropSupport="false"
+                          sizeLimit="52428800"
+                          update="messages"  allowTypes="/(\.|\/)(gif|jpg|png)$/" 
+                          showButtons="false"
+                          />
+            <p:commandButton type="button" onclick="PF('switcher').previous();"
+                             icon="ui-icon-circle-triangle-w" id="prev" />
+            <p:commandButton type="button" onclick="PF('switcher').next();"
+                             icon="ui-icon-circle-triangle-e" id="next" />
+            <p:imageSwitch effect="wipe" widgetVar="switcher" id="manuelSwitcher"
+                           slideshowAuto="false">
+                    <p:graphicImage name="/img/plano3.gif"/>
+            </p:imageSwitch>
+
+        </h:form>   
+
+
     </ui:define>
 </ui:composition>

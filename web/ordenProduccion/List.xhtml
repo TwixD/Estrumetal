@@ -50,6 +50,7 @@
                 <p:dataTable id="tbl" var="item" value="#{ordenProduccionController.items}" 
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
                              paginator="true" rows="10" style="margin-bottom:20px;"
+                             emptyMessage="El código no se encuentra registrado"
                              >
                     <p:column filterBy="#{item.idOrdenproduccion}" filterMatchMode="contains"> 
                         <f:facet name="header">
