@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.estrumetal.jpa;
 
 import java.io.Serializable;
@@ -14,6 +13,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -46,10 +47,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Plano.findByObservacion", query = "SELECT p FROM Plano p WHERE p.observacion = :observacion"),
     @NamedQuery(name = "Plano.findByFecha", query = "SELECT p FROM Plano p WHERE p.fecha = :fecha")})
 public class Plano implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_plano")
     private Integer idPlano;
     @Basic(optional = false)
@@ -86,6 +88,12 @@ public class Plano implements Serializable {
     @JoinColumn(name = "OBRA_id_obra", referencedColumnName = "id_obra")
     @ManyToOne(optional = false)
     private Obra oBRAidobra;
+    @Size(max = 400)
+    @Column(name = "historial_prestamo")
+    private String historial_prestamo;
+    @Size(max = 400)
+    @Column(name = "actual_prestamo")
+    private String actual_prestamo;
 
     public Plano() {
     }
@@ -192,6 +200,22 @@ public class Plano implements Serializable {
         this.oBRAidobra = oBRAidobra;
     }
 
+    public String getHistorial_prestamo() {
+        return historial_prestamo;
+    }
+
+    public void setHistorial_prestamo(String historial_prestamo) {
+        this.historial_prestamo = historial_prestamo;
+    }
+
+    public String getActual_prestamo() {
+        return actual_prestamo;
+    }
+
+    public void setActual_prestamo(String actual_prestamo) {
+        this.actual_prestamo = actual_prestamo;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -214,7 +238,7 @@ public class Plano implements Serializable {
 
     @Override
     public String toString() {
-        return idPlano+"";
+        return idPlano + "";
     }
-    
+
 }

@@ -2,6 +2,7 @@ package com.estrumetal.jsf;
 
 import com.estrumetal.jpa.Pieza;
 import com.estrumetal.jpa.Plano;
+import com.estrumetal.jpa.Usuario;
 import com.estrumetal.jpacontroller.PiezaFacade;
 import com.estrumetal.jsf.util.JsfUtil;
 import com.estrumetal.jsf.util.PaginationHelper;
@@ -40,7 +41,8 @@ public class PlanoController implements Serializable {
     private String obra;
     private String idPlano;
     private String seccion;
-    
+    private Usuario usuario;
+    private Plano plano;
 
     private DataModel items = null;
     @EJB
@@ -102,6 +104,11 @@ public class PlanoController implements Serializable {
         return "List";
     }
 
+    public String prepareListHistorial() {
+        recreateModel();
+        return "HistorialPrestamo";
+    }
+
     public String prepareView() {
         current = (Plano) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -136,7 +143,7 @@ public class PlanoController implements Serializable {
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PlanoCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage("El código de plano se encuentra ya registrado.");
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
@@ -194,7 +201,7 @@ public class PlanoController implements Serializable {
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PlanoUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
@@ -203,7 +210,7 @@ public class PlanoController implements Serializable {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
         SimpleDateFormat format2 = new SimpleDateFormat("dd-MM-yyyy");
-        if (!getFacade().asignar(Integer.parseInt(idPlano),"ASIGNADO["+nombreOperario+" - Fecha:["+format2.format(date)+"] - Hora:["+format.format(date)+"]- Seccion : "+seccion+" - OBRA : ["+obra+"]]").equals(null)) {
+        if (!getFacade().asignar(Integer.parseInt(idPlano), "ASIGNADO[" + nombreOperario + " - Fecha:[" + format2.format(date) + "] - Hora:[" + format.format(date) + "]- Seccion : " + seccion + " - OBRA : [" + obra + "]]").equals(null)) {
             JsfUtil.addSuccessMessage("Plano asignado exitosamente");
             return "AsignarPlano";
         } else {
@@ -211,12 +218,34 @@ public class PlanoController implements Serializable {
             return null;
         }
     }
-    
+
+    public String prestamo() {
+        if (getFacade().planoDisponible(plano.getIdPlano())) {
+            getFacade().prestamo(plano.getIdPlano(), usuario.getIdUsuario() + " - " + usuario.getNombre() + " - " + usuario.getDocumento());
+            JsfUtil.addSuccessMessage("El plano se presto a : " + usuario.getNombre() + ", con documento :" + usuario.getDocumento());
+            return "PrestamoPlano";
+        } else {
+            JsfUtil.addErrorMessage("El plano se encuentra actualmente prestado.");
+            return "PrestamoPlano";
+        }
+    }
+
+    public String recibir() {
+        if (!getFacade().planoDisponible(plano.getIdPlano())) {
+            getFacade().recibir(plano.getIdPlano());
+            JsfUtil.addSuccessMessage("El plano se recibio correctamente.");
+            return "RecibirPlano";
+        } else {
+            JsfUtil.addErrorMessage("El plano no se encuentra actualmente prestado.");
+            return "RecibirPlano";
+        }
+    }
+
     public String recepcion() {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
         SimpleDateFormat format2 = new SimpleDateFormat("dd-MM-yyyy");
-        if (!getFacade().asignar(Integer.parseInt(idPlano),"RECIBIDO["+nombreOperario+" - Fecha:["+format2.format(date)+"] - Hora:["+format.format(date)+"] - OBRA : ["+obra+"]]").equals(null)) {
+        if (!getFacade().asignar(Integer.parseInt(idPlano), "RECIBIDO[" + nombreOperario + " - Fecha:[" + format2.format(date) + "] - Hora:[" + format.format(date) + "] - OBRA : [" + obra + "]]").equals(null)) {
             JsfUtil.addSuccessMessage("Recepción de plano exitoso.");
             return "RecepcionPlano";
         } else {
@@ -252,7 +281,7 @@ public class PlanoController implements Serializable {
             getFacade().remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PlanoDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
 
@@ -489,6 +518,20 @@ public class PlanoController implements Serializable {
     public void setSeccion(String seccion) {
         this.seccion = seccion;
     }
-    
-    
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Plano getPlano() {
+        return plano;
+    }
+
+    public void setPlano(Plano plano) {
+        this.plano = plano;
+    }
 }

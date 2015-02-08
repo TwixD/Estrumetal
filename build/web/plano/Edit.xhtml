@@ -18,7 +18,11 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.EditPlanoLabel_idPlano}" for="idPlano" />
-                    <p:inputText id="idPlano" value="#{planoController.selected.idPlano}" title="#{bundle.EditPlanoTitle_idPlano}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_idPlano}" style="width: 220px;"/>
+                    <p:inputText id="idPlano" value="#{planoController.selected.idPlano}" title="#{bundle.EditPlanoTitle_idPlano}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_idPlano}" style="width: 220px;" disabled="true"/>
+                    <p:outputLabel value="#{bundle.EditPlanoLabel_OBRAidobra}" for="OBRAidobra" />
+                    <p:selectOneMenu id="OBRAidobra" value="#{planoController.selected.OBRAidobra}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_OBRAidobra}" style="width: 230px;">
+                        <f:selectItems value="#{obraController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.EditPlanoLabel_nombre}" for="nombre" />
                     <p:inputText id="nombre" value="#{planoController.selected.nombre}" title="#{bundle.EditPlanoTitle_nombre}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_nombre}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditPlanoLabel_pesoUnitario}" for="pesoUnitario" />
@@ -33,10 +37,6 @@
                     <p:inputText id="observacion" value="#{planoController.selected.observacion}" title="#{bundle.EditPlanoTitle_observacion}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditPlanoLabel_fecha}" for="fecha" />
                     <p:calendar id="fecha" locale="es" value="#{planoController.selected.fecha}" navigator="true" pattern="MM/dd/yyyy" />
-                    <p:outputLabel value="#{bundle.EditPlanoLabel_OBRAidobra}" for="OBRAidobra" />
-                    <p:selectOneMenu id="OBRAidobra" value="#{planoController.selected.OBRAidobra}" required="true" requiredMessage="#{bundle.EditPlanoRequiredMessage_OBRAidobra}" style="width: 230px;">
-                        <f:selectItems value="#{obraController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
                 </h:panelGrid>
                 <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{planoController.update}" value="#{bundle.EditPlanoSaveLink}" ajax="false" icon="ui-icon-pencil" rendered="#{loginBean.admin()}"/>

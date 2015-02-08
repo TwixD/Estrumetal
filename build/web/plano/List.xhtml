@@ -116,7 +116,7 @@
                         <h:outputText value=" "/>
                         <h:commandLink action="#{planoController.prepareEdit}" value="#{bundle.ListPlanoEditLink}" rendered="#{loginBean.admin()}"/>
                         <h:outputText value=" "/>
-                        <h:commandLink action="#{planoController.destroy}" value="#{bundle.ListPlanoDestroyLink}" rendered="#{loginBean.admin()}"/>
+                        <h:commandLink action="#{planoController.destroy}" value="#{bundle.ListPlanoDestroyLink}" rendered="false"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

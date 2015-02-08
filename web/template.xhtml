@@ -113,10 +113,12 @@
                         </p:accordionPanel> 
                         <p:accordionPanel id="menuPanel6" activeIndex="null">
                             <p:tab id="tabPlano" title="Plano">
-                                <p:menu style="height: 160px; width: 190px;">
+                                <p:menu style="height: 210px; width: 190px;">
                                     <p:menuitem value="Crear plano"  icon="ui-icon-disk" outcome="/plano/Create"/>
                                     <p:menuitem value="Crear plano/piezas"  icon="ui-icon-disk" outcome="/plano/CreatePlanoPieza"/>
                                     <p:menuitem value="Listar plano"  icon="ui-icon-clipboard" outcome="/plano/List"/>
+                                    <p:menuitem value="Prestamo plano"  icon="ui-icon-tag" outcome="/plano/PrestamoPlano"/>
+                                    <p:menuitem value="Recepción plano"  icon="ui-icon-arrowthickstop-1-s" outcome="/plano/RecibirPlano"/>
                                     <p:menuitem value="Observación asignar plano"  icon="ui-icon-tag" outcome="/plano/AsignarPlano" rendered="#{loginBean.admin()}"/>
                                     <p:menuitem value="Observación recepción plano"  icon="ui-icon-arrowthickstop-1-s" outcome="/plano/RecepcionPlano"/>
                                     <p:menuitem value="Carga plano"  icon="ui-icon-image" outcome="/plano/CargaPlano"/>
