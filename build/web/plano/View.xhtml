@@ -19,6 +19,8 @@
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.ViewPlanoLabel_idPlano}"/>
                     <p:outputLabel value="#{planoController.selected.idPlano}" title="#{bundle.ViewPlanoTitle_idPlano}"/>
+                    <p:outputLabel value="#{bundle.ViewPlanoLabel_OBRAidobra}"/>
+                    <p:outputLabel value="#{planoController.selected.OBRAidobra}" title="#{bundle.ViewPlanoTitle_OBRAidobra}"/>
                     <p:outputLabel value="#{bundle.ViewPlanoLabel_nombre}"/>
                     <p:outputLabel value="#{planoController.selected.nombre}" title="#{bundle.ViewPlanoTitle_nombre}"/>
                     <p:outputLabel value="#{bundle.ViewPlanoLabel_pesoUnitario}"/>
@@ -35,8 +37,6 @@
                     <p:outputLabel value="#{planoController.selected.fecha}" title="#{bundle.ViewPlanoTitle_fecha}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </p:outputLabel>
-                    <p:outputLabel value="#{bundle.ViewPlanoLabel_OBRAidobra}"/>
-                    <p:outputLabel value="#{planoController.selected.OBRAidobra}" title="#{bundle.ViewPlanoTitle_OBRAidobra}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="4" styleClass="link">
                     <p:commandButton action="#{planoController.destroyAndView}"  value="#{bundle.ViewPlanoDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="false"/>

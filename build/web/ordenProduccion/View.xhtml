@@ -19,19 +19,19 @@
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.ViewOrdenProduccionLabel_ordenProduccionPK_idOrdenproduccion}"/>
                     <p:outputLabel value="#{ordenProduccionController.selected.idOrdenproduccion}" title="#{bundle.ViewOrdenProduccionTitle_ordenProduccionPK_idOrdenproduccion}"/>
+                    <h:outputText value="#{bundle.ViewOrdenProduccionLabel_PLANOidplano}"/>
+                    <h:outputText value="#{ordenProduccionController.selected.PLANOidplano}" title="#{bundle.ViewOrdenProduccionTitle_PLANOidplano}"/>
+                    <h:outputText value="#{bundle.ViewOrdenProduccionLabel_RUTAidruta}"/>
+                    <h:outputText value="#{ordenProduccionController.selected.RUTAidruta}" title="#{bundle.ViewOrdenProduccionTitle_RUTAidruta}"/>
                     <p:outputLabel value="#{bundle.ViewOrdenProduccionLabel_ordenProduccionPK_cantidad}"/>
                     <p:outputLabel value="#{ordenProduccionController.selected.cantidad}" title="#{bundle.ViewOrdenProduccionTitle_ordenProduccionPK_cantidad}"/> 
                     <p:outputLabel value="#{bundle.ViewOrdenProduccionLabel_fecha}"/>
                     <h:outputText value="#{ordenProduccionController.selected.fecha}" title="#{bundle.ViewOrdenProduccionTitle_fecha}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:outputText>
-                    <h:outputText value="#{bundle.ViewOrdenProduccionLabel_RUTAidruta}"/>
-                    <h:outputText value="#{ordenProduccionController.selected.RUTAidruta}" title="#{bundle.ViewOrdenProduccionTitle_RUTAidruta}"/>
-                    <h:outputText value="#{bundle.ViewOrdenProduccionLabel_PLANOidplano}"/>
-                    <h:outputText value="#{ordenProduccionController.selected.PLANOidplano}" title="#{bundle.ViewOrdenProduccionTitle_PLANOidplano}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="4" styleClass="link">
-                    <p:commandButton action="#{ordenProduccionController.destroyAndView}"  value="#{bundle.ViewOrdenProduccionDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="#{loginBean.admin()}"/>
+                    <p:commandButton action="#{ordenProduccionController.destroyAndView}"  value="#{bundle.ViewOrdenProduccionDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="false"/>
                     <p:button outcome="Edit" value="#{bundle.ViewOrdenProduccionEditLink}" icon="ui-icon-pencil"/>
                     <p:commandButton action="#{ordenProduccionController.prepareCreate()}" value="#{bundle.ViewOrdenProduccionCreateLink}" ajax="false" icon="ui-icon-plusthick" />
                     <p:commandButton action="#{ordenProduccionController.prepareList()}" value="#{bundle.ViewOrdenProduccionShowAllLink}" ajax="false" icon="ui-icon-clipboard"/>

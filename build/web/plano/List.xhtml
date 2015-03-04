@@ -58,19 +58,19 @@
                         </f:facet>
                         <h:outputText value="#{item.idPlano}"/>
                     </p:column>
-                    <p:column>
+                    <p:column width="50">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_nombre}"/>
                         </f:facet>
                         <h:outputText value="#{item.nombre}"/>
                     </p:column>
-                    <p:column>
+                    <p:column width="60">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_pesoUnitario}"/>
                         </f:facet>
                         <h:outputText value="#{item.pesoUnitario}"/>
                     </p:column>
-                    <p:column>
+                    <p:column width="60">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_areaUnitaria}"/>
                         </f:facet>
@@ -82,11 +82,11 @@
                         </f:facet>
                         <h:outputText value="#{item.cantidad}"/>
                     </p:column>
-                    <p:column width="40">
-                        <f:facet name="header" >
-                            <h:outputText value="#{bundle.ListPlanoTitle_revision}"/>
+                     <p:column width="50">
+                        <f:facet name="header">
+                            <h:outputText value="Descripción"/>
                         </f:facet>
-                        <h:outputText value="#{item.revision}"/>
+                        <h:outputText value="#{item.descripcion}"/>
                     </p:column>
                     <p:column width="200">
                         <f:facet name="header">
@@ -94,7 +94,7 @@
                         </f:facet>
                         <h:outputText value="#{item.observacion}"/>
                     </p:column>
-                    <p:column>
+                    <p:column width="60">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPlanoTitle_fecha}"/>
                         </f:facet>

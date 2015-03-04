@@ -19,6 +19,10 @@
                 <p:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.ViewPiezaLabel_idPieza}"/>
                     <p:outputLabel value="#{piezaController.selected.idPieza}" title="#{bundle.ViewPiezaTitle_idPieza}"/>
+                    <p:outputLabel value="#{bundle.ViewPiezaLabel_PLANOidplano}"/>
+                    <p:outputLabel value="#{piezaController.selected.PLANOidplano}" title="#{bundle.ViewPiezaTitle_PLANOidplano}"/>
+                    <p:outputLabel value="#{bundle.ViewPiezaLabel_MATERIAPRIMAidmateriaprima}"/>
+                    <p:outputLabel value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}" title="#{bundle.ViewPiezaTitle_MATERIAPRIMAidmateriaprima}"/>
                     <p:outputLabel value="#{bundle.ViewPiezaLabel_cantidad}"/>
                     <p:outputLabel value="#{piezaController.selected.cantidad}" title="#{bundle.ViewPiezaTitle_cantidad}"/>
                     <p:outputLabel value="#{bundle.ViewPiezaLabel_longitud}"/>
@@ -31,13 +35,9 @@
                     <p:outputLabel value="#{piezaController.selected.areaCorte}" title="#{bundle.ViewPiezaTitle_areaCorte}"/>
                     <p:outputLabel value="#{bundle.ViewPiezaLabel_bisel}"/>
                     <p:outputLabel value="#{piezaController.selected.bisel}" title="#{bundle.ViewPiezaTitle_bisel}"/>
-                    <p:outputLabel value="#{bundle.ViewPiezaLabel_PLANOidplano}"/>
-                    <p:outputLabel value="#{piezaController.selected.PLANOidplano}" title="#{bundle.ViewPiezaTitle_PLANOidplano}"/>
-                    <p:outputLabel value="#{bundle.ViewPiezaLabel_MATERIAPRIMAidmateriaprima}"/>
-                    <p:outputLabel value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}" title="#{bundle.ViewPiezaTitle_MATERIAPRIMAidmateriaprima}"/>
                 </p:panelGrid>
                 <h:panelGrid columns="4" styleClass="link">
-                    <p:commandButton action="#{piezaController.destroyAndView}"  value="#{bundle.ViewPiezaDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="#{loginBean.admin()}"/>
+                    <p:commandButton action="#{piezaController.destroyAndView}"  value="#{bundle.ViewPiezaDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="false"/>
                     <p:button outcome="Edit" value="#{bundle.ViewPiezaEditLink}" icon="ui-icon-pencil"/>
                     <p:commandButton action="#{piezaController.prepareCreate()}" value="#{bundle.ViewPiezaCreateLink}" ajax="false" icon="ui-icon-plusthick" />
                     <p:commandButton action="#{piezaController.prepareList()}" value="#{bundle.ViewPiezaShowAllLink}" ajax="false" icon="ui-icon-clipboard"/>

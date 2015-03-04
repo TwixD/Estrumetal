@@ -113,7 +113,7 @@
                         <h:outputText value=" "/>
                         <h:commandLink action="#{piezaController.prepareEdit}" value="#{bundle.ListPiezaEditLink}"/>
                         <h:outputText value=" "/>
-                        <h:commandLink action="#{piezaController.destroy}" value="#{bundle.ListPiezaDestroyLink}" rendered="#{loginBean.admin()}"/>
+                        <h:commandLink action="#{piezaController.destroy}" value="#{bundle.ListPiezaDestroyLink}" rendered="false"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

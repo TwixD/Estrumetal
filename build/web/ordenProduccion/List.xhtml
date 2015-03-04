@@ -93,7 +93,7 @@
                         <h:outputText value=" "/>
                         <h:commandLink action="#{ordenProduccionController.prepareEdit}" value="#{bundle.ListOrdenProduccionEditLink}"/>
                         <h:outputText value=" "/>
-                        <h:commandLink action="#{ordenProduccionController.destroy}" value="#{bundle.ListOrdenProduccionDestroyLink}" rendered="#{loginBean.admin()}"/>
+                        <h:commandLink action="#{ordenProduccionController.destroy}" value="#{bundle.ListOrdenProduccionDestroyLink}" rendered="false"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

@@ -94,7 +94,7 @@
                         <p:outputLabel value=" "/>
                         <h:commandLink action="#{maquinaController.prepareEdit}" value="#{bundle.ListMaquinaEditLink}"/>
                         <p:outputLabel value=" "/>
-                        <h:commandLink action="#{maquinaController.destroy}" value="#{bundle.ListMaquinaDestroyLink}" rendered="#{loginBean.admin()}"/>
+                        <h:commandLink action="#{maquinaController.destroy}" value="#{bundle.ListMaquinaDestroyLink}" rendered="false"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

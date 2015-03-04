@@ -15,8 +15,10 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
+            <h:form id="form">
                 <h:panelGrid columns="2">
+                    <p:outputLabel value="Código materia prima:" for="idMateriaPrima" />
+                    <p:inputText id="idMateriaPrima" value='#{maquinaController.getIdTable("id_materiaprima","MATERIA_PRIMA")}' title="Codigo materia prima" style="width: 220px;" disabled="true"/>
                     <p:outputLabel value="#{bundle.CreateMateriaPrimaLabel_descripcion}" for="descripcion" />
                     <p:inputText id="descripcion" value="#{materiaPrimaController.selected.descripcion}" title="#{bundle.CreateMateriaPrimaTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateMateriaPrimaRequiredMessage_descripcion}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateMateriaPrimaLabel_tipo}" for="tipo" />
@@ -26,11 +28,12 @@
                         <f:selectItem itemValue="VIGA" itemLabel="Viga" />
                     </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.CreateMateriaPrimaLabel_pesoMl}" for="pesoMl" />
-                    <p:inputText id="pesoMl" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{materiaPrimaController.selected.pesoMl}" title="#{bundle.CreateMateriaPrimaTitle_pesoMl}" required="true" requiredMessage="#{bundle.CreateMateriaPrimaRequiredMessage_pesoMl}" style="width: 220px;"/>
+                    <p:inputText id="pesoMl" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{materiaPrimaController.selected.pesoMl}" title="#{bundle.CreateMateriaPrimaTitle_pesoMl}" required="true" requiredMessage="#{bundle.CreateMateriaPrimaRequiredMessage_pesoMl}" style="width: 220px;"/>
                 </h:panelGrid>
-                <h:panelGrid columns="2" styleClass="link">
+                <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{materiaPrimaController.create}" value="#{bundle.CreateMateriaPrimaSaveLink}"  ajax="false" icon="ui-icon-disk"/> 
                     <p:commandButton action="#{materiaPrimaController.prepareList}" value="#{bundle.CreateMateriaPrimaShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                    <p:commandButton icon="ui-icon-arrowrefresh-1-e" value="Limpiar" onclick="limpiarForm()"/>
                 </h:panelGrid>   
             </h:form>
         </p:panel>

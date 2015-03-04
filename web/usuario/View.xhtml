@@ -19,6 +19,8 @@
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.ViewUsuarioLabel_idUsuario}"/>
                     <p:outputLabel value="#{usuarioController.selected.idUsuario}" title="#{bundle.ViewUsuarioTitle_idUsuario}"/>
+                    <p:outputLabel value="#{bundle.ViewUsuarioLabel_ROLidrol}"/>
+                    <p:outputLabel value="#{usuarioController.selected.ROLidrol}" title="#{bundle.ViewUsuarioTitle_ROLidrol}"/>
                     <p:outputLabel value="#{bundle.ViewUsuarioLabel_user}"/>
                     <p:outputLabel value="#{usuarioController.selected.user}" title="#{bundle.ViewUsuarioTitle_user}"/>
                     <p:outputLabel value="#{bundle.ViewUsuarioLabel_password}"/>
@@ -35,11 +37,9 @@
                     <p:outputLabel value="#{usuarioController.selected.telefono}" title="#{bundle.ViewUsuarioTitle_telefono}"/>
                     <p:outputLabel value="#{bundle.ViewUsuarioLabel_direccion}"/>
                     <p:outputLabel value="#{usuarioController.selected.direccion}" title="#{bundle.ViewUsuarioTitle_direccion}"/>
-                    <p:outputLabel value="#{bundle.ViewUsuarioLabel_ROLidrol}"/>
-                    <p:outputLabel value="#{usuarioController.selected.ROLidrol}" title="#{bundle.ViewUsuarioTitle_ROLidrol}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="4" styleClass="link">
-                    <p:commandButton action="#{usuarioController.destroyAndView}"  value="#{bundle.ViewUsuarioDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="#{loginBean.admin()}"/>
+                    <p:commandButton action="#{usuarioController.destroyAndView}"  value="#{bundle.ViewUsuarioDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="false"/>
                     <p:button outcome="Edit" value="#{bundle.ViewUsuarioEditLink}" icon="ui-icon-pencil"/>
                     <p:commandButton action="#{usuarioController.prepareCreate()}" value="#{bundle.ViewUsuarioCreateLink}" ajax="false" icon="ui-icon-plusthick" />
                     <p:commandButton action="#{usuarioController.prepareList()}" value="#{bundle.ViewUsuarioShowAllLink}" ajax="false" icon="ui-icon-clipboard"/>

@@ -15,10 +15,14 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
+            <h:form id="form">
                 <h:panelGrid columns="2">
-                    <p:outputLabel value="#{bundle.CreateUsuarioLabel_idUsuario}" for="idUsuario" rendered="false"/>
-                    <p:inputText id="idUsuario" value="#{usuarioController.selected.idUsuario}" title="#{bundle.CreateUsuarioTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_idUsuario}" rendered="false" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreateUsuarioLabel_idUsuario}" for="idUsuario" rendered="true"/>
+                    <p:inputText id="idUsuario" value='#{maquinaController.getIdTable("id_usuario","USUARIO")}' title="#{bundle.CreateUsuarioTitle_idUsuario}" disabled="true" rendered="true" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreateUsuarioLabel_ROLidrol}" for="ROLidrol" />
+                    <p:selectOneMenu id="ROLidrol" value="#{usuarioController.selected.ROLidrol}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_ROLidrol}" style="width: 230px;">
+                        <f:selectItems value="#{rolController.itemsAvailableSelectOne}" itemValue="#{idRol}"/>
+                    </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_user}" for="user" />
                     <p:inputText id="user" value="#{usuarioController.selected.user}" title="#{bundle.CreateUsuarioTitle_user}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_user}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
@@ -43,14 +47,11 @@
                     <p:inputText id="telefono" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{usuarioController.selected.telefono}" title="#{bundle.CreateUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_telefono}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateUsuarioLabel_direccion}" for="direccion" />
                     <p:inputText id="direccion" value="#{usuarioController.selected.direccion}" title="#{bundle.CreateUsuarioTitle_direccion}" style="width: 220px;"/>
-                    <p:outputLabel value="#{bundle.CreateUsuarioLabel_ROLidrol}" for="ROLidrol" />
-                    <p:selectOneMenu id="ROLidrol" value="#{usuarioController.selected.ROLidrol}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_ROLidrol}" style="width: 230px;">
-                        <f:selectItems value="#{rolController.itemsAvailableSelectOne}" itemValue="#{idRol}"/>
-                    </p:selectOneMenu>
                 </h:panelGrid>
-                <h:panelGrid columns="2" styleClass="link">
+                <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{usuarioController.create}" value="#{bundle.CreateUsuarioSaveLink}"  ajax="false" icon="ui-icon-disk"/> 
                     <p:commandButton action="#{usuarioController.prepareList}" value="#{bundle.CreateUsuarioShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                    <p:commandButton icon="ui-icon-arrowrefresh-1-e" value="Limpiar" onclick="limpiarForm()"/>
                 </h:panelGrid>   
             </h:form>
         </p:panel>

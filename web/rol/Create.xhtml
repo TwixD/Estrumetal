@@ -15,14 +15,17 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
+            <h:form id="form">
                 <h:panelGrid columns="2">
+                    <p:outputLabel value="Código rol:" for="idRol" rendered="true"/>
+                    <p:inputText id="idRol" value='#{maquinaController.getIdTable("id_rol","ROL")}' title="Código rol"  style="width: 220px;" rendered="true" disabled="true"/>
                     <p:outputLabel value="#{bundle.CreateRolLabel_nombre}" for="nombre" />
                     <p:inputText id="nombre" value="#{rolController.selected.nombre}" title="#{bundle.CreateRolTitle_nombre}" required="true" requiredMessage="#{bundle.CreateRolRequiredMessage_nombre}"  style="width: 220px;"/>
                 </h:panelGrid>
-                <h:panelGrid columns="2" styleClass="link">
+                <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{rolController.create}" value="#{bundle.CreateRolSaveLink}"  ajax="false" icon="ui-icon-disk"/> 
                     <p:commandButton action="#{rolController.prepareList}" value="#{bundle.CreateRolShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                    <p:commandButton icon="ui-icon-arrowrefresh-1-e" value="Limpiar" onclick="limpiarForm()"/>
                 </h:panelGrid> 
             </h:form>
         </p:panel>

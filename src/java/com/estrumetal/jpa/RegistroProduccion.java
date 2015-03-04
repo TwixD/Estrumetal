@@ -55,7 +55,7 @@ public class RegistroProduccion implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "total_produccion")
-    private int totalProduccion;
+    private Integer totalProduccion;
     @JoinColumn(name = "USUARIO_id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
     private Usuario uSUARIOidusuario;
@@ -100,11 +100,11 @@ public class RegistroProduccion implements Serializable {
         this.fechaTerminacion = fechaTerminacion;
     }
 
-    public int getTotalProduccion() {
+    public Integer getTotalProduccion() {
         return totalProduccion;
     }
 
-    public void setTotalProduccion(int totalProduccion) {
+    public void setTotalProduccion(Integer totalProduccion) {
         this.totalProduccion = totalProduccion;
     }
 

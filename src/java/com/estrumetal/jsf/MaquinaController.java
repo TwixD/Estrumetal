@@ -24,7 +24,7 @@ public class MaquinaController implements Serializable {
 
     private Maquina current;
     private DataModel items = null;
-
+    private String idMaquina;
     @EJB
     private com.estrumetal.jpacontroller.MaquinaFacade ejbFacade;
     private PaginationHelper pagination;
@@ -39,6 +39,10 @@ public class MaquinaController implements Serializable {
             selectedItemIndex = -1;
         }
         return current;
+    }
+    
+    public String getIdTable(String idColumn,String tableName){
+        return (Integer.parseInt(ejbFacade.getMaxId(idColumn, tableName)) + 1)+"";
     }
 
     private MaquinaFacade getFacade() {

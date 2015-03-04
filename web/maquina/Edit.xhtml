@@ -21,12 +21,6 @@
                     <p:inputText id="idMaquina" value="#{maquinaController.selected.idMaquina}" title="#{bundle.EditMaquinaTitle_idMaquina}" required="true" requiredMessage="#{bundle.EditMaquinaRequiredMessage_idMaquina}" disabled="true" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditMaquinaLabel_nombre}" for="nombre" />
                     <p:inputText id="nombre" value="#{maquinaController.selected.nombre}" title="#{bundle.EditMaquinaTitle_nombre}" required="true" requiredMessage="#{bundle.EditMaquinaRequiredMessage_nombre}" style="width: 220px;"/>
-                    <p:outputLabel value="#{bundle.EditMaquinaLabel_ubicacion}" for="ubicacion" />
-                    <p:selectOneMenu id="ubicacion" value="#{maquinaController.selected.ubicacion}" required="true" requiredMessage="#{bundle.EditMaquinaRequiredMessage_ubicacion}" style="width: 230px;">
-                        <f:selectItem itemValue="" itemLabel="Elija un Ubicacion de maquina" />
-                        <f:selectItem itemValue="Preparacion" itemLabel="Preparacion" />
-                        <f:selectItem itemValue="Linea De Perfiles" itemLabel="Linea De Perfiles" />
-                    </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.EditMaquinaLabel_tipo}" for="tipo" />
                     <p:selectOneMenu id="tipo" value="#{maquinaController.selected.tipo}" required="true" requiredMessage="#{bundle.EditMaquinaRequiredMessage_tipo}" style="width: 230px;">
                         <f:selectItem itemValue="" itemLabel="Elija un tipo de maquina" />
@@ -34,6 +28,12 @@
                         <f:selectItem itemValue="Corte Y Perforacion" itemLabel="Corte y perforacion" />
                         <f:selectItem itemValue="Perforacion" itemLabel="perforacion" />			
                     </p:selectOneMenu> 
+                    <p:outputLabel value="#{bundle.EditMaquinaLabel_ubicacion}" for="ubicacion" />
+                    <p:selectOneMenu id="ubicacion" value="#{maquinaController.selected.ubicacion}" required="true" requiredMessage="#{bundle.EditMaquinaRequiredMessage_ubicacion}" style="width: 230px;">
+                        <f:selectItem itemValue="" itemLabel="Elija un Ubicacion de maquina" />
+                        <f:selectItem itemValue="Preparacion" itemLabel="Preparacion" />
+                        <f:selectItem itemValue="Linea De Perfiles" itemLabel="Linea De Perfiles" />
+                    </p:selectOneMenu>
                 </h:panelGrid>      
                 <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{maquinaController.update}" value="#{bundle.EditMaquinaSaveLink}" ajax="false" icon="ui-icon-pencil"/>

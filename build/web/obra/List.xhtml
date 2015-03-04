@@ -73,7 +73,7 @@
                         <h:outputText value=" "/>
                         <h:commandLink action="#{obraController.prepareEdit}" value="#{bundle.ListObraEditLink}"/>
                         <h:outputText value=" "/>
-                        <h:commandLink action="#{obraController.destroy}" value="#{bundle.ListObraDestroyLink}" rendered="#{loginBean.admin()}"/>
+                        <h:commandLink action="#{obraController.destroy}" value="#{bundle.ListObraDestroyLink}" rendered="false"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

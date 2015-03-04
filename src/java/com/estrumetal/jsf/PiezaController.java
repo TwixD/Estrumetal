@@ -28,6 +28,7 @@ public class PiezaController implements Serializable {
     private com.estrumetal.jpacontroller.PiezaFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+
     public PiezaController() {
     }
 
@@ -79,13 +80,23 @@ public class PiezaController implements Serializable {
     }
 
     public String create() {
-        try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PiezaCreated"));
-            return prepareCreate();
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        if (current.getCantidad() <= 0) {
+            JsfUtil.addErrorMessage("Cantidad debe ser mayor a '0'.");
             return null;
+        } else {
+            if (current.getLongitud() <= 0) {
+                JsfUtil.addErrorMessage("Longitud debe ser mayor a '0'.");
+                return null;
+            } else {
+                try {
+                    getFacade().create(current);
+                    JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PiezaCreated"));
+                    return prepareCreate();
+                } catch (Exception e) {
+                    JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                    return null;
+                }
+            }
         }
     }
 

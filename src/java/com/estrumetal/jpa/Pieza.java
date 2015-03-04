@@ -49,11 +49,11 @@ public class Pieza implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "cantidad")
-    private int cantidad;
+    private Integer cantidad;
     @Basic(optional = false)
     @NotNull
     @Column(name = "longitud")
-    private int longitud;
+    private Integer longitud;
     @Column(name = "ancho")
     private Integer ancho;
     @Column(name = "cantidad_perforaciones")
@@ -92,19 +92,19 @@ public class Pieza implements Serializable {
         this.idPieza = idPieza;
     }
 
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
-    public int getLongitud() {
+    public Integer getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(int longitud) {
+    public void setLongitud(Integer longitud) {
         this.longitud = longitud;
     }
 

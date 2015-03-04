@@ -19,6 +19,8 @@
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.ViewRutaLabel_idRuta}"/>
                     <p:outputLabel value="#{rutaController.selected.idRuta}" title="#{bundle.ViewRutaTitle_idRuta}"/>
+                    <p:outputLabel value="#{bundle.ViewRutaLabel_MAQUINAidmaquina}"/>
+                    <p:outputLabel value="#{rutaController.selected.MAQUINAidmaquina}" title="#{bundle.ViewRutaTitle_MAQUINAidmaquina}"/>  
                     <p:outputLabel value="#{bundle.ViewRutaLabel_fechaProduccion}"/>
                     <p:outputLabel value="#{rutaController.selected.fechaProduccion}" title="#{bundle.ViewRutaTitle_fechaProduccion}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -27,11 +29,9 @@
                     <p:outputLabel value="#{rutaController.selected.fechaTerminacion}" title="#{bundle.ViewRutaTitle_fechaTerminacion}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </p:outputLabel>
-                    <p:outputLabel value="#{bundle.ViewRutaLabel_MAQUINAidmaquina}"/>
-                    <p:outputLabel value="#{rutaController.selected.MAQUINAidmaquina}" title="#{bundle.ViewRutaTitle_MAQUINAidmaquina}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="4" styleClass="link">
-                    <p:commandButton action="#{rutaController.destroyAndView}"  value="#{bundle.ViewRutaDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="#{loginBean.admin()}"/>
+                    <p:commandButton action="#{rutaController.destroyAndView}"  value="#{bundle.ViewRutaDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="false"/>
                     <p:button outcome="Edit" value="#{bundle.ViewRutaEditLink}" icon="ui-icon-pencil"/>
                     <p:commandButton action="#{rutaController.prepareCreate()}" value="#{bundle.ViewRutaCreateLink}" ajax="false" icon="ui-icon-plusthick" />
                     <p:commandButton action="#{rutaController.prepareList()}" value="#{bundle.ViewRutaShowAllLink}" ajax="false" icon="ui-icon-clipboard"/>

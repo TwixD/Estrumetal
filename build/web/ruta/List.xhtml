@@ -87,7 +87,7 @@
                         <h:outputText value=" "/>
                         <h:commandLink action="#{rutaController.prepareEdit}" value="#{bundle.ListRutaEditLink}"/>
                         <h:outputText value=" "/>
-                        <h:commandLink action="#{rutaController.destroy}" value="#{bundle.ListRutaDestroyLink}" rendered="#{loginBean.admin()}"/>
+                        <h:commandLink action="#{rutaController.destroy}" value="#{bundle.ListRutaDestroyLink}" rendered="false"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

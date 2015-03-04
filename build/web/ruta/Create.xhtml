@@ -15,22 +15,23 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
+            <h:form id="form">
                 <h:panelGrid columns="2">
-                    <p:outputLabel value="#{bundle.CreateRutaLabel_idRuta}" for="idRuta" rendered="false"/>
-                    <p:inputText id="idRuta" value="#{rutaController.selected.idRuta}" title="#{bundle.CreateRutaTitle_idRuta}" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_idRuta}" style="width: 220px;" rendered="false"/>
-                    <p:outputLabel value="#{bundle.CreateRutaLabel_fechaProduccion}" for="fechaProduccion" />
-                    <p:calendar id="fechaProduccion" locale="es" value="#{rutaController.selected.fechaProduccion}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_fechaProduccion}" style="width: 220px;"/>
-                    <p:outputLabel value="#{bundle.CreateRutaLabel_fechaTerminacion}" for="fechaTerminacion" />
-                    <p:calendar id="fechaTerminacion" locale="es" value="#{rutaController.selected.fechaTerminacion}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_fechaTerminacion}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreateRutaLabel_idRuta}" for="idRuta" rendered="true"/>
+                    <p:inputText disabled="true" id="idRuta" value='#{maquinaController.getIdTable("id_ruta","RUTA")}' title="#{bundle.CreateRutaTitle_idRuta}"  style="width: 220px;" rendered="true"/>
                     <p:outputLabel value="#{bundle.CreateRutaLabel_MAQUINAidmaquina}" for="MAQUINAidmaquina" />
                     <p:selectOneMenu id="MAQUINAidmaquina" value="#{rutaController.selected.MAQUINAidmaquina}"  required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_MAQUINAidmaquina}" style="width: 230px;">
                         <f:selectItems value="#{maquinaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreateRutaLabel_fechaProduccion}" for="fechaProduccion" />
+                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaProduccion" locale="es" value="#{rutaController.selected.fechaProduccion}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_fechaProduccion}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreateRutaLabel_fechaTerminacion}" for="fechaTerminacion" />
+                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaTerminacion" locale="es" value="#{rutaController.selected.fechaTerminacion}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_fechaTerminacion}" style="width: 220px;"/>
                 </h:panelGrid>
-                <h:panelGrid columns="2" styleClass="link">
+                <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{rutaController.create}" value="#{bundle.CreateRutaSaveLink}"  ajax="false" icon="ui-icon-disk"/> 
-                    <p:commandButton action="#{rutaController.prepareList}" value="#{bundle.CreateRutaShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                    <p:commandButton action="#{rutaController.prepareList}" value="#{bundle.CreateRutaShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard" />
+                    <p:commandButton icon="ui-icon-arrowrefresh-1-e" value="Limpiar" onclick="limpiarForm()"/>
                 </h:panelGrid>   
             </h:form>
         </p:panel>

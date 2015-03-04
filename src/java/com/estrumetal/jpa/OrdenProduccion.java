@@ -47,7 +47,7 @@ public class OrdenProduccion implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "cantidad")
-    private int cantidad;
+    private Integer cantidad;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha")
@@ -107,11 +107,11 @@ public class OrdenProduccion implements Serializable {
         this.idOrdenproduccion = idOrdenproduccion;
     }
 
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 

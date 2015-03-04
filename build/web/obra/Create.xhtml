@@ -15,16 +15,17 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
+            <h:form id="form">
                 <h:panelGrid columns="2" styleClass="panelGrid">
-                    <p:outputLabel value="#{bundle.CreateObraLabel_idObra}" for="idObra" rendered="false" />
-                    <p:inputText id="idObra" value="#{obraController.selected.idObra}" title="#{bundle.CreateObraTitle_idObra}" required="true" requiredMessage="#{bundle.CreateObraRequiredMessage_idObra}" rendered="false"/>
+                    <p:outputLabel value="#{bundle.CreateObraLabel_idObra}" for="idObra" rendered="true" />
+                    <p:inputText disabled="true" id="idObra" value='#{maquinaController.getIdTable("id_obra","OBRA")}' title="#{bundle.CreateObraTitle_idObra}" required="true" requiredMessage="#{bundle.CreateObraRequiredMessage_idObra}" rendered="true"/>
                     <p:outputLabel value="#{bundle.CreateObraLabel_nombre}" for="nombre" />
                     <p:inputText id="nombre" value="#{obraController.selected.nombre}" title="#{bundle.CreateObraTitle_nombre}" required="true" requiredMessage="#{bundle.CreateObraRequiredMessage_nombre}"/>
                 </h:panelGrid>
-                <h:panelGrid columns="2" styleClass="link">
+                <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{obraController.create}" value="#{bundle.CreateObraSaveLink}"  ajax="false" icon="ui-icon-disk"/> 
                     <p:commandButton action="#{obraController.prepareList}" value="#{bundle.CreateObraShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                    <p:commandButton icon="ui-icon-arrowrefresh-1-e" value="Limpiar" onclick="limpiarForm()"/>
                 </h:panelGrid>  
             </h:form>
         </p:panel>

@@ -17,8 +17,16 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <p:outputLabel value="#{bundle.EditPiezaLabel_idPieza}" for="idPieza" rendered="false"/>
-                    <p:inputText id="idPieza" value="#{piezaController.selected.idPieza}" title="#{bundle.EditPiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:outputLabel value="#{bundle.EditPiezaLabel_idPieza}" for="idPieza" rendered="true"/>
+                    <p:inputText id="idPieza" value="#{piezaController.selected.idPieza}" title="#{bundle.EditPiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="true" disabled="true"/>
+                    <p:outputLabel value="#{bundle.EditPiezaLabel_PLANOidplano}" for="PLANOidplano" />
+                    <p:selectOneMenu id="PLANOidplano" value="#{piezaController.selected.PLANOidplano}"  required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_PLANOidplano}" style="width: 230px;">
+                        <f:selectItems value="#{planoController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.EditPiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
+                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima" value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                        <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.EditPiezaLabel_cantidad}" for="cantidad" />
                     <p:inputText id="cantidad" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{piezaController.selected.cantidad}" title="#{bundle.EditPiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_cantidad}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditPiezaLabel_longitud}" for="longitud" />
@@ -28,17 +36,9 @@
                     <p:outputLabel value="#{bundle.EditPiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
                     <p:inputText id="cantidadPerforaciones" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{piezaController.selected.cantidadPerforaciones}" title="#{bundle.EditPiezaTitle_cantidadPerforaciones}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditPiezaLabel_areaCorte}" for="areaCorte" />
-                    <p:inputText id="areaCorte" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{piezaController.selected.areaCorte}" title="#{bundle.EditPiezaTitle_areaCorte}" style="width: 220px;"/>
+                    <p:inputText id="areaCorte" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{piezaController.selected.areaCorte}" title="#{bundle.EditPiezaTitle_areaCorte}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditPiezaLabel_bisel}" for="bisel" />
                     <p:inputText id="bisel" value="#{piezaController.selected.bisel}" title="#{bundle.EditPiezaTitle_bisel}" style="width: 220px;"/>
-                    <p:outputLabel value="#{bundle.EditPiezaLabel_PLANOidplano}" for="PLANOidplano" />
-                    <p:selectOneMenu id="PLANOidplano" value="#{piezaController.selected.PLANOidplano}"  required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_PLANOidplano}" style="width: 230px;">
-                        <f:selectItems value="#{planoController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="#{bundle.EditPiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima" value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
-                        <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
                 </h:panelGrid>
                 <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{piezaController.update}" value="#{bundle.EditPiezaSaveLink}" ajax="false" icon="ui-icon-pencil"/>

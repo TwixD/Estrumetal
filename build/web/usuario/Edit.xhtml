@@ -17,8 +17,12 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <p:outputLabel value="#{bundle.EditUsuarioLabel_idUsuario}" for="idUsuario" rendered="false"/>
-                    <p:inputText id="idUsuario" value="#{usuarioController.selected.idUsuario}" title="#{bundle.EditUsuarioTitle_idUsuario}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_idUsuario}" rendered="false" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.EditUsuarioLabel_idUsuario}" for="idUsuario" rendered="true"/>
+                    <p:inputText id="idUsuario" value="#{usuarioController.selected.idUsuario}" title="#{bundle.EditUsuarioTitle_idUsuario}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_idUsuario}" rendered="true" style="width: 220px;" disabled="true"/>
+                    <p:outputLabel value="#{bundle.EditUsuarioLabel_ROLidrol}" for="ROLidrol" />
+                    <p:selectOneMenu id="ROLidrol" value="#{usuarioController.selected.ROLidrol}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_ROLidrol}" style="width: 230px;">
+                        <f:selectItems value="#{rolController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_user}" for="user" />
                     <p:inputText id="user" value="#{usuarioController.selected.user}" title="#{bundle.EditUsuarioTitle_user}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_user}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_password}" for="password" />
@@ -35,10 +39,6 @@
                     <p:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundle.EditUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_telefono}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditUsuarioLabel_direccion}" for="direccion" />
                     <p:inputText id="direccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{usuarioController.selected.direccion}" title="#{bundle.EditUsuarioTitle_direccion}" style="width: 220px;"/>
-                    <p:outputLabel value="#{bundle.EditUsuarioLabel_ROLidrol}" for="ROLidrol" />
-                    <p:selectOneMenu id="ROLidrol" value="#{usuarioController.selected.ROLidrol}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_ROLidrol}" style="width: 230px;">
-                        <f:selectItems value="#{rolController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
                 </h:panelGrid>
                 <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}" ajax="false" icon="ui-icon-pencil"/>

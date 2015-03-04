@@ -23,7 +23,7 @@
                     <p:outputLabel value="#{rolController.selected.nombre}" title="#{bundle.ViewRolTitle_nombre}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="4" styleClass="link">
-                    <p:commandButton action="#{rolController.destroyAndView}"  value="#{bundle.ViewRolDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="#{loginBean.admin()}"/>
+                    <p:commandButton action="#{rolController.destroyAndView}"  value="#{bundle.ViewRolDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="false"/>
                     <p:button outcome="Edit" value="#{bundle.ViewRolEditLink}" icon="ui-icon-pencil"/>
                     <p:commandButton action="#{rolController.prepareCreate()}" value="#{bundle.ViewRolCreateLink}" ajax="false" icon="ui-icon-plusthick" />
                     <p:commandButton action="#{rolController.prepareList()}" value="#{bundle.ViewRolShowAllLink}" ajax="false" icon="ui-icon-clipboard"/>

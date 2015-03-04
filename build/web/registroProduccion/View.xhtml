@@ -19,6 +19,10 @@
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.ViewRegistroProduccionLabel_idRegistroproduccion}"/>
                     <p:outputLabel value="#{registroProduccionController.selected.idRegistroproduccion}" title="#{bundle.ViewRegistroProduccionTitle_idRegistroproduccion}"/>
+                    <p:outputLabel value="#{bundle.ViewRegistroProduccionLabel_RUTAidruta}"/>
+                    <p:outputLabel value="#{registroProduccionController.selected.RUTAidruta}" title="#{bundle.ViewRegistroProduccionTitle_RUTAidruta}"/>
+                    <p:outputLabel value="#{bundle.ViewRegistroProduccionLabel_USUARIOidusuario}"/>
+                    <p:outputLabel value="#{registroProduccionController.selected.USUARIOidusuario}" title="#{bundle.ViewRegistroProduccionTitle_USUARIOidusuario}"/>
                     <p:outputLabel value="#{bundle.ViewRegistroProduccionLabel_fechaInicio}"/>
                     <p:outputLabel value="#{registroProduccionController.selected.fechaInicio}" title="#{bundle.ViewRegistroProduccionTitle_fechaInicio}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -29,13 +33,9 @@
                     </p:outputLabel>
                     <p:outputLabel value="#{bundle.ViewRegistroProduccionLabel_totalProduccion}"/>
                     <p:outputLabel value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.ViewRegistroProduccionTitle_totalProduccion}"/>
-                    <p:outputLabel value="#{bundle.ViewRegistroProduccionLabel_USUARIOidusuario}"/>
-                    <p:outputLabel value="#{registroProduccionController.selected.USUARIOidusuario}" title="#{bundle.ViewRegistroProduccionTitle_USUARIOidusuario}"/>
-                    <p:outputLabel value="#{bundle.ViewRegistroProduccionLabel_RUTAidruta}"/>
-                    <p:outputLabel value="#{registroProduccionController.selected.RUTAidruta}" title="#{bundle.ViewRegistroProduccionTitle_RUTAidruta}"/>
                 </h:panelGrid>
                 <h:panelGrid columns="4" styleClass="link">
-                    <p:commandButton action="#{registroProduccionController.destroyAndView}"  value="#{bundle.ViewRegistroProduccionDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="#{loginBean.admin()}"/>
+                    <p:commandButton action="#{registroProduccionController.destroyAndView}"  value="#{bundle.ViewRegistroProduccionDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="false"/>
                     <p:button outcome="Edit" value="#{bundle.ViewRegistroProduccionEditLink}" icon="ui-icon-pencil"/>
                     <p:commandButton action="#{registroProduccionController.prepareCreate()}" value="#{bundle.ViewRegistroProduccionCreateLink}" ajax="false" icon="ui-icon-plusthick" />
                     <p:commandButton action="#{registroProduccionController.prepareList()}" value="#{bundle.ViewRegistroProduccionShowAllLink}" ajax="false" icon="ui-icon-clipboard"/>

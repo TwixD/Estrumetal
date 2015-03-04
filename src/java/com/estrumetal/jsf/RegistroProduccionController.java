@@ -7,15 +7,12 @@ import com.estrumetal.jpacontroller.RegistroProduccionFacade;
 
 import java.io.Serializable;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -96,13 +93,18 @@ public class RegistroProduccionController implements Serializable {
     }
 
     public String create() {
-        try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RegistroProduccionCreated"));
-            return prepareCreate();
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        if (current.getTotalProduccion() <= 0) {
+            JsfUtil.addErrorMessage("Total producción debe ser mayor a '0'.");
             return null;
+        } else {
+            try {
+                getFacade().create(current);
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RegistroProduccionCreated"));
+                return prepareCreate();
+            } catch (Exception e) {
+                JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                return null;
+            }
         }
     }
 
@@ -172,7 +174,7 @@ public class RegistroProduccionController implements Serializable {
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
-        } 
+        }
         return items;
     }
 

@@ -61,4 +61,18 @@ public class OrdenProduccionFacade extends AbstractFacade<OrdenProduccion> {
             return null;
         }
     }
+
+    public int getPlanoCantidad(int idPlano) {
+        try {
+            String PERSISTENCE_UNIT_NAME = "projectEstrumetalPU";
+            EntityManagerFactory factory;
+            factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+            EntityManager emx = factory.createEntityManager();
+            String sql = "SELECT cantidad FROM PLANO WHERE id_plano = " + idPlano;
+            Query q = emx.createNativeQuery(sql);
+            return  (int) q.getSingleResult();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 }

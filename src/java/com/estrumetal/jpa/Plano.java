@@ -71,7 +71,7 @@ public class Plano implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "cantidad")
-    private int cantidad;
+    private Integer cantidad;
     @Size(max = 45)
     @Column(name = "revision")
     private String revision;
@@ -94,6 +94,9 @@ public class Plano implements Serializable {
     @Size(max = 400)
     @Column(name = "actual_prestamo")
     private String actual_prestamo;
+    @Size(max = 100)
+    @Column(name = "descripcion")
+    private String descripcion;
 
     public Plano() {
     }
@@ -102,7 +105,7 @@ public class Plano implements Serializable {
         this.idPlano = idPlano;
     }
 
-    public Plano(Integer idPlano, String nombre, BigDecimal pesoUnitario, BigDecimal areaUnitaria, int cantidad) {
+    public Plano(Integer idPlano, String nombre, BigDecimal pesoUnitario, BigDecimal areaUnitaria, Integer cantidad) {
         this.idPlano = idPlano;
         this.nombre = nombre;
         this.pesoUnitario = pesoUnitario;
@@ -142,11 +145,11 @@ public class Plano implements Serializable {
         this.areaUnitaria = areaUnitaria;
     }
 
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -216,6 +219,14 @@ public class Plano implements Serializable {
         this.actual_prestamo = actual_prestamo;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -238,7 +249,7 @@ public class Plano implements Serializable {
 
     @Override
     public String toString() {
-        return idPlano + "";
+        return idPlano + " - " + nombre;
     }
 
 }

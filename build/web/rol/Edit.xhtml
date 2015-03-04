@@ -17,8 +17,8 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <p:outputLabel value="#{bundle.EditRolLabel_idRol}" for="idRol" rendered="false"/>
-                    <p:inputText id="idRol" value="#{rolController.selected.idRol}" title="#{bundle.EditRolTitle_idRol}" required="true" requiredMessage="#{bundle.EditRolRequiredMessage_idRol}" style="width: 220px;" rendered="false"/>
+                    <p:outputLabel value="#{bundle.EditRolLabel_idRol}" for="idRol" rendered="true"/>
+                    <p:inputText id="idRol" value="#{rolController.selected.idRol}" title="#{bundle.EditRolTitle_idRol}" required="true" requiredMessage="#{bundle.EditRolRequiredMessage_idRol}" style="width: 220px;" rendered="true" disabled="true"/>
                     <p:outputLabel value="#{bundle.EditRolLabel_nombre}" for="nombre" />
                     <p:inputText id="nombre" value="#{rolController.selected.nombre}" title="#{bundle.EditRolTitle_nombre}" required="true" requiredMessage="#{bundle.EditRolRequiredMessage_nombre}" style="width: 220px;"/>
                 </h:panelGrid>

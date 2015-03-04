@@ -6,6 +6,7 @@ import com.estrumetal.jsf.util.PaginationHelper;
 import com.estrumetal.jpacontroller.OrdenProduccionFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -28,6 +29,12 @@ public class OrdenProduccionController implements Serializable {
     private com.estrumetal.jpacontroller.OrdenProduccionFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+
+    private Date currentDate = new Date();
+
+    public Date getCurrentDate() {
+        return currentDate;
+    }
 
     public OrdenProduccionController() {
     }
@@ -80,13 +87,23 @@ public class OrdenProduccionController implements Serializable {
     }
 
     public String create() {
-        try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("OrdenProduccionCreated"));
-            return prepareCreate();
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        if (current.getCantidad() > getFacade().getPlanoCantidad(current.getPLANOidplano().getIdPlano())) {
+            JsfUtil.addErrorMessage("Cantidad no debe superar a la cantidad del plano.");
             return null;
+        } else {
+            if (current.getCantidad() <= 0) {
+                JsfUtil.addErrorMessage("Cantidad debe ser mayor a '0'.");
+                return null;
+            } else {
+                try {
+                    getFacade().create(current);
+                    JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("OrdenProduccionCreated"));
+                    return prepareCreate();
+                } catch (Exception e) {
+                    JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                    return null;
+                }
+            }
         }
     }
 

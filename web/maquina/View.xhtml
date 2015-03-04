@@ -16,22 +16,23 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
+                <h:panelGrid columns="2">      
                     <p:outputLabel value="#{bundle.ViewMaquinaLabel_idMaquina}"/>
                     <p:outputLabel value="#{maquinaController.selected.idMaquina}" title="#{bundle.ViewMaquinaTitle_idMaquina}"/>
                     <p:outputLabel value="#{bundle.ViewMaquinaLabel_nombre}"/>
                     <p:outputLabel value="#{maquinaController.selected.nombre}" title="#{bundle.ViewMaquinaTitle_nombre}"/> 
-                    <p:outputLabel value="#{bundle.ViewMaquinaLabel_ubicacion}"/>
-                    <p:outputLabel value="#{maquinaController.selected.ubicacion}" title="#{bundle.ViewMaquinaTitle_ubicacion}"/> 
                     <p:outputLabel value="#{bundle.ViewMaquinaLabel_tipo}"/>
                     <p:outputLabel value="#{maquinaController.selected.tipo}" title="#{bundle.ViewMaquinaTitle_tipo}"/> 
+                    <p:outputLabel value="#{bundle.ViewMaquinaLabel_ubicacion}"/>
+                    <p:outputLabel value="#{maquinaController.selected.ubicacion}" title="#{bundle.ViewMaquinaTitle_ubicacion}"/> 
                 </h:panelGrid>
                 <h:panelGrid columns="4" styleClass="link">
-                    <p:commandButton action="#{maquinaController.destroyAndView}"  value="#{bundle.ViewMaquinaDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="#{loginBean.admin()}"/>
+                    <p:commandButton action="#{maquinaController.destroyAndView}"  value="#{bundle.ViewMaquinaDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="false"/>
                     <p:button outcome="Edit" value="#{bundle.ViewMaquinaEditLink}" icon="ui-icon-pencil"/>
                     <p:commandButton action="#{maquinaController.prepareCreate()}" value="#{bundle.ViewMaquinaCreateLink}" ajax="false" icon="ui-icon-plusthick" />
                     <p:commandButton action="#{maquinaController.prepareList()}" value="#{bundle.ViewMaquinaShowAllLink}" ajax="false" icon="ui-icon-clipboard"/>
                 </h:panelGrid>
+
             </h:form>
         </p:panel>
     </ui:define>

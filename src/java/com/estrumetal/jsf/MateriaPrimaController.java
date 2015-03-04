@@ -6,6 +6,7 @@ import com.estrumetal.jsf.util.PaginationHelper;
 import com.estrumetal.jpacontroller.MateriaPrimaFacade;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -80,13 +81,18 @@ public class MateriaPrimaController implements Serializable {
     }
 
     public String create() {
-        try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MateriaPrimaCreated"));
-            return prepareCreate();
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        if (current.getPesoMl().compareTo(BigDecimal.ZERO) <= 0) {
+            JsfUtil.addErrorMessage("El peso metro lineal debe ser mayor a '0'.");
             return null;
+        } else {
+            try {
+                getFacade().create(current);
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MateriaPrimaCreated"));
+                return prepareCreate();
+            } catch (Exception e) {
+                JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                return null;
+            }
         }
     }
 
@@ -102,7 +108,7 @@ public class MateriaPrimaController implements Serializable {
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MateriaPrimaUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage( ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }

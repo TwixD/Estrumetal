@@ -18,21 +18,21 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_idRegistroproduccion}" for="idRegistroproduccion" />
-                    <p:inputText id="idRegistroproduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.idRegistroproduccion}" title="#{bundle.EditRegistroProduccionTitle_idRegistroproduccion}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_idRegistroproduccion}"/>
-                    <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_fechaInicio}" for="fechaInicio" />
-                    <p:calendar id="fechaInicio" locale="es" value="#{registroProduccionController.selected.fechaInicio}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_fechaInicio}"/>     
-                    <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_fechaTerminacion}" for="fechaTerminacion" />
-                    <p:calendar id="fechaTerminacion" locale="es" value="#{registroProduccionController.selected.fechaTerminacion}" navigator="true" pattern="MM/dd/yyyy" />
-                    <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_totalProduccion}" for="totalProduccion" />
-                    <p:inputText id="totalProduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.EditRegistroProduccionTitle_totalProduccion}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_totalProduccion}"/>
-                    <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_USUARIOidusuario}" for="USUARIOidusuario" />
-                    <p:selectOneMenu id="USUARIOidusuario" value="#{registroProduccionController.selected.USUARIOidusuario}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_USUARIOidusuario}">
-                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
+                    <p:inputText id="idRegistroproduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.idRegistroproduccion}" title="#{bundle.EditRegistroProduccionTitle_idRegistroproduccion}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_idRegistroproduccion}" disabled="true" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_RUTAidruta}" for="RUTAidruta" />
-                    <p:selectOneMenu id="RUTAidruta" value="#{registroProduccionController.selected.RUTAidruta}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_RUTAidruta}">
+                    <p:selectOneMenu id="RUTAidruta" value="#{registroProduccionController.selected.RUTAidruta}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">
                         <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_USUARIOidusuario}" for="USUARIOidusuario" />
+                    <p:selectOneMenu id="USUARIOidusuario" value="#{registroProduccionController.selected.USUARIOidusuario}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_USUARIOidusuario}" style="width: 230px;">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>    
+                    <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_fechaInicio}" for="fechaInicio" />
+                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaInicio" locale="es" value="#{registroProduccionController.selected.fechaInicio}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_fechaInicio}"/>     
+                    <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_fechaTerminacion}" for="fechaTerminacion" />
+                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaTerminacion" locale="es" value="#{registroProduccionController.selected.fechaTerminacion}" navigator="true" pattern="MM/dd/yyyy" />
+                    <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_totalProduccion}" for="totalProduccion" />
+                    <p:inputText id="totalProduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.EditRegistroProduccionTitle_totalProduccion}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_totalProduccion}" style="width: 220px;"/>
                 </h:panelGrid>
                 <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{registroProduccionController.update}" value="#{bundle.EditRegistroProduccionSaveLink}" ajax="false" icon="ui-icon-pencil" rendered="#{loginBean.admin()}"/>

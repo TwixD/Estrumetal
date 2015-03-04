@@ -8,6 +8,7 @@ import com.estrumetal.jsf.util.JsfUtil;
 import com.estrumetal.jsf.util.PaginationHelper;
 import com.estrumetal.jpacontroller.PlanoFacade;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -138,13 +139,29 @@ public class PlanoController implements Serializable {
     }
 
     public String create() {
-        try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PlanoCreated"));
-            return prepareCreate();
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+
+        if (current.getPesoUnitario().compareTo(BigDecimal.ZERO) <= 0) {
+            JsfUtil.addErrorMessage("Peso unitario debe ser mayor a '0'.");
             return null;
+        } else {
+            if (current.getAreaUnitaria().compareTo(BigDecimal.ZERO) <= 0) {
+                JsfUtil.addErrorMessage("Area unitaria debe ser mayor a '0'.");
+                return null;
+            } else {
+                if (current.getCantidad() <= 0) {
+                    JsfUtil.addErrorMessage("Cantidad debe ser mayor a '0'.");
+                    return null;
+                } else {
+                    try {
+                        getFacade().create(current);
+                        JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PlanoCreated"));
+                        return prepareCreate();
+                    } catch (Exception e) {
+                        JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                        return null;
+                    }
+                }
+            }
         }
     }
 
