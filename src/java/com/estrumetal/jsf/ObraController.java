@@ -68,8 +68,12 @@ public class ObraController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Obra) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (Obra) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         return "View";
     }
 
@@ -91,8 +95,12 @@ public class ObraController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Obra) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (Obra) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         return "Edit";
     }
 

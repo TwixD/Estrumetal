@@ -75,8 +75,12 @@ public class OrdenProduccionController implements Serializable {
     }
 
     public String prepareView() {
-        current = (OrdenProduccion) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (OrdenProduccion) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         return "View";
     }
 
@@ -108,8 +112,12 @@ public class OrdenProduccionController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (OrdenProduccion) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (OrdenProduccion) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         return "Edit";
     }
 

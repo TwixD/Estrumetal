@@ -81,8 +81,12 @@ public class RegistroProduccionController implements Serializable {
     }
 
     public String prepareView() {
-        current = (RegistroProduccion) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (RegistroProduccion) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         return "View";
     }
 
@@ -109,8 +113,12 @@ public class RegistroProduccionController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (RegistroProduccion) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (RegistroProduccion) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         return "Edit";
     }
 

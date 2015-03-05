@@ -69,8 +69,12 @@ public class MateriaPrimaController implements Serializable {
     }
 
     public String prepareView() {
-        current = (MateriaPrima) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (MateriaPrima) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         return "View";
     }
 
@@ -97,8 +101,12 @@ public class MateriaPrimaController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (MateriaPrima) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (MateriaPrima) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         return "Edit";
     }
 

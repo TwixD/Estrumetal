@@ -68,8 +68,12 @@ public class PiezaController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Pieza) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (Pieza) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         return "View";
     }
 
@@ -101,8 +105,12 @@ public class PiezaController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Pieza) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (Pieza) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         return "Edit";
     }
 

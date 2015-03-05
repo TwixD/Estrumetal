@@ -40,9 +40,9 @@ public class MaquinaController implements Serializable {
         }
         return current;
     }
-    
-    public String getIdTable(String idColumn,String tableName){
-        return (Integer.parseInt(ejbFacade.getMaxId(idColumn, tableName)) + 1)+"";
+
+    public String getIdTable(String idColumn, String tableName) {
+        return (Integer.parseInt(ejbFacade.getMaxId(idColumn, tableName)) + 1) + "";
     }
 
     private MaquinaFacade getFacade() {
@@ -73,9 +73,13 @@ public class MaquinaController implements Serializable {
     }
 
     public String prepareView() {
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
             current = (Maquina) getItems().getRowData();
             selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-            return "View";
+        }
+        return "View";
     }
 
     public String prepareCreate() {
@@ -96,8 +100,12 @@ public class MaquinaController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Maquina) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (Maquina) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         return "Edit";
     }
 
@@ -107,7 +115,7 @@ public class MaquinaController implements Serializable {
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MaquinaUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage( ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
@@ -139,7 +147,7 @@ public class MaquinaController implements Serializable {
             getFacade().remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MaquinaDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage( ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
 

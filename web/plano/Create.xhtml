@@ -26,9 +26,14 @@
                     <p:outputLabel value="Descripción:" for="descripcion" />
                     <p:selectOneMenu id="descripcion" value="#{planoController.selected.descripcion}" required="true" requiredMessage="Ingrese la descripción del plano" style="width: 230px;">
                         <f:selectItem itemValue="" itemLabel="Elija un tipo de maquina" />
-                        <f:selectItem itemValue="Viga" itemLabel="Viga" />
-                        <f:selectItem itemValue="Vigueta" itemLabel="Vigueta" />
-                        <f:selectItem itemValue="Perforacion" itemLabel="perforacion" />			
+                        <f:selectItem itemValue="Riostas" itemLabel="Riostas" />
+                        <f:selectItem itemValue="Tensores" itemLabel="Tensores" />
+                        <f:selectItem itemValue="Tirantes" itemLabel="Tirantes" />
+                        <f:selectItem itemValue="Cerchas" itemLabel="Cerchas" />	
+                        <f:selectItem itemValue="Columnas" itemLabel="Columnas" />	
+                        <f:selectItem itemValue="Viguetas" itemLabel="Viguetas" />	
+                        <f:selectItem itemValue="Vigas" itemLabel="Vigas" />	
+                        <f:selectItem itemValue="Entramados" itemLabel="Entramados" />		
                     </p:selectOneMenu> 
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_nombre}" for="nombre" />
                     <p:inputText id="nombre" value="#{planoController.selected.nombre}" title="#{bundle.CreatePlanoTitle_nombre}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_nombre}" style="width: 220px;"/>

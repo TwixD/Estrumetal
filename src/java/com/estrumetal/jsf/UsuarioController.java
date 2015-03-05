@@ -21,6 +21,7 @@ import javax.faces.model.SelectItem;
 @ManagedBean(name = "usuarioController")
 @SessionScoped
 public class UsuarioController implements Serializable {
+
     //Current de tipo usuario
     private Usuario current;
     private DataModel items = null;
@@ -69,8 +70,12 @@ public class UsuarioController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Usuario) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (Usuario) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        }
         return "View";
     }
 
@@ -88,7 +93,7 @@ public class UsuarioController implements Serializable {
                 getFacade().create(current);
                 JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
                 return prepareCreate();
-            }else{
+            } else {
                 JsfUtil.addErrorMessage("El login o usuario de usuario ya existe, intente con otro.");
             }
             return null;
@@ -99,9 +104,13 @@ public class UsuarioController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Usuario) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        if (getItems().getRowIndex() == -1) {
+            return "List";
+        } else {
+            current = (Usuario) getItems().getRowData();
+            selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+            return "Edit";
+        }
     }
 
     public String update() {
