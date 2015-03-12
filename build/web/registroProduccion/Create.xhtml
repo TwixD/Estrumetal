@@ -16,29 +16,53 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form id="form">
-                <h:panelGrid columns="2">
-                    <p:outputLabel value="Código registro producción:" for="idRegistroProduccion" rendered="true"/>
-                    <p:inputText id="idRegistroProduccion" value='#{maquinaController.getIdTable("id_registroproduccion","REGISTRO_PRODUCCION")}' title="Código registro producción" style="width: 220px;" rendered="true" disabled="true"/>
+                <p:wizard>
+                    <p:tab id="ruta" title="Ruta">
+                    <h:panelGrid columns="2">    
                     <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_RUTAidruta}" for="RUTAidruta" />
-                    <p:selectOneMenu id="RUTAidruta" value="#{registroProduccionController.selected.RUTAidruta}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="RUTAidruta" value="#{registroProduccionController.selected.RUTAidruta}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">
+                        <p:ajax event="change" update="eventoAjax" />
                         <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
-                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_USUARIOidusuario}" for="USUARIOidusuario" />
-                    <p:selectOneMenu id="USUARIOidusuario" value="#{registroProduccionController.selected.USUARIOidusuario}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_USUARIOidusuario}" style="width: 230px;">
-                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_fechaInicio}" for="fechaInicio" />
-                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaInicio" locale="es" value="#{registroProduccionController.selected.fechaInicio}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_fechaInicio}" style="width: 220px;"/>
-                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_fechaTerminacion}" for="fechaTerminacion" />
-                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaTerminacion" locale="es" value="#{registroProduccionController.selected.fechaTerminacion}" navigator="true" pattern="MM/dd/yyyy" />
-                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_totalProduccion}" for="totalProduccion" />
-                    <p:inputText id="totalProduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.CreateRegistroProduccionTitle_totalProduccion}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_totalProduccion}" style="width: 220px;"/>
-                </h:panelGrid>
-                <h:panelGrid columns="3" styleClass="link">
-                    <p:commandButton action="#{registroProduccionController.create}" value="#{bundle.CreateRegistroProduccionSaveLink}"  ajax="false" icon="ui-icon-disk"/> 
-                    <p:commandButton action="#{registroProduccionController.prepareList}" value="#{bundle.CreateRegistroProduccionShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
-                    <p:commandButton icon="ui-icon-arrowrefresh-1-e" value="Limpiar" onclick="limpiarForm()"/>
-                </h:panelGrid>   
+                    </h:panelGrid> 
+                        <p:panel id="eventoAjax">
+                        <p:fieldset id="maquina" legend="Descripción Máquina">
+                            <h:panelGrid columns="2" cellpadding="5">
+                            <p:graphicImage name="img/machine.jpg" height="100"/>
+                            <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputLabel value="Código Máquina:" />
+                            <h:outputText value="#{registroProduccionController.selected.RUTAidruta.MAQUINAidmaquina.idMaquina}" style="color: blue"/>
+                            <h:outputLabel value="Nombre:"/>
+                            <h:outputText value="#{registroProduccionController.selected.RUTAidruta.MAQUINAidmaquina.nombre}" style="color: blue"/>
+                            <h:outputLabel value="Ubicación:" />
+                            <h:outputText value="#{registroProduccionController.selected.RUTAidruta.MAQUINAidmaquina.ubicacion}" style="color: blue"/>
+                            <h:outputLabel value="Tipo de máquina:" />
+                            <h:outputText value="#{registroProduccionController.selected.RUTAidruta.MAQUINAidmaquina.tipo}" style="color: blue"/>
+                            </h:panelGrid>
+                            </h:panelGrid>
+                        </p:fieldset>
+                        
+                        <p:fieldset id="rutaRuta" legend="Tiempos de la ruta"> 
+                            <h:panelGrid columns="2" cellpadding="5">
+                            <p:graphicImage name="img/calendario.png" height="100" id="rutaTime"/>
+                            <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputLabel value="Fecha producción:" />
+                            <h:outputText value='#{registroProduccionController.selected.RUTAidruta.fechaProduccion}' style="color: blue"/>
+                            <h:outputLabel value="Fecha final producción:"/>
+                            <h:outputText value="#{registroProduccionController.selected.RUTAidruta.fechaTerminacion}" style="color: blue"/>
+                            </h:panelGrid>
+                            </h:panelGrid>
+                             <p:overlayPanel for="rutaTime" >
+                                <h:outputText value="Tiempos de producción"/><br/>
+                                <h:outputText value="Los tiempos de la Ruta es el tiempo disponible en el que se realizara la producción"/>
+                            </p:overlayPanel>  
+                        </p:fieldset>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="asd" title="asd">
+                        
+                    </p:tab>
+                </p:wizard>
             </h:form>
         </p:panel>
     </ui:define>

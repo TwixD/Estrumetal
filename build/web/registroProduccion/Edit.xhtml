@@ -20,11 +20,11 @@
                     <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_idRegistroproduccion}" for="idRegistroproduccion" />
                     <p:inputText id="idRegistroproduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.idRegistroproduccion}" title="#{bundle.EditRegistroProduccionTitle_idRegistroproduccion}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_idRegistroproduccion}" disabled="true" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_RUTAidruta}" for="RUTAidruta" />
-                    <p:selectOneMenu id="RUTAidruta" value="#{registroProduccionController.selected.RUTAidruta}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="RUTAidruta" value="#{registroProduccionController.selected.RUTAidruta}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">
                         <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_USUARIOidusuario}" for="USUARIOidusuario" />
-                    <p:selectOneMenu id="USUARIOidusuario" value="#{registroProduccionController.selected.USUARIOidusuario}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_USUARIOidusuario}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="USUARIOidusuario" value="#{registroProduccionController.selected.USUARIOidusuario}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_USUARIOidusuario}" style="width: 230px;">
                         <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>    
                     <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_fechaInicio}" for="fechaInicio" />

@@ -20,11 +20,11 @@
                     <p:outputLabel value="#{bundle.EditPiezaLabel_idPieza}" for="idPieza" rendered="true"/>
                     <p:inputText id="idPieza" value="#{piezaController.selected.idPieza}" title="#{bundle.EditPiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="true" disabled="true"/>
                     <p:outputLabel value="#{bundle.EditPiezaLabel_PLANOidplano}" for="PLANOidplano" />
-                    <p:selectOneMenu id="PLANOidplano" value="#{piezaController.selected.PLANOidplano}"  required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_PLANOidplano}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="PLANOidplano" value="#{piezaController.selected.PLANOidplano}"  required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_PLANOidplano}" style="width: 230px;">
                         <f:selectItems value="#{planoController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.EditPiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima" value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima" value="#{piezaController.selected.MATERIAPRIMAidmateriaprima}" required="true" requiredMessage="#{bundle.EditPiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.EditPiezaLabel_cantidad}" for="cantidad" />

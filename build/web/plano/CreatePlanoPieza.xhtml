@@ -29,7 +29,7 @@
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_fecha}" for="fecha" />
                     <p:calendar id="fecha" locale="es" value="#{planoController.selected.fecha}" navigator="true" pattern="MM/dd/yyyy" />
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_OBRAidobra}" for="OBRAidobra" />
-                    <p:selectOneMenu id="OBRAidobra" value="#{planoController.selected.OBRAidobra}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_OBRAidobra}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="OBRAidobra" value="#{planoController.selected.OBRAidobra}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_OBRAidobra}" style="width: 230px;">
                         <f:selectItems value="#{obraController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
@@ -60,7 +60,7 @@
                         <f:selectItem itemValue="No" itemLabel="No" />			
                     </p:selectOneMenu>  
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima" value="#{planoController.pieza.MATERIAPRIMAidmateriaprima}"  required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima" value="#{planoController.pieza.MATERIAPRIMAidmateriaprima}"  required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                
@@ -88,7 +88,7 @@
                         <f:selectItem itemValue="No" itemLabel="No" />			
                     </p:selectOneMenu>  
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima1" value="#{planoController.pieza1.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima1" value="#{planoController.pieza1.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
@@ -116,7 +116,7 @@
                         <f:selectItem itemValue="No" itemLabel="No" />			
                     </p:selectOneMenu>  
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima2" value="#{planoController.pieza2.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima2" value="#{planoController.pieza2.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
@@ -144,7 +144,7 @@
                         <f:selectItem itemValue="No" itemLabel="No" />			
                     </p:selectOneMenu>  
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima3" value="#{planoController.pieza3.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima3" value="#{planoController.pieza3.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
@@ -171,7 +171,7 @@
                         <f:selectItem itemValue="No" itemLabel="No" />			
                     </p:selectOneMenu>  
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima4" value="#{planoController.pieza4.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima4" value="#{planoController.pieza4.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
@@ -198,7 +198,7 @@
                         <f:selectItem itemValue="No" itemLabel="No" />			
                     </p:selectOneMenu>  
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima5" value="#{planoController.pieza5.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima5" value="#{planoController.pieza5.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
@@ -226,7 +226,7 @@
                         <f:selectItem itemValue="No" itemLabel="No" />			
                     </p:selectOneMenu>  
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima6" value="#{planoController.pieza6.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima6" value="#{planoController.pieza6.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
@@ -254,7 +254,7 @@
                         <f:selectItem itemValue="No" itemLabel="No" />			
                     </p:selectOneMenu>  
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima7" value="#{planoController.pieza7.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima7" value="#{planoController.pieza7.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
@@ -281,7 +281,7 @@
                         <f:selectItem itemValue="No" itemLabel="No" />			
                     </p:selectOneMenu>  
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima8" value="#{planoController.pieza8.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima8" value="#{planoController.pieza8.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
@@ -308,7 +308,7 @@
                         <f:selectItem itemValue="No" itemLabel="No" />			
                     </p:selectOneMenu>  
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu id="MATERIAPRIMAidmateriaprima9" value="#{planoController.pieza9.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima9" value="#{planoController.pieza9.MATERIAPRIMAidmateriaprima}"  required="false" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>

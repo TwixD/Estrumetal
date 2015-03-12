@@ -46,3 +46,7 @@ table {
 .calendar input {
 width: 222px;
 }
+
+.ui-selectonemenu-filter-container {
+    width: 77% !important;
+}

@@ -20,11 +20,11 @@
                     <p:outputLabel value="Código orden producción" for="ordenProduccionPK_idOrdenproduccion" />
                     <p:inputText id="ordenProduccionPK_idOrdenproduccion" value="#{ordenProduccionController.selected.idOrdenproduccion}" title="#{bundle.EditOrdenProduccionTitle_ordenProduccionPK_idOrdenproduccion}" required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_ordenProduccionPK_idOrdenproduccion}" rendered="true" style="width: 220px;" disabled="true"/>
                     <p:outputLabel value="#{bundle.EditOrdenProduccionLabel_PLANOidplano}" for="PLANOidplano" />
-                    <p:selectOneMenu id="PLANOidplano" value="#{ordenProduccionController.selected.PLANOidplano}"  required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_PLANOidplano}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="PLANOidplano" value="#{ordenProduccionController.selected.PLANOidplano}"  required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_PLANOidplano}" style="width: 230px;">
                         <f:selectItems value="#{planoController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.EditOrdenProduccionLabel_RUTAidruta}" for="RUTAidruta" />
-                    <p:selectOneMenu id="RUTAidruta" value="#{ordenProduccionController.selected.RUTAidruta}"  required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="RUTAidruta" value="#{ordenProduccionController.selected.RUTAidruta}"  required="true" requiredMessage="#{bundle.EditOrdenProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">
                         <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.EditOrdenProduccionLabel_ordenProduccionPK_cantidad}" for="ordenProduccionPK_cantidad" />

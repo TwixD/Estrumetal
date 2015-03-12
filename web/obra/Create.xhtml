@@ -25,7 +25,7 @@
                 <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{obraController.create}" value="#{bundle.CreateObraSaveLink}"  ajax="false" icon="ui-icon-disk"/> 
                     <p:commandButton action="#{obraController.prepareList}" value="#{bundle.CreateObraShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
-                    <p:commandButton icon="ui-icon-arrowrefresh-1-e" value="Limpiar" onclick="limpiarForm()"/>
+                    <p:commandButton icon="ui-icon-arrowrefresh-1-e" value="Limpiar" onclick="limpiarForm()" update="@form"/>
                 </h:panelGrid>  
             </h:form>
         </p:panel>

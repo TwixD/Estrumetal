@@ -91,21 +91,28 @@ public class OrdenProduccionController implements Serializable {
     }
 
     public String create() {
-        if (current.getCantidad() > getFacade().getPlanoCantidad(current.getPLANOidplano().getIdPlano())) {
-            JsfUtil.addErrorMessage("Cantidad no debe superar a la cantidad del plano.");
+        int idPlano = current.getPLANOidplano().getIdPlano();
+        int aviableCant = getFacade().getPlanoCantidad(idPlano);
+        if (current.getCantidad() <= 0) {
+            JsfUtil.addErrorMessage("Cantidad debe ser mayor a '0'.");
             return null;
         } else {
-            if (current.getCantidad() <= 0) {
-                JsfUtil.addErrorMessage("Cantidad debe ser mayor a '0'.");
+            if (aviableCant <= 0) {
+                JsfUtil.addErrorMessage("El plano seleccionado ya no tiene la cantidad solicitada.");
                 return null;
             } else {
-                try {
-                    getFacade().create(current);
-                    JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("OrdenProduccionCreated"));
-                    return prepareCreate();
-                } catch (Exception e) {
-                    JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                if (current.getCantidad() > aviableCant) {
+                    JsfUtil.addErrorMessage("La cantidad del Plano solo tiene disponible :" + aviableCant + ", por favor ingrese una cantidad dentro de el rango.");
                     return null;
+                } else {
+                    try {
+                        getFacade().create(current);
+                        JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("OrdenProduccionCreated"));
+                        return prepareCreate();
+                    } catch (Exception e) {
+                        JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                        return null;
+                    }
                 }
             }
         }

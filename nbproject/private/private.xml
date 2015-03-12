@@ -5,20 +5,12 @@
             <url>src/java/com/estrumetal/jsf/MaquinaController.java</url>
             <bookmark id="4">
                 <name/>
-                <line>74</line>
+                <line>75</line>
                 <key/>
             </bookmark>
             <bookmark id="3">
                 <name/>
-                <line>168</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>web/plano/CreatePlanoPieza.xhtml</url>
-            <bookmark id="1">
-                <name/>
-                <line>15</line>
+                <line>169</line>
                 <key/>
             </bookmark>
         </file>
@@ -27,6 +19,14 @@
             <bookmark id="2">
                 <name/>
                 <line>211</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>web/plano/CreatePlanoPieza.xhtml</url>
+            <bookmark id="1">
+                <name/>
+                <line>15</line>
                 <key/>
             </bookmark>
         </file>

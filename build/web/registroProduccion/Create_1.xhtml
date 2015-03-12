@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="img">
+        <img src="../resources/img/logolarge.png"/> 
+    </ui:define>
+    <ui:define name="body">
+        <p:panel id="basic" header="#{bundle.CreateRegistroProduccionTitle}" footer="Registrar producción" style="margin-bottom:20px">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form id="form">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Código registro producción:" for="idRegistroProduccion" rendered="true"/>
+                    <p:inputText id="idRegistroProduccion" value='#{maquinaController.getIdTable("id_registroproduccion","REGISTRO_PRODUCCION")}' title="Código registro producción" style="width: 220px;" rendered="true" disabled="true"/>
+                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_RUTAidruta}" for="RUTAidruta" />
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="RUTAidruta" value="#{registroProduccionController.selected.RUTAidruta}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">
+                        <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_USUARIOidusuario}" for="USUARIOidusuario" />
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="USUARIOidusuario" value="#{registroProduccionController.selected.USUARIOidusuario}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_USUARIOidusuario}" style="width: 230px;">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_fechaInicio}" for="fechaInicio" />
+                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaInicio" locale="es" value="#{registroProduccionController.selected.fechaInicio}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_fechaInicio}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_fechaTerminacion}" for="fechaTerminacion" />
+                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaTerminacion" locale="es" value="#{registroProduccionController.selected.fechaTerminacion}" navigator="true" pattern="MM/dd/yyyy" />
+                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_totalProduccion}" for="totalProduccion" />
+                    <p:inputText id="totalProduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.CreateRegistroProduccionTitle_totalProduccion}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_totalProduccion}" style="width: 220px;"/>
+                </h:panelGrid>
+                <h:panelGrid columns="3" styleClass="link">
+                    <p:commandButton action="#{registroProduccionController.create}" value="#{bundle.CreateRegistroProduccionSaveLink}"  ajax="false" icon="ui-icon-disk"/> 
+                    <p:commandButton action="#{registroProduccionController.prepareList}" value="#{bundle.CreateRegistroProduccionShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                    <p:commandButton icon="ui-icon-arrowrefresh-1-e" value="Limpiar" onclick="limpiarForm()" update="@form"/>
+                </h:panelGrid>   
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

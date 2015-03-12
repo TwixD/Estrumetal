@@ -59,6 +59,10 @@ public class OrdenProduccion implements Serializable {
     @JoinColumn(name = "PLANO_id_plano", referencedColumnName = "id_plano")
     @ManyToOne(optional = false)
     private Plano pLANOidplano;
+    @Basic(optional = true)
+    @Column(name = "fechasys")
+    @Temporal(TemporalType.DATE)
+    private Date fechaRegistro;
 
     public OrdenProduccion() {
     }
@@ -113,6 +117,14 @@ public class OrdenProduccion implements Serializable {
 
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public Date getFechaRegistro() {
+        return fechaRegistro = new Date();
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
  

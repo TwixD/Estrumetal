@@ -33,7 +33,7 @@
                 <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{materiaPrimaController.create}" value="#{bundle.CreateMateriaPrimaSaveLink}"  ajax="false" icon="ui-icon-disk"/> 
                     <p:commandButton action="#{materiaPrimaController.prepareList}" value="#{bundle.CreateMateriaPrimaShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
-                    <p:commandButton icon="ui-icon-arrowrefresh-1-e" value="Limpiar" onclick="limpiarForm()"/>
+                    <p:commandButton icon="ui-icon-arrowrefresh-1-e" value="Limpiar" onclick="limpiarForm()" update="@form"/>
                 </h:panelGrid>   
             </h:form>
         </p:panel>

@@ -7,6 +7,8 @@ package com.estrumetal.jpa;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -170,6 +172,8 @@ public class Plano implements Serializable {
     }
 
     public Date getFecha() {
+        Date date = new Date();
+        fecha = date;
         return fecha;
     }
 

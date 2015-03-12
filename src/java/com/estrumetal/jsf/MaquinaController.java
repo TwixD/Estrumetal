@@ -49,6 +49,7 @@ public class MaquinaController implements Serializable {
         return ejbFacade;
     }
 
+
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(999999) {

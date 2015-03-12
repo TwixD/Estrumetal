@@ -196,6 +196,7 @@ public class RutaController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
+
     @FacesConverter(forClass = Ruta.class)
     public static class RutaControllerConverter implements Converter {
 
