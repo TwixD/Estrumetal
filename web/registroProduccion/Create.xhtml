@@ -16,51 +16,88 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form id="form">
-                <p:wizard>
+                <p:wizard nextLabel="Siguiente" backLabel="Atras">
                     <p:tab id="ruta" title="Ruta">
-                    <h:panelGrid columns="2">    
-                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_RUTAidruta}" for="RUTAidruta" />
-                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="RUTAidruta" value="#{registroProduccionController.selected.RUTAidruta}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">
-                        <p:ajax event="change" update="eventoAjax" />
-                        <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
-                    </h:panelGrid> 
+                        <h:panelGrid columns="2">    
+                            <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_RUTAidruta}" for="RUTAidruta" />
+                            <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="RUTAidruta" value="#{registroProduccionController.selected.RUTAidruta}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">
+                                <p:ajax event="change" update="eventoAjax" />
+                                <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid> 
                         <p:panel id="eventoAjax">
-                        <p:fieldset id="maquina" legend="Descripción Máquina">
-                            <h:panelGrid columns="2" cellpadding="5">
-                            <p:graphicImage name="img/machine.jpg" height="100"/>
-                            <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputLabel value="Código Máquina:" />
-                            <h:outputText value="#{registroProduccionController.selected.RUTAidruta.MAQUINAidmaquina.idMaquina}" style="color: blue"/>
-                            <h:outputLabel value="Nombre:"/>
-                            <h:outputText value="#{registroProduccionController.selected.RUTAidruta.MAQUINAidmaquina.nombre}" style="color: blue"/>
-                            <h:outputLabel value="Ubicación:" />
-                            <h:outputText value="#{registroProduccionController.selected.RUTAidruta.MAQUINAidmaquina.ubicacion}" style="color: blue"/>
-                            <h:outputLabel value="Tipo de máquina:" />
-                            <h:outputText value="#{registroProduccionController.selected.RUTAidruta.MAQUINAidmaquina.tipo}" style="color: blue"/>
-                            </h:panelGrid>
-                            </h:panelGrid>
-                        </p:fieldset>
-                        
-                        <p:fieldset id="rutaRuta" legend="Tiempos de la ruta"> 
-                            <h:panelGrid columns="2" cellpadding="5">
-                            <p:graphicImage name="img/calendario.png" height="100" id="rutaTime"/>
-                            <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputLabel value="Fecha producción:" />
-                            <h:outputText value='#{registroProduccionController.selected.RUTAidruta.fechaProduccion}' style="color: blue"/>
-                            <h:outputLabel value="Fecha final producción:"/>
-                            <h:outputText value="#{registroProduccionController.selected.RUTAidruta.fechaTerminacion}" style="color: blue"/>
-                            </h:panelGrid>
-                            </h:panelGrid>
-                             <p:overlayPanel for="rutaTime" >
-                                <h:outputText value="Tiempos de producción"/><br/>
-                                <h:outputText value="Los tiempos de la Ruta es el tiempo disponible en el que se realizara la producción"/>
-                            </p:overlayPanel>  
-                        </p:fieldset>
+                            <p:fieldset id="maquina" legend="Descripción Máquina">
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:graphicImage name="img/machine.png" height="100" id="maquinaIcon"/>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputLabel value="Código Máquina:" />
+                                        <h:outputText value="#{registroProduccionController.selected.RUTAidruta.MAQUINAidmaquina.idMaquina}" style="color: blue"/>
+                                        <h:outputLabel value="Nombre:"/>
+                                        <h:outputText value="#{registroProduccionController.selected.RUTAidruta.MAQUINAidmaquina.nombre}" style="color: blue"/>
+                                        <h:outputLabel value="Ubicación:" />
+                                        <h:outputText value="#{registroProduccionController.selected.RUTAidruta.MAQUINAidmaquina.ubicacion}" style="color: blue"/>
+                                        <h:outputLabel value="Tipo de máquina:" />
+                                        <h:outputText value="#{registroProduccionController.selected.RUTAidruta.MAQUINAidmaquina.tipo}" style="color: blue"/>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                                <p:overlayPanel for="maquinaIcon" >
+                                    <h:panelGrid columns="6" cellpadding="5">
+                                        <p:graphicImage name="img/machine.jpg" height="30"/>
+                                        <h:outputText value="Máquina" style="color: blue"/>
+                                        <h:outputText value="Es la máquina que fue seleccionada para esta ruta ya previamente configurada."/>
+                                    </h:panelGrid>
+                                </p:overlayPanel>  
+                            </p:fieldset>
+
+                            <p:fieldset id="rutaRuta" legend="Tiempos de la ruta"> 
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:graphicImage name="img/calendario.png" height="100" id="rutaTime"/>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputLabel value="Fecha producción:" />
+                                        <h:outputText value='#{registroProduccionController.selected.RUTAidruta.fechaProduccion}' style="color: blue"/>
+                                        <h:outputLabel value="Fecha final producción:"/>
+                                        <h:outputText value="#{registroProduccionController.selected.RUTAidruta.fechaTerminacion}" style="color: blue"/>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                                <p:overlayPanel for="rutaTime" >
+                                    <h:panelGrid columns="6" cellpadding="5">
+                                        <p:graphicImage name="img/clock.png" height="30"/>
+                                        <h:outputText value="Tiempos de producción" style="color: blue"/>
+                                        <h:outputText value="Es el tiempo en el que se podra hacer un registro de producción"/>
+                                    </h:panelGrid>
+                                </p:overlayPanel>  
+                            </p:fieldset>
                         </p:panel>
                     </p:tab>
-                    <p:tab id="asd" title="asd">
-                        
+
+                    <p:tab id="operario" title="Operario">
+                        <h:panelGrid columns="2">    
+                            <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_USUARIOidusuario}" for="USUARIOidusuario" />
+                            <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="USUARIOidusuario" value="#{registroProduccionController.selected.USUARIOidusuario}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_USUARIOidusuario}" style="width: 230px;">
+                                <p:ajax event="change" update="eventoAjaxOperario" />
+                                <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        <p:panel id="eventoAjaxOperario">
+                            <p:fieldset id="fsOperario" legend="Descripción operario">
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:graphicImage name="img/operario.png" height="100" id="operarioIcon"/>
+                                    <h:panelGrid columns="2">
+                                        <p:outputLabel value="Nombre:" />
+                                        <h:outputText value="#{registroProduccionController.selected.USUARIOidusuario.nombre}" style="color: blue"/>
+                                        <p:outputLabel value="Documento:" />
+                                        <h:outputText value="#{registroProduccionController.selected.USUARIOidusuario.documento}" style="color: blue"/>
+                                        <p:outputLabel value="Teléfono:" />
+                                        <h:outputText value="#{registroProduccionController.selected.USUARIOidusuario.telefono}" style="color: blue"/>
+                                    </h:panelGrid>                  
+                                </h:panelGrid>
+                            </p:fieldset>
+
+                            <p:fieldset id="fsCalendarioOpe" legend="Operario cronograma">
+                                <p:schedule value="#{scheduleView.getLazyEventModel2(registroProduccionController.selected.USUARIOidusuario.idUsuario)}" locale="es"/>
+                            </p:fieldset>
+
+                        </p:panel>
                     </p:tab>
                 </p:wizard>
             </h:form>

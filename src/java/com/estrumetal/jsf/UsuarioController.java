@@ -6,6 +6,7 @@ import com.estrumetal.jsf.util.PaginationHelper;
 import com.estrumetal.jpacontroller.UsuarioFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -202,7 +203,13 @@ public class UsuarioController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        List<Usuario> findAll = ejbFacade.findAll();
+        for (int i = 0; i < findAll.size(); i++) {
+            if(!findAll.get(i).getROLidrol().getNombre().equalsIgnoreCase("Operario")){
+                findAll.remove(i);
+            }
+        }
+        return JsfUtil.getSelectItems(findAll, true);
     }
 
     @FacesConverter(forClass = Usuario.class)

@@ -32,26 +32,20 @@ public class ScheduleView implements Serializable {
     OrdenProduccionFacade facade = new OrdenProduccionFacade();
 
     private ScheduleModel eventModel;
+    public int x=0;
 
-    private ScheduleModel lazyEventModel;
+    private ScheduleModel lazyEventModel, lazyEventModel2;
 
     private ScheduleEvent event = new DefaultScheduleEvent();
 
     @PostConstruct
     public void init() {
         eventModel = new DefaultScheduleModel();
-        eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
-        eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
 
         lazyEventModel = new LazyScheduleModel() {
 
             @Override
             public void loadEvents(Date start, Date end) {
-                Date random = getRandomDate(start);
-                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-                Date fecha = null;
                 List<Date> list = facade.listDatesOrdenProduccion();
                 List list2 = facade.listDatesOrdenProduccionID();
                 for (int i = 0; i < list.size(); i++) {
@@ -59,6 +53,19 @@ public class ScheduleView implements Serializable {
                 }
             }
         };
+
+        lazyEventModel2 = new LazyScheduleModel() {
+
+            @Override
+            public void loadEvents(Date start, Date end) {
+                List<Date> list1 = facade.datesOPUsuarioInicio(x);
+                List<Date> list2 = facade.datesOPUsuarioTerminacion(x);
+                for (int i = 0; i < list1.size(); i++) {
+                    addEvent(new DefaultScheduleEvent("En producción", list1.get(i), list2.get(i)));
+                }
+            }
+        };
+
     }
 
     public Date getRandomDate(Date base) {
@@ -82,6 +89,12 @@ public class ScheduleView implements Serializable {
 
     public ScheduleModel getLazyEventModel() {
         return lazyEventModel;
+    }
+
+    public ScheduleModel getLazyEventModel2(int id) {
+        x = id;
+        init();
+        return lazyEventModel2;
     }
 
     private Calendar today() {

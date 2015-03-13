@@ -50,6 +50,34 @@ public class OrdenProduccionFacade extends AbstractFacade<OrdenProduccion> {
         }
     }
 
+    public List<Date> datesOPUsuarioInicio(int idUsuario) {
+        try {
+            String PERSISTENCE_UNIT_NAME = "projectEstrumetalPU";
+            EntityManagerFactory factory;
+            factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+            EntityManager emx = factory.createEntityManager();
+            String sql = "SELECT fecha_inicio FROM REGISTRO_PRODUCCION WHERE USUARIO_id_usuario = "+idUsuario;
+            Query q = emx.createNativeQuery(sql);
+            return q.getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+        public List<Date> datesOPUsuarioTerminacion(int idUsuario) {
+        try {
+            String PERSISTENCE_UNIT_NAME = "projectEstrumetalPU";
+            EntityManagerFactory factory;
+            factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+            EntityManager emx = factory.createEntityManager();
+            String sql = "SELECT fecha_terminacion FROM REGISTRO_PRODUCCION WHERE USUARIO_id_usuario = "+idUsuario;
+            Query q = emx.createNativeQuery(sql);
+            return q.getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public List listDatesOrdenProduccionID() {
         try {
             String PERSISTENCE_UNIT_NAME = "projectEstrumetalPU";

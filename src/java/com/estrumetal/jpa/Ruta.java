@@ -150,7 +150,7 @@ public class Ruta implements Serializable {
 
     @Override
     public String toString() {
-        return idRuta + ", Maquina :["+ mAQUINAidmaquina.getIdMaquina() + " - "+ mAQUINAidmaquina.getNombre() + "]";
+        return idRuta+" - "+mAQUINAidmaquina.getNombre();
     }
 
 }
