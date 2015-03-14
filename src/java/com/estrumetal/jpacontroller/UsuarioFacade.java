@@ -25,6 +25,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     @PersistenceContext(unitName = "projectEstrumetalPU")
     private EntityManager em;
     private String username; 
+    private int id;
     private int rol;
 
     public int getRol() {
@@ -49,6 +50,14 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
    
 
@@ -84,6 +93,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
             usuario  = (Usuario) q.getSingleResult();
             rol = usuario.getROLidrol();
             this.setUsername(usuario.getNombre());
+            this.setId(usuario.getIdUsuario());
             this.setRol(rol.getIdRol());
             return "success";
         } catch (NoResultException e) {

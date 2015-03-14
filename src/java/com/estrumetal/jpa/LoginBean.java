@@ -132,6 +132,10 @@ public class LoginBean implements Serializable {
     public String getUserName() {
         return usuarioFacade.getUsername();
     }
+    
+    public int getUserId(){
+        return usuarioFacade.getId();
+    }
 
     public void login(ActionEvent actionEvent) {
         this.usuarioFacade = new UsuarioFacade();

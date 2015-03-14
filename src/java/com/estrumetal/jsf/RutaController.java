@@ -84,6 +84,10 @@ public class RutaController implements Serializable {
     }
 
     public String create() {
+        if (current.getFechaProduccion().after(current.getFechaTerminacion())) {
+            JsfUtil.addErrorMessage("La fecha de producción debe ser menor a la fecha de terminacion");
+            return null;
+        }
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RutaCreated"));
@@ -195,7 +199,6 @@ public class RutaController implements Serializable {
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
-
 
     @FacesConverter(forClass = Ruta.class)
     public static class RutaControllerConverter implements Converter {

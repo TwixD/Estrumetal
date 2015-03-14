@@ -1,18 +1,22 @@
 package com.estrumetal.jsf;
 
 import com.estrumetal.jpa.RegistroProduccion;
+import com.estrumetal.jpacontroller.OrdenProduccionFacade;
 import com.estrumetal.jsf.util.JsfUtil;
 import com.estrumetal.jsf.util.PaginationHelper;
 import com.estrumetal.jpacontroller.RegistroProduccionFacade;
 
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -29,6 +33,7 @@ import javax.faces.model.SelectItem;
 public class RegistroProduccionController implements Serializable {
 
     private RegistroProduccion current;
+    private OrdenProduccionFacade facade;
     private DataModel items = null;
     @EJB
     private com.estrumetal.jpacontroller.RegistroProduccionFacade ejbFacade;
@@ -43,6 +48,7 @@ public class RegistroProduccionController implements Serializable {
     List<String> listMaquinaRango4 = new ArrayList<String>();
 
     public RegistroProduccionController() {
+        facade = new OrdenProduccionFacade();
     }
 
     public RegistroProduccion getSelected() {
@@ -97,6 +103,43 @@ public class RegistroProduccionController implements Serializable {
     }
 
     public String create() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String format = dateFormat.format(current.getFechaInicio());
+        String format2 = dateFormat.format(current.getFechaTerminacion());
+        Date fechaini = null, fechafini = null;
+        try {
+            fechaini = dateFormat.parse(format);
+            fechafini = dateFormat.parse(format2);
+        } catch (ParseException ex) {
+            Logger.getLogger(RegistroProduccionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        List<Date> datesOPUsuarioInicio = facade.datesOPUsuarioInicio(current.getUSUARIOidusuario().getIdUsuario());
+        List<Date> datesOPUsuarioTerminacion = facade.datesOPUsuarioTerminacion(current.getUSUARIOidusuario().getIdUsuario());
+        for (int i = 0; i < datesOPUsuarioInicio.size(); i++) {
+            if (fechaini.after(datesOPUsuarioInicio.get(i)) && fechafini.before(datesOPUsuarioTerminacion.get(i)) || fechaini.equals(datesOPUsuarioInicio.get(i)) || fechafini.equals(datesOPUsuarioTerminacion.get(i))) {
+                JsfUtil.addErrorMessage("El operario se encuentra en una producción entre estas fechas.");
+                JsfUtil.addErrorMessage("Seleccione 'Atras' para ver el cronograma del operario.");
+                return null;
+            }
+        }
+
+        String formatR = dateFormat.format(current.getRUTAidruta().getFechaProduccion());
+        String formatR2 = dateFormat.format(current.getRUTAidruta().getFechaTerminacion());
+        Date fechainiR = null, fechafiniR = null;
+        try {
+            fechainiR = dateFormat.parse(formatR);
+            fechafiniR = dateFormat.parse(formatR2);
+        } catch (ParseException ex) {
+            Logger.getLogger(RegistroProduccionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(current.getFechaInicio().before(current.getRUTAidruta().getFechaProduccion()) || current.getFechaTerminacion().after(current.getRUTAidruta().getFechaTerminacion())){
+                JsfUtil.addErrorMessage("La fecha de producción no se encuentra dentro del rango de la Ruta.");
+                JsfUtil.addErrorMessage("Seleccione 'Ruta' para ver el rango de producción valido.");
+                return null;
+        }
+        
+
         if (current.getTotalProduccion() <= 0) {
             JsfUtil.addErrorMessage("Total producción debe ser mayor a '0'.");
             return null;

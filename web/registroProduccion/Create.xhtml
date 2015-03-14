@@ -16,7 +16,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form id="form">
-                <p:wizard nextLabel="Siguiente" backLabel="Atras">
+                <p:wizard nextLabel="Siguiente" backLabel="Atras" >
                     <p:tab id="ruta" title="Ruta">
                         <h:panelGrid columns="2">    
                             <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_RUTAidruta}" for="RUTAidruta" />
@@ -83,6 +83,8 @@
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <p:graphicImage name="img/operario.png" height="100" id="operarioIcon"/>
                                     <h:panelGrid columns="2">
+                                        <p:outputLabel value="Código usuario:" />
+                                        <h:outputText value="#{registroProduccionController.selected.USUARIOidusuario.idUsuario}" style="color: blue"/>
                                         <p:outputLabel value="Nombre:" />
                                         <h:outputText value="#{registroProduccionController.selected.USUARIOidusuario.nombre}" style="color: blue"/>
                                         <p:outputLabel value="Documento:" />
@@ -98,6 +100,26 @@
                             </p:fieldset>
 
                         </p:panel>
+                    </p:tab>
+                    
+                    
+                    <p:tab id="fin" title="Fin">
+                 <h:panelGrid columns="2">
+                    <p:outputLabel value="Código registro producción:" for="idRegistroProduccion" rendered="true"/>
+                    <p:inputText id="idRegistroProduccion" value='#{maquinaController.getIdTable("id_registroproduccion","REGISTRO_PRODUCCION")}' title="Código registro producción" style="width: 220px;" rendered="true" disabled="true"/>
+
+
+                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_fechaInicio}" for="fechaInicio" />
+                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaInicio" locale="es" value="#{registroProduccionController.selected.fechaInicio}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_fechaInicio}" style="width: 220px;"/>
+                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_fechaTerminacion}" for="fechaTerminacion" />
+                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaTerminacion" locale="es" value="#{registroProduccionController.selected.fechaTerminacion}" navigator="true" pattern="MM/dd/yyyy" />
+                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_totalProduccion}" for="totalProduccion" />
+                    <p:inputText id="totalProduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.CreateRegistroProduccionTitle_totalProduccion}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_totalProduccion}" style="width: 220px;"/>
+                </h:panelGrid>
+                <h:panelGrid columns="3" styleClass="link">
+                    <p:commandButton action="#{registroProduccionController.create}" value="#{bundle.CreateRegistroProduccionSaveLink}"  ajax="false" icon="ui-icon-disk"/> 
+                    <p:commandButton action="#{registroProduccionController.prepareList}" value="#{bundle.CreateRegistroProduccionShowAllLink}" ajax="false" immediate="true" icon="ui-icon-clipboard"/>
+                </h:panelGrid> 
                     </p:tab>
                 </p:wizard>
             </h:form>
