@@ -14,24 +14,38 @@
         <p:panel id="basic" header="Crear plano con multiples piezas">
          <h:form>
                 <h:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.CreatePlanoLabel_idPlano}" for="idPlano" rendered="true"/>
+                    <p:inputText id="idPlano" value='#{maquinaController.getIdTable("id_plano","PLANO")}' title="#{bundle.CreatePlanoTitle_idPlano}"  style="width: 220px;" rendered="true" disabled="true"/>
+                    <p:outputLabel value="#{bundle.CreatePlanoLabel_fecha}" for="fecha" />
+                    <p:calendar disabled ="true" pagedate="#{ordenProduccionController.currentDate}" styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fecha" locale="es" value="#{planoController.selected.fecha}" navigator="true" pattern="MM/dd/yyyy" />
+                    <p:outputLabel value="#{bundle.CreatePlanoLabel_OBRAidobra}" for="OBRAidobra" />
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="OBRAidobra" value="#{planoController.selected.OBRAidobra}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_OBRAidobra}" style="width: 230px;">
+                        <f:selectItems value="#{obraController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Descripción:" for="descripcion" />
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="descripcion" value="#{planoController.selected.descripcion}" required="true" requiredMessage="Ingrese la descripción del plano" style="width: 230px;">
+                        <f:selectItem itemValue="" itemLabel="Elija un tipo de maquina" />
+                        <f:selectItem itemValue="Riostas" itemLabel="Riostas" />
+                        <f:selectItem itemValue="Tensores" itemLabel="Tensores" />
+                        <f:selectItem itemValue="Tirantes" itemLabel="Tirantes" />
+                        <f:selectItem itemValue="Cerchas" itemLabel="Cerchas" />	
+                        <f:selectItem itemValue="Columnas" itemLabel="Columnas" />	
+                        <f:selectItem itemValue="Viguetas" itemLabel="Viguetas" />	
+                        <f:selectItem itemValue="Vigas" itemLabel="Vigas" />	
+                        <f:selectItem itemValue="Entramados" itemLabel="Entramados" />		
+                    </p:selectOneMenu> 
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_nombre}" for="nombre" />
                     <p:inputText id="nombre" value="#{planoController.selected.nombre}" title="#{bundle.CreatePlanoTitle_nombre}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_nombre}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_pesoUnitario}" for="pesoUnitario" />
-                    <p:inputText id="pesoUnitario" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.selected.pesoUnitario}" title="#{bundle.CreatePlanoTitle_pesoUnitario}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_pesoUnitario}" style="width: 220px;"/>
+                    <p:inputText id="pesoUnitario" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.selected.pesoUnitario}" title="#{bundle.CreatePlanoTitle_pesoUnitario}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_pesoUnitario}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_areaUnitaria}" for="areaUnitaria" />
-                    <p:inputText id="areaUnitaria" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.selected.areaUnitaria}" title="#{bundle.CreatePlanoTitle_areaUnitaria}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_areaUnitaria}" style="width: 220px;"/>
+                    <p:inputText id="areaUnitaria" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.selected.areaUnitaria}" title="#{bundle.CreatePlanoTitle_areaUnitaria}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_areaUnitaria}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_cantidad}" for="cantidad" />
                     <p:inputText id="cantidad" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.selected.cantidad}" title="#{bundle.CreatePlanoTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_cantidad}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_revision}" for="revision" rendered="false"/>
                     <p:inputText id="revision" value="#{planoController.selected.revision}" title="#{bundle.CreatePlanoTitle_revision}" style="width: 220px;" rendered="false"/>
                     <p:outputLabel value="#{bundle.CreatePlanoLabel_observacion}" for="observacion" />
                     <p:inputText id="observacion" value="#{planoController.selected.observacion}" title="#{bundle.CreatePlanoTitle_observacion}" style="width: 220px;"/>
-                    <p:outputLabel value="#{bundle.CreatePlanoLabel_fecha}" for="fecha" />
-                    <p:calendar id="fecha" locale="es" value="#{planoController.selected.fecha}" navigator="true" pattern="MM/dd/yyyy" />
-                    <p:outputLabel value="#{bundle.CreatePlanoLabel_OBRAidobra}" for="OBRAidobra" />
-                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="OBRAidobra" value="#{planoController.selected.OBRAidobra}" required="true" requiredMessage="#{bundle.CreatePlanoRequiredMessage_OBRAidobra}" style="width: 230px;">
-                        <f:selectItems value="#{obraController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
                 </h:panelGrid>
              <p:panel id="basic" header="Piezas del plano">
              <h:panelGrid columns="3" styleClass="link">
@@ -42,17 +56,17 @@
                 <p:tab title="Pieza 1">
                 <h:panelGrid columns="14">  
                  <p:outputLabel value="#{bundle.CreatePiezaLabel_idPieza}" for="idPieza" rendered="false"/>
-                    <p:inputText id="idPieza" value="#{planoController.pieza.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:inputText id="idPieza" value="#{planoController.pieza.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="false" style="width: 220px;" rendered="false"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidad}" for="cantidadPieza" />
-                    <p:inputText id="cantidadPieza" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_cantidad}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPieza" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}"  style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_longitud}" for="longitud" />
-                    <p:inputText id="longitud" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_longitud}" style="width: 20px;"/>
+                    <p:inputText id="longitud" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_ancho}" for="ancho" />
-                    <p:inputText id="ancho" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
+                    <p:inputText id="ancho" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
-                    <p:inputText id="cantidadPerforaciones" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPerforaciones" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_areaCorte}" for="areaCorte" />
-                    <p:inputText id="areaCorte" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
+                    <p:inputText id="areaCorte" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_bisel}" for="bisel" />
                     <p:selectOneMenu id="bisel" value="#{planoController.pieza.bisel}"  style="width: 70px;">
                         <f:selectItem itemValue="" itemLabel="Usa bisel" />
@@ -60,7 +74,7 @@
                         <f:selectItem itemValue="No" itemLabel="No" />			
                     </p:selectOneMenu>  
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_MATERIAPRIMAidmateriaprima}" for="MATERIAPRIMAidmateriaprima" />
-                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima" value="#{planoController.pieza.MATERIAPRIMAidmateriaprima}"  required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_MATERIAPRIMAidmateriaprima}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="MATERIAPRIMAidmateriaprima" value="#{planoController.pieza.MATERIAPRIMAidmateriaprima}" style="width: 230px;">
                         <f:selectItems value="#{materiaPrimaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                
@@ -70,17 +84,17 @@
              <p:tab title="Pieza 2">
                 <h:panelGrid columns="14">
                  <p:outputLabel value="#{bundle.CreatePiezaLabel_idPieza}" for="idPieza" rendered="false"/>
-                    <p:inputText id="idPieza1" value="#{planoController.pieza1.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:inputText id="idPieza1" value="#{planoController.pieza1.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="false" style="width: 220px;" rendered="false"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidad}" for="cantidadPieza" />
-                    <p:inputText id="cantidadPieza1" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza1.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_cantidad}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPieza1" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza1.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}"  style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_longitud}" for="longitud" />
-                    <p:inputText id="longitud1" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza1.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_longitud}" style="width: 20px;"/>
+                    <p:inputText id="longitud1" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza1.longitud}" title="#{bundle.CreatePiezaTitle_longitud}"  style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_ancho}" for="ancho" />
-                    <p:inputText id="ancho1" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza1.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
+                    <p:inputText id="ancho1" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza1.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
-                    <p:inputText id="cantidadPerforaciones1" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza1.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPerforaciones1" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza1.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_areaCorte}" for="areaCorte" />
-                    <p:inputText id="areaCorte1" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza1.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
+                    <p:inputText id="areaCorte1" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza1.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_bisel}" for="bisel" />
                     <p:selectOneMenu id="bisel1" value="#{planoController.pieza1.bisel}"  style="width: 70px;">
                         <f:selectItem itemValue="" itemLabel="Usa bisel" />
@@ -98,17 +112,17 @@
               <p:tab title="Pieza 3">
                 <h:panelGrid columns="14">
                  <p:outputLabel value="#{bundle.CreatePiezaLabel_idPieza}" for="idPieza" rendered="false"/>
-                    <p:inputText id="idPieza2" value="#{planoController.pieza2.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:inputText id="idPieza2" value="#{planoController.pieza2.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="false" style="width: 220px;" rendered="false"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidad}" for="cantidadPieza" />
-                    <p:inputText id="cantidadPieza2" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza2.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_cantidad}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPieza2" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza2.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_longitud}" for="longitud" />
-                    <p:inputText id="longitud2" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza2.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_longitud}" style="width: 20px;"/>
+                    <p:inputText id="longitud2" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza2.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_ancho}" for="ancho" />
-                    <p:inputText id="ancho2" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza2.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
+                    <p:inputText id="ancho2" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza2.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
                     <p:inputText id="cantidadPerforaciones2" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza2.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_areaCorte}" for="areaCorte" />
-                    <p:inputText id="areaCorte2" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza2.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
+                    <p:inputText id="areaCorte2" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza2.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_bisel}" for="bisel" />
                     <p:selectOneMenu id="bisel2" value="#{planoController.pieza2.bisel}"  style="width: 70px;">
                         <f:selectItem itemValue="" itemLabel="Usa bisel" />
@@ -126,17 +140,17 @@
              <p:tab title="Pieza 4">
                 <h:panelGrid columns="14">
                  <p:outputLabel value="#{bundle.CreatePiezaLabel_idPieza}" for="idPieza" rendered="false"/>
-                    <p:inputText id="idPieza3" value="#{planoController.pieza3.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:inputText id="idPieza3" value="#{planoController.pieza3.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="false" style="width: 220px;" rendered="false"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidad}" for="cantidadPieza" />
-                    <p:inputText id="cantidadPieza3" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza3.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_cantidad}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPieza3" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza3.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_longitud}" for="longitud" />
-                    <p:inputText id="longitud3" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza3.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_longitud}" style="width: 20px;"/>
+                    <p:inputText id="longitud3" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza3.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_ancho}" for="ancho" />
-                    <p:inputText id="ancho3" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza3.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
+                    <p:inputText id="ancho3" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza3.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
-                    <p:inputText id="cantidadPerforaciones3" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza3.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPerforaciones3" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza3.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_areaCorte}" for="areaCorte" />
-                    <p:inputText id="areaCorte3" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza3.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
+                    <p:inputText id="areaCorte3" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza3.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_bisel}" for="bisel" />
                     <p:selectOneMenu id="bisel3" value="#{planoController.pieza3.bisel}"  style="width: 70px;">
                         <f:selectItem itemValue="" itemLabel="Usa bisel" />
@@ -153,17 +167,17 @@
              <p:tab title="Pieza 5">
                 <h:panelGrid columns="14">
                  <p:outputLabel value="#{bundle.CreatePiezaLabel_idPieza}" for="idPieza" rendered="false"/>
-                    <p:inputText id="idPieza4" value="#{planoController.pieza4.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:inputText id="idPieza4" value="#{planoController.pieza4.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="false" style="width: 220px;" rendered="false"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidad}" for="cantidadPieza" />
-                    <p:inputText id="cantidadPieza4" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza4.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_cantidad}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPieza4" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza4.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_longitud}" for="longitud" />
-                    <p:inputText id="longitud4" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza4.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_longitud}" style="width: 20px;"/>
+                    <p:inputText id="longitud4" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza4.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_ancho}" for="ancho" />
-                    <p:inputText id="ancho4" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza4.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
+                    <p:inputText id="ancho4" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza4.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
-                    <p:inputText id="cantidadPerforaciones4" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza4.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPerforaciones4" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza4.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_areaCorte}" for="areaCorte" />
-                    <p:inputText id="areaCorte4" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza4.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
+                    <p:inputText id="areaCorte4" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza4.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_bisel}" for="bisel" />
                     <p:selectOneMenu id="bisel4" value="#{planoController.pieza4.bisel}"  style="width: 70px;">
                         <f:selectItem itemValue="" itemLabel="Usa bisel" />
@@ -180,17 +194,17 @@
               <p:tab title="Pieza 6">
                 <h:panelGrid columns="14">
                  <p:outputLabel value="#{bundle.CreatePiezaLabel_idPieza}" for="idPieza" rendered="false"/>
-                    <p:inputText id="idPieza5" value="#{planoController.pieza5.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:inputText id="idPieza5" value="#{planoController.pieza5.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="false" style="width: 220px;" rendered="false"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidad}" for="cantidadPieza" />
-                    <p:inputText id="cantidadPieza5" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza5.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_cantidad}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPieza5" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza5.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_longitud}" for="longitud" />
-                    <p:inputText id="longitud5" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza5.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_longitud}" style="width: 20px;"/>
+                    <p:inputText id="longitud5" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza5.longitud}" title="#{bundle.CreatePiezaTitle_longitud}"  style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_ancho}" for="ancho" />
-                    <p:inputText id="ancho5" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza5.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
+                    <p:inputText id="ancho5" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza5.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
-                    <p:inputText id="cantidadPerforaciones5" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza5.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPerforaciones5" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza5.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_areaCorte}" for="areaCorte" />
-                    <p:inputText id="areaCorte5" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza5.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
+                    <p:inputText id="areaCorte5" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza5.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_bisel}" for="bisel" />
                     <p:selectOneMenu id="bisel5" value="#{planoController.pieza5.bisel}"  style="width: 70px;">
                         <f:selectItem itemValue="" itemLabel="Usa bisel" />
@@ -208,17 +222,17 @@
               <p:tab title="Pieza 7">
                 <h:panelGrid columns="14">
                  <p:outputLabel value="#{bundle.CreatePiezaLabel_idPieza}" for="idPieza" rendered="false"/>
-                    <p:inputText id="idPieza6" value="#{planoController.pieza6.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:inputText id="idPieza6" value="#{planoController.pieza6.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="false" style="width: 220px;" rendered="false"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidad}" for="cantidadPieza" />
-                    <p:inputText id="cantidadPieza6" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza6.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_cantidad}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPieza6" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza6.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_longitud}" for="longitud" />
-                    <p:inputText id="longitud6" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza6.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_longitud}" style="width: 20px;"/>
+                    <p:inputText id="longitud6" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza6.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_ancho}" for="ancho" />
-                    <p:inputText id="ancho6" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza6.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
+                    <p:inputText id="ancho6" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza6.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
-                    <p:inputText id="cantidadPerforaciones6" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza6.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPerforaciones6" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza6.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_areaCorte}" for="areaCorte" />
-                    <p:inputText id="areaCorte6" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza6.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
+                    <p:inputText id="areaCorte6" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza6.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_bisel}" for="bisel" />
                     <p:selectOneMenu id="bisel6" value="#{planoController.pieza6.bisel}"  style="width: 70px;">
                         <f:selectItem itemValue="" itemLabel="Usa bisel" />
@@ -236,17 +250,17 @@
               <p:tab title="Pieza 8">
                 <h:panelGrid columns="14">
                  <p:outputLabel value="#{bundle.CreatePiezaLabel_idPieza}" for="idPieza" rendered="false"/>
-                    <p:inputText id="idPieza7" value="#{planoController.pieza7.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:inputText id="idPieza7" value="#{planoController.pieza7.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="false" style="width: 220px;" rendered="false"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidad}" for="cantidadPieza" />
-                    <p:inputText id="cantidadPieza7" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza7.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_cantidad}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPieza7" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza7.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_longitud}" for="longitud" />
-                    <p:inputText id="longitud7" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza7.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_longitud}" style="width: 20px;"/>
+                    <p:inputText id="longitud7" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza7.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_ancho}" for="ancho" />
-                    <p:inputText id="ancho7" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza7.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
+                    <p:inputText id="ancho7" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza7.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
-                    <p:inputText id="cantidadPerforaciones7" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza7.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPerforaciones7" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza7.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_areaCorte}" for="areaCorte" />
-                    <p:inputText id="areaCorte7" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza7.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
+                    <p:inputText id="areaCorte7" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza7.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_bisel}" for="bisel" />
                     <p:selectOneMenu id="bisel7" value="#{planoController.pieza7.bisel}"  style="width: 70px;">
                         <f:selectItem itemValue="" itemLabel="Usa bisel" />
@@ -263,17 +277,17 @@
               <p:tab title="Pieza 9">
                 <h:panelGrid columns="14">
                  <p:outputLabel value="#{bundle.CreatePiezaLabel_idPieza}" for="idPieza" rendered="false"/>
-                    <p:inputText id="idPieza8" value="#{planoController.pieza8.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:inputText id="idPieza8" value="#{planoController.pieza8.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="false" style="width: 220px;" rendered="false"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidad}" for="cantidadPieza" />
-                    <p:inputText id="cantidadPieza8" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza8.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_cantidad}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPieza8" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza8.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}"  style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_longitud}" for="longitud" />
-                    <p:inputText id="longitud8" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza8.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_longitud}" style="width: 20px;"/>
+                    <p:inputText id="longitud8" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza8.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_ancho}" for="ancho" />
-                    <p:inputText id="ancho8" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza8.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
+                    <p:inputText id="ancho8" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza8.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
-                    <p:inputText id="cantidadPerforaciones8" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza8.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPerforaciones8" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza8.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_areaCorte}" for="areaCorte" />
-                    <p:inputText id="areaCorte8" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza8.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
+                    <p:inputText id="areaCorte8" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza8.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_bisel}" for="bisel" />
                     <p:selectOneMenu id="bisel8" value="#{planoController.pieza8.bisel}"  style="width: 70px;">
                         <f:selectItem itemValue="" itemLabel="Usa bisel" />
@@ -290,17 +304,17 @@
               <p:tab title="Pieza 10">
                 <h:panelGrid columns="14">
                  <p:outputLabel value="#{bundle.CreatePiezaLabel_idPieza}" for="idPieza" rendered="false"/>
-                    <p:inputText id="idPieza9" value="#{planoController.pieza9.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_idPieza}" style="width: 220px;" rendered="false"/>
+                    <p:inputText id="idPieza9" value="#{planoController.pieza9.idPieza}" title="#{bundle.CreatePiezaTitle_idPieza}" required="false" style="width: 220px;" rendered="false"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidad}" for="cantidadPieza" />
-                    <p:inputText id="cantidadPieza9" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza9.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_cantidad}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPieza9" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza9.cantidad}" title="#{bundle.CreatePiezaTitle_cantidad}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_longitud}" for="longitud" />
-                    <p:inputText id="longitud9" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza9.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" required="true" requiredMessage="#{bundle.CreatePiezaRequiredMessage_longitud}" style="width: 20px;"/>
+                    <p:inputText id="longitud9" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza9.longitud}" title="#{bundle.CreatePiezaTitle_longitud}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_ancho}" for="ancho" />
-                    <p:inputText id="ancho9" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza9.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
+                    <p:inputText id="ancho9" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza9.ancho}" title="#{bundle.CreatePiezaTitle_ancho}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_cantidadPerforaciones}" for="cantidadPerforaciones" />
-                    <p:inputText id="cantidadPerforaciones9" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza9.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
+                    <p:inputText id="cantidadPerforaciones9" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza9.cantidadPerforaciones}" title="#{bundle.CreatePiezaTitle_cantidadPerforaciones}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_areaCorte}" for="areaCorte" />
-                    <p:inputText id="areaCorte9" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{planoController.pieza9.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
+                    <p:inputText id="areaCorte9" onkeypress="if(event.which &lt;  46 || event.which &gt; 57) return false;" value="#{planoController.pieza9.areaCorte}" title="#{bundle.CreatePiezaTitle_areaCorte}" style="width: 20px;"/>
                     <p:outputLabel value="#{bundle.CreatePiezaLabel_bisel}" for="bisel" />
                     <p:selectOneMenu id="bisel9" value="#{planoController.pieza9.bisel}"  style="width: 70px;">
                         <f:selectItem itemValue="" itemLabel="Usa bisel" />
@@ -313,6 +327,7 @@
                     </p:selectOneMenu>
                 </h:panelGrid>
               </p:tab>
+           
               </p:accordionPanel>
              </p:panel>
             </h:form>

@@ -1,6 +1,7 @@
 package com.estrumetal.jpa;
 
 import com.estrumetal.jpacontroller.OrdenProduccionFacade;
+import com.estrumetal.jpacontroller.RutaFacade;
 import com.google.common.eventbus.DeadEvent;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -30,11 +31,11 @@ import org.primefaces.model.ScheduleModel;
 public class ScheduleView implements Serializable {
 
     OrdenProduccionFacade facade = new OrdenProduccionFacade();
-
+    RutaFacade facade1 = new RutaFacade();
     private ScheduleModel eventModel;
-    public int x=0;
+    public int x = 0, idMaquina = 0;
 
-    private ScheduleModel lazyEventModel, lazyEventModel2;
+    private ScheduleModel lazyEventModel, lazyEventModel2, lazyEventModel3;
 
     private ScheduleEvent event = new DefaultScheduleEvent();
 
@@ -65,7 +66,21 @@ public class ScheduleView implements Serializable {
                 }
             }
         };
+    }
 
+    public void init2() {
+        eventModel = new DefaultScheduleModel();
+        lazyEventModel3 = new LazyScheduleModel() {
+
+            @Override
+            public void loadEvents(Date start, Date end) {
+                List<Date> list1 = facade1.datesRutaMaquinaIdInicio(idMaquina);
+                List<Date> list2 = facade1.datesRutaMaquinaIdFin(idMaquina);
+                for (int i = 0; i < list1.size(); i++) {
+                    addEvent(new DefaultScheduleEvent("Máquina en estado de producción", list1.get(i), list2.get(i)));
+                }
+            }
+        };
     }
 
     public Date getRandomDate(Date base) {
@@ -95,6 +110,12 @@ public class ScheduleView implements Serializable {
         x = id;
         init();
         return lazyEventModel2;
+    }
+
+    public ScheduleModel getLazyEventModel3(int id) {
+        idMaquina = id;
+        init2();
+        return lazyEventModel3;
     }
 
     private Calendar today() {

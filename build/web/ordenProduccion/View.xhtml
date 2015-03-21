@@ -29,6 +29,10 @@
                     <h:outputText value="#{ordenProduccionController.selected.fecha}" title="#{bundle.ViewOrdenProduccionTitle_fecha}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:outputText>
+                    <p:outputLabel value="Fecha registro:"/>
+                    <h:outputText value="#{ordenProduccionController.selected.fechaRegistro}" title="Fecha registro">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
                 </h:panelGrid>
                 <h:panelGrid columns="4" styleClass="link">
                     <p:commandButton action="#{ordenProduccionController.destroyAndView}"  value="#{bundle.ViewOrdenProduccionDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="false"/>

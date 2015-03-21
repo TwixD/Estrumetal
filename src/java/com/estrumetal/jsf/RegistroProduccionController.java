@@ -1,6 +1,13 @@
 package com.estrumetal.jsf;
 
+import com.estrumetal.jpa.DetRegProduccion;
+import com.estrumetal.jpa.OrdenProduccion;
+import com.estrumetal.jpa.Pieza;
+import com.estrumetal.jpa.Plano;
 import com.estrumetal.jpa.RegistroProduccion;
+import com.estrumetal.jpa.Ruta;
+import com.estrumetal.jpacontroller.DetRegProduccionFacade;
+import com.estrumetal.jpacontroller.MaquinaFacade;
 import com.estrumetal.jpacontroller.OrdenProduccionFacade;
 import com.estrumetal.jsf.util.JsfUtil;
 import com.estrumetal.jsf.util.PaginationHelper;
@@ -34,14 +41,21 @@ public class RegistroProduccionController implements Serializable {
 
     private RegistroProduccion current;
     private OrdenProduccionFacade facade;
+    private DetRegProduccion detRegProduccion;
+    private MaquinaFacade maquinaFacacade;
     private DataModel items = null;
     @EJB
     private com.estrumetal.jpacontroller.RegistroProduccionFacade ejbFacade;
+    @EJB
+    private com.estrumetal.jpacontroller.DetRegProduccionFacade detRegProduccionFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private Date fechaInicial;
     private Date fechaFinal;
     private int idMaquina;
+    private List<Pieza> listaPieza;
+    private List<Pieza> selectedPiezas;
+
     List<String> listMaquinaRango1 = new ArrayList<String>();
     List<String> listMaquinaRango2 = new ArrayList<String>();
     List<String> listMaquinaRango3 = new ArrayList<String>();
@@ -49,6 +63,7 @@ public class RegistroProduccionController implements Serializable {
 
     public RegistroProduccionController() {
         facade = new OrdenProduccionFacade();
+        detRegProduccion = new DetRegProduccion();
     }
 
     public RegistroProduccion getSelected() {
@@ -61,6 +76,10 @@ public class RegistroProduccionController implements Serializable {
 
     private RegistroProduccionFacade getFacade() {
         return ejbFacade;
+    }
+
+    public DetRegProduccionFacade getDetRegProduccionFacade() {
+        return detRegProduccionFacade;
     }
 
     public PaginationHelper getPagination() {
@@ -103,6 +122,11 @@ public class RegistroProduccionController implements Serializable {
     }
 
     public String create() {
+        if (selectedPiezas.size() <= 0) {
+            JsfUtil.addErrorMessage("Debe seleccionar por lo menos una pieza para producción.");
+            JsfUtil.addErrorMessage("Si no encuentra Piezas, debe crearlas para el Plano.");
+            return null;
+        }
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String format = dateFormat.format(current.getFechaInicio());
         String format2 = dateFormat.format(current.getFechaTerminacion());
@@ -133,25 +157,32 @@ public class RegistroProduccionController implements Serializable {
         } catch (ParseException ex) {
             Logger.getLogger(RegistroProduccionController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(current.getFechaInicio().before(current.getRUTAidruta().getFechaProduccion()) || current.getFechaTerminacion().after(current.getRUTAidruta().getFechaTerminacion())){
-                JsfUtil.addErrorMessage("La fecha de producción no se encuentra dentro del rango de la Ruta.");
-                JsfUtil.addErrorMessage("Seleccione 'Ruta' para ver el rango de producción valido.");
-                return null;
-        }
-        
-
-        if (current.getTotalProduccion() <= 0) {
-            JsfUtil.addErrorMessage("Total producción debe ser mayor a '0'.");
+        if (current.getFechaInicio().before(current.getRUTAidruta().getFechaProduccion()) || current.getFechaTerminacion().after(current.getRUTAidruta().getFechaTerminacion())) {
+            JsfUtil.addErrorMessage("La fecha de producción no se encuentra dentro del rango de la Ruta.");
+            JsfUtil.addErrorMessage("Seleccione 'Ruta' para ver el rango de producción valido.");
             return null;
-        } else {
-            try {
-                getFacade().create(current);
-                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RegistroProduccionCreated"));
-                return prepareCreate();
-            } catch (Exception e) {
-                JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-                return null;
+        }
+        try {
+            current.setTotalProduccion(0);
+            current.setEstado("A");
+            maquinaFacacade = new MaquinaFacade();
+            String idMazi = maquinaFacacade.getMaxId("id_registroproduccion","REGISTRO_PRODUCCION");
+            int x = Integer.parseInt(idMazi);
+            x++;
+            getFacade().create(current);
+            current.setIdRegistroproduccion(x);
+            detRegProduccion.setRPidregistroproduccion(current);
+            for (int i = 0; i < selectedPiezas.size(); i++) {
+                detRegProduccion.setCantidad(selectedPiezas.get(i).getCantidad());
+                detRegProduccion.setCodPieza(selectedPiezas.get(i).getIdPieza());
+                getDetRegProduccionFacade().create(detRegProduccion);
             }
+
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RegistroProduccionCreated"));
+            return prepareCreate();
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
         }
     }
 
@@ -205,6 +236,32 @@ public class RegistroProduccionController implements Serializable {
         } catch (Exception e) {
             JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
+    }
+
+    public String getOP(Ruta idRuta, String code) {
+        try {
+            if (code.equalsIgnoreCase("idOrdenproduccion")) {
+                return facade.getOrdenProduccionById(idRuta).getIdOrdenproduccion() + "";
+            }
+            if (code.equalsIgnoreCase("fecha")) {
+                return facade.getOrdenProduccionById(idRuta).getFecha() + "";
+            }
+            if (code.equalsIgnoreCase("cantidad")) {
+                return facade.getOrdenProduccionById(idRuta).getCantidad() + "";
+            }
+            if (code.equalsIgnoreCase("idPlano")) {
+                return facade.getOrdenProduccionById(idRuta).getPLANOidplano().getIdPlano() + "";
+            }
+            return "0";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("La RUTA no tiene una Orden de producción asociada.");
+            return null;
+        }
+
+    }
+
+    public Plano getPlanoSelected(Ruta idRuta) {
+        return facade.getOrdenProduccionById(idRuta).getPLANOidplano();
     }
 
     private void updateCurrentItem() {
@@ -351,6 +408,22 @@ public class RegistroProduccionController implements Serializable {
 
     public void setIdMaquina(int idMaquina) {
         this.idMaquina = idMaquina;
+    }
+
+    public List<Pieza> getListaPieza(Plano idPlano) {
+        return facade.getPiezasById(idPlano);
+    }
+
+    public void setListaPieza(List<Pieza> listaPieza) {
+        this.listaPieza = listaPieza;
+    }
+
+    public List<Pieza> getSelectedPiezas() {
+        return selectedPiezas;
+    }
+
+    public void setSelectedPiezas(List<Pieza> selectedPiezas) {
+        this.selectedPiezas = selectedPiezas;
     }
 
     public void doPopulateMaquinaRango() {

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.estrumetal.jpa;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,11 +18,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,6 +41,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "RegistroProduccion.findByFechaTerminacion", query = "SELECT r FROM RegistroProduccion r WHERE r.fechaTerminacion = :fechaTerminacion"),
     @NamedQuery(name = "RegistroProduccion.findByTotalProduccion", query = "SELECT r FROM RegistroProduccion r WHERE r.totalProduccion = :totalProduccion")})
 public class RegistroProduccion implements Serializable {
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,16 +50,19 @@ public class RegistroProduccion implements Serializable {
     private Integer idRegistroproduccion;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "total_produccion")
+    private int totalProduccion;
+    @Size(max = 2)
+    @Column(name = "estado")
+    private String estado;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "fecha_inicio")
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
     @Column(name = "fecha_terminacion")
     @Temporal(TemporalType.DATE)
     private Date fechaTerminacion;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "total_produccion")
-    private Integer totalProduccion;
     @JoinColumn(name = "USUARIO_id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
     private Usuario uSUARIOidusuario;
@@ -148,5 +155,12 @@ public class RegistroProduccion implements Serializable {
     public String toString() {
         return "com.estrumetal.jpa.RegistroProduccion[ idRegistroproduccion=" + idRegistroproduccion + " ]";
     }
-    
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }

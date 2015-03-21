@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="4">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="10">
         <file>
             <url>src/java/com/estrumetal/jsf/MaquinaController.java</url>
             <bookmark id="4">
@@ -15,10 +15,31 @@
             </bookmark>
         </file>
         <file>
-            <url>src/java/com/estrumetal/jsf/PlanoController.java</url>
-            <bookmark id="2">
+            <url>src/java/com/estrumetal/jsf/RegistroProduccionController.java</url>
+            <bookmark id="9">
                 <name/>
-                <line>211</line>
+                <line>123</line>
+                <key/>
+            </bookmark>
+            <bookmark id="10">
+                <name/>
+                <line>164</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>web/registroProduccion/Create.xhtml</url>
+            <bookmark id="6">
+                <name/>
+                <line>157</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/java/com/estrumetal/jpa/ScheduleView.java</url>
+            <bookmark id="5">
+                <name/>
+                <line>83</line>
                 <key/>
             </bookmark>
         </file>
@@ -30,10 +51,17 @@
                 <key/>
             </bookmark>
         </file>
+        <file>
+            <url>src/java/com/estrumetal/jsf/PlanoController.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>355</line>
+                <key/>
+            </bookmark>
+        </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/twix/NetBeansProjects/projectEstrumetal/src/java/com/estrumetal/jsf/RegistroProduccionController.java</file>
             <file>file:/home/twix/NetBeansProjects/projectEstrumetal/web/registroProduccion/Create.xhtml</file>
         </group>
     </open-files>

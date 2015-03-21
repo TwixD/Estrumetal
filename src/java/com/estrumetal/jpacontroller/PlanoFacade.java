@@ -9,6 +9,7 @@ import com.estrumetal.jpa.Plano;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -104,5 +105,23 @@ public class PlanoFacade extends AbstractFacade<Plano> {
             return false;
         }
     }
+    
+    public Plano getPlanoById(int id) {
+        String PERSISTENCE_UNIT_NAME = "projectEstrumetalPU";
+        EntityManagerFactory factory;
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        EntityManager emx = factory.createEntityManager();
+        Query q = emx.createQuery("SELECT p FROM Plano p WHERE p.idPlano = :idPlano");
+        q.setParameter("idPlano", id);
+        try {
+            Plano plano;   
+            plano  = (Plano) q.getSingleResult();
+            return plano;
+        } catch (NoResultException e) {
+            System.out.println("PlanoFacade.validate "+ e);
+            return null;
+        }
+    }
+    
 
 }

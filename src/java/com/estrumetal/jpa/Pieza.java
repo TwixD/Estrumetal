@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.estrumetal.jpa;
 
 import java.io.Serializable;
@@ -40,18 +39,19 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pieza.findByAreaCorte", query = "SELECT p FROM Pieza p WHERE p.areaCorte = :areaCorte"),
     @NamedQuery(name = "Pieza.findByBisel", query = "SELECT p FROM Pieza p WHERE p.bisel = :bisel")})
 public class Pieza implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_pieza")
     private Integer idPieza;
-    @Basic(optional = false)
-    @NotNull
+//    @Basic(optional = false)
+//    @NotNull
     @Column(name = "cantidad")
     private Integer cantidad;
-    @Basic(optional = false)
-    @NotNull
+//    @Basic(optional = false)
+//    @NotNull
     @Column(name = "longitud")
     private Integer longitud;
     @Column(name = "ancho")
@@ -180,5 +180,5 @@ public class Pieza implements Serializable {
     public String toString() {
         return "com.estrumetal.jpa.Pieza[ idPieza=" + idPieza + " ]";
     }
-    
+
 }

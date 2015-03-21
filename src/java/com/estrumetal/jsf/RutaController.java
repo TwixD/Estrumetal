@@ -6,7 +6,13 @@ import com.estrumetal.jsf.util.PaginationHelper;
 import com.estrumetal.jpacontroller.RutaFacade;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -84,10 +90,34 @@ public class RutaController implements Serializable {
     }
 
     public String create() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String format = dateFormat.format(current.getFechaProduccion());
+        String format2 = dateFormat.format(current.getFechaTerminacion());
+        Date fechaini = null, fechafini = null;
+        try {
+            fechaini = dateFormat.parse(format);
+            fechafini = dateFormat.parse(format2);
+        } catch (ParseException ex) {
+            Logger.getLogger(RegistroProduccionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         if (current.getFechaProduccion().after(current.getFechaTerminacion())) {
             JsfUtil.addErrorMessage("La fecha de producción debe ser menor a la fecha de terminacion");
             return null;
         }
+
+        List<Date> datesOPUsuarioInicio = ejbFacade.datesRutaMaquinaIdInicio(current.getMAQUINAidmaquina().getIdMaquina());
+        List<Date> datesOPUsuarioTerminacion = ejbFacade.datesRutaMaquinaIdFin(current.getMAQUINAidmaquina().getIdMaquina());
+        for (int i = 0; i < datesOPUsuarioInicio.size(); i++) {
+            System.out.println("" + current.getFechaProduccion() + " after " + datesOPUsuarioInicio.get(i));
+            System.out.println("&& " + current.getFechaTerminacion() + " Before " + datesOPUsuarioTerminacion.get(i));
+            if (fechaini.after(datesOPUsuarioInicio.get(i)) && fechafini.before(datesOPUsuarioTerminacion.get(i)) || fechaini.equals(datesOPUsuarioInicio.get(i)) || fechafini.equals(datesOPUsuarioTerminacion.get(i))) {
+                JsfUtil.addErrorMessage("La máquina ya se encuentra programada programada para producción.");
+                JsfUtil.addErrorMessage("Seleccione otra máquina o cambie la fecha de producción.");
+                return null;
+            }
+        }
+
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RutaCreated"));

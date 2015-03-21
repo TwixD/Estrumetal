@@ -91,6 +91,10 @@ public class OrdenProduccionController implements Serializable {
     }
 
     public String create() {
+        if (getFacade().validateRuta(current.getRUTAidruta().getIdRuta()) != 0) {
+            JsfUtil.addErrorMessage("La Ruta ya se encuentra en producción");
+            return null;
+        }
         int idPlano = current.getPLANOidplano().getIdPlano();
         int aviableCant = getFacade().getPlanoCantidad(idPlano);
         if (current.getCantidad() <= 0) {

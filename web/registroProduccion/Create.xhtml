@@ -11,7 +11,7 @@
         <img src="../resources/img/logolarge.png"/> 
     </ui:define>
     <ui:define name="body">
-        <p:panel id="basic" header="#{bundle.CreateRegistroProduccionTitle}" footer="Registrar producción" style="margin-bottom:20px">
+        <p:panel id="basic" header="#{bundle.CreateRegistroProduccionTitle}" footer="Programar producción paso a paso" style="margin-bottom:20px">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
@@ -49,9 +49,9 @@
                                 </p:overlayPanel>  
                             </p:fieldset>
 
-                            <p:fieldset id="rutaRuta" legend="Tiempos de la ruta"> 
+                            <p:fieldset id="rutaRuta" legend="Tiempos de ruta"> 
                                 <h:panelGrid columns="2" cellpadding="5">
-                                    <p:graphicImage name="img/calendario.png" height="100" id="rutaTime"/>
+                                    <p:graphicImage name="img/tiempo.png" height="100" id="rutaTime"/>
                                     <h:panelGrid columns="2" cellpadding="5">
                                         <h:outputLabel value="Fecha producción:" />
                                         <h:outputText value='#{registroProduccionController.selected.RUTAidruta.fechaProduccion}' style="color: blue"/>
@@ -62,14 +62,69 @@
                                 <p:overlayPanel for="rutaTime" >
                                     <h:panelGrid columns="6" cellpadding="5">
                                         <p:graphicImage name="img/clock.png" height="30"/>
-                                        <h:outputText value="Tiempos de producción" style="color: blue"/>
-                                        <h:outputText value="Es el tiempo en el que se podra hacer un registro de producción"/>
+                                        <h:outputText value="Tiempos de ruta" style="color: blue"/>
+                                        <h:outputText value="Es el tiempo en que se encuentra disponible una máquina"/>
                                     </h:panelGrid>
                                 </p:overlayPanel>  
                             </p:fieldset>
                         </p:panel>
                     </p:tab>
-
+                    
+                    <p:tab id="oproduccion" title="Orden producción">
+                        <h:panelGrid columns="2">
+                            <p:graphicImage name="img/ordenproduccion.PNG" height="100" id="oproduccionIcon"/>
+                                   <h:panelGrid columns="2">
+                                   <h:outputLabel value="Orden de producción relacionada a la Ruta:" />
+                                   <h:outputText value="#{registroProduccionController.selected.RUTAidruta}" />
+                                   <h:outputLabel value="Código orden producción:" />
+                                   <h:outputText value='#{registroProduccionController.getOP(registroProduccionController.selected.RUTAidruta,"idOrdenproduccion")}' style="color: blue"/>
+                                   <h:outputLabel value="Fecha programación:" />
+                                   <h:outputText value='#{registroProduccionController.getOP(registroProduccionController.selected.RUTAidruta,"fecha")}' style="color: blue"/>
+                                   <h:outputLabel value="Cantidad:" />
+                                   <h:outputText value='#{registroProduccionController.getOP(registroProduccionController.selected.RUTAidruta,"cantidad")}' style="color: blue"/>
+                                   <h:outputLabel value="Código Plano:" />
+                                   <h:outputText value='#{registroProduccionController.getOP(registroProduccionController.selected.RUTAidruta,"idPlano")}' style="color: blue"/>
+                                   </h:panelGrid>
+                        </h:panelGrid>
+                        <h3>Seleccione las piezas que va a programar para producción</h3>
+                        
+        <p:dataTable var="pz" value='#{registroProduccionController.getListaPieza(registroProduccionController.getPlanoSelected(registroProduccionController.selected.RUTAidruta))}' 
+                     paginator="true" rows="10"
+                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                     rowsPerPageTemplate="5,10,15"   
+                     id="piezaTable" 
+                     rowKey="#{pz.idPieza}"
+                     selection="#{registroProduccionController.selectedPiezas}"
+                     >
+            
+                 <f:facet name="header">
+                     Piezas
+                 </f:facet>
+                 <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                 <p:column headerText="Código pieza" >
+                      <h:outputText value="#{pz.idPieza}" />
+                 </p:column>
+                 <p:column headerText="Cantidad" >
+                     <h:outputText value="#{pz.cantidad}" />
+                 </p:column>
+                 <p:column headerText="Longitud" >
+                     <h:outputText value="#{pz.longitud}" />
+                 </p:column>
+                 <p:column headerText="Ancho" >
+                     <h:outputText value="#{pz.ancho}" />
+                 </p:column>
+                 <p:column headerText="Cantidad perforaciones" >
+                     <h:outputText value="#{pz.cantidadPerforaciones}" />
+                 </p:column>
+                 <p:column headerText="Area corte" >
+                     <h:outputText value="#{pz.areaCorte}" />
+                 </p:column>
+                 <p:column headerText="Bisel" >
+                     <h:outputText value="#{pz.bisel}" />
+                 </p:column>
+            </p:dataTable>
+                        
+                    </p:tab>
                     <p:tab id="operario" title="Operario">
                         <h:panelGrid columns="2">    
                             <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_USUARIOidusuario}" for="USUARIOidusuario" />
@@ -100,21 +155,16 @@
                             </p:fieldset>
 
                         </p:panel>
-                    </p:tab>
-                    
+                    </p:tab>                  
                     
                     <p:tab id="fin" title="Fin">
                  <h:panelGrid columns="2">
                     <p:outputLabel value="Código registro producción:" for="idRegistroProduccion" rendered="true"/>
                     <p:inputText id="idRegistroProduccion" value='#{maquinaController.getIdTable("id_registroproduccion","REGISTRO_PRODUCCION")}' title="Código registro producción" style="width: 220px;" rendered="true" disabled="true"/>
-
-
                     <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_fechaInicio}" for="fechaInicio" />
-                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaInicio" locale="es" value="#{registroProduccionController.selected.fechaInicio}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_fechaInicio}" style="width: 220px;"/>
+                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaInicio" locale="es" value="#{registroProduccionController.selected.fechaInicio}" navigator="true" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_fechaInicio}" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_fechaTerminacion}" for="fechaTerminacion" />
-                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaTerminacion" locale="es" value="#{registroProduccionController.selected.fechaTerminacion}" navigator="true" pattern="MM/dd/yyyy" />
-                    <p:outputLabel value="#{bundle.CreateRegistroProduccionLabel_totalProduccion}" for="totalProduccion" />
-                    <p:inputText id="totalProduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.CreateRegistroProduccionTitle_totalProduccion}" required="true" requiredMessage="#{bundle.CreateRegistroProduccionRequiredMessage_totalProduccion}" style="width: 220px;"/>
+                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaTerminacion" locale="es" value="#{registroProduccionController.selected.fechaTerminacion}" navigator="true" required="true" pattern="MM/dd/yyyy HH:mm:ss" style="width: 220px;" requiredMessage="Se requiere el campo fecha de terminación." />
                 </h:panelGrid>
                 <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{registroProduccionController.create}" value="#{bundle.CreateRegistroProduccionSaveLink}"  ajax="false" icon="ui-icon-disk"/> 

@@ -3,6 +3,7 @@ package com.estrumetal.jsf;
 import com.estrumetal.jpa.Pieza;
 import com.estrumetal.jpa.Plano;
 import com.estrumetal.jpa.Usuario;
+import com.estrumetal.jpacontroller.MaquinaFacade;
 import com.estrumetal.jpacontroller.PiezaFacade;
 import com.estrumetal.jsf.util.JsfUtil;
 import com.estrumetal.jsf.util.PaginationHelper;
@@ -50,6 +51,7 @@ public class PlanoController implements Serializable {
     private com.estrumetal.jpacontroller.PlanoFacade ejbFacade;
     @EJB
     private com.estrumetal.jpacontroller.PiezaFacade ejbFacade2;
+    MaquinaFacade facade = new MaquinaFacade();
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -61,16 +63,6 @@ public class PlanoController implements Serializable {
             current = new Plano();
             selectedItemIndex = -1;
         }
-        pieza.setPLANOidplano(current);
-        pieza1.setPLANOidplano(current);
-        pieza2.setPLANOidplano(current);
-        pieza3.setPLANOidplano(current);
-        pieza4.setPLANOidplano(current);
-        pieza5.setPLANOidplano(current);
-        pieza6.setPLANOidplano(current);
-        pieza7.setPLANOidplano(current);
-        pieza8.setPLANOidplano(current);
-        pieza9.setPLANOidplano(current);
         return current;
     }
 
@@ -152,8 +144,9 @@ public class PlanoController implements Serializable {
                 JsfUtil.addErrorMessage("Area unitaria debe ser mayor a '0'.");
                 return null;
             } else {
-                if (current.getCantidad() <= 0) {
+                if (current.getCantidad() <= 0 || current.getCantidad() > 9999) {
                     JsfUtil.addErrorMessage("Cantidad debe ser mayor a '0'.");
+                    JsfUtil.addErrorMessage("Cantidad debe ser menor o igual a 1000.");
                     return null;
                 } else {
                     try {
@@ -170,38 +163,189 @@ public class PlanoController implements Serializable {
     }
 
     public String createPlanoPieza() {
+        boolean flag = false, flag2 = false, flag3 = false, flag4 = false, flag5 = false;
+        boolean flag6 = false, flag7 = false, flag8 = false, flag9 = false, flag10 = false;
         try {
-            getFacade().create(current);
             if (pieza.getMATERIAPRIMAidmateriaprima() != null) {
-                getFacade2().create(pieza);
+                if (pieza.getCantidad() == null) {
+                    JsfUtil.addErrorMessage("Ingrese la cantidad de pieza 1.");
+                    return null;
+                } else {
+                    if (pieza.getLongitud() == null) {
+                        JsfUtil.addErrorMessage("Ingrese la longitud de pieza 1.");
+                        return null;
+                    } else {
+                        flag = true;
+                    }
+                }
             }
             if (pieza1.getMATERIAPRIMAidmateriaprima() != null) {
-                getFacade2().create(pieza1);
+                if (pieza1.getCantidad() == null) {
+                    JsfUtil.addErrorMessage("Ingrese la cantidad de pieza 2.");
+                    return null;
+                } else {
+                    if (pieza1.getLongitud() == null) {
+                        JsfUtil.addErrorMessage("Ingrese la longitud de pieza 2.");
+                        return null;
+                    } else {
+                        flag2 = true;
+                    }
+                }
             }
             if (pieza2.getMATERIAPRIMAidmateriaprima() != null) {
-                getFacade2().create(pieza2);
+                if (pieza2.getCantidad() == null) {
+                    JsfUtil.addErrorMessage("Ingrese la cantidad de pieza 3.");
+                    return null;
+                } else {
+                    if (pieza2.getLongitud() == null) {
+                        JsfUtil.addErrorMessage("Ingrese la longitud de pieza 3.");
+                        return null;
+                    } else {
+                        flag3 = true;
+                    }
+                }
             }
             if (pieza3.getMATERIAPRIMAidmateriaprima() != null) {
-                getFacade2().create(pieza3);
+                if (pieza3.getCantidad() == null) {
+                    JsfUtil.addErrorMessage("Ingrese la cantidad de pieza 4.");
+                    return null;
+                } else {
+                    if (pieza3.getLongitud() == null) {
+                        JsfUtil.addErrorMessage("Ingrese la longitud de pieza 4.");
+                        return null;
+                    } else {
+                        flag4 = true;
+                    }
+                }
             }
             if (pieza4.getMATERIAPRIMAidmateriaprima() != null) {
-                getFacade2().create(pieza4);
+                if (pieza4.getCantidad() == null) {
+                    JsfUtil.addErrorMessage("Ingrese la cantidad de pieza 5.");
+                    return null;
+                } else {
+                    if (pieza4.getLongitud() == null) {
+                        JsfUtil.addErrorMessage("Ingrese la longitud de pieza 5.");
+                        return null;
+                    } else {
+                        flag5 = true;
+                    }
+                }
             }
             if (pieza5.getMATERIAPRIMAidmateriaprima() != null) {
-                getFacade2().create(pieza5);
+                if (pieza5.getCantidad() == null) {
+                    JsfUtil.addErrorMessage("Ingrese la cantidad de pieza 6.");
+                    return null;
+                } else {
+                    if (pieza5.getLongitud() == null) {
+                        JsfUtil.addErrorMessage("Ingrese la longitud de pieza 6.");
+                        return null;
+                    } else {
+                        flag6 = true;
+                    }
+                }
             }
             if (pieza6.getMATERIAPRIMAidmateriaprima() != null) {
-                getFacade2().create(pieza6);
+                if (pieza6.getCantidad() == null) {
+                    JsfUtil.addErrorMessage("Ingrese la cantidad de pieza 7.");
+                    return null;
+                } else {
+                    if (pieza6.getLongitud() == null) {
+                        JsfUtil.addErrorMessage("Ingrese la longitud de pieza 7.");
+                        return null;
+                    } else {
+                        flag7 = true;
+                    }
+                }
             }
             if (pieza7.getMATERIAPRIMAidmateriaprima() != null) {
-                getFacade2().create(pieza7);
+                if (pieza7.getCantidad() == null) {
+                    JsfUtil.addErrorMessage("Ingrese la cantidad de pieza 8.");
+                    return null;
+                } else {
+                    if (pieza7.getLongitud() == null) {
+                        JsfUtil.addErrorMessage("Ingrese la longitud de pieza 8.");
+                        return null;
+                    } else {
+                        flag8 = true;
+                    }
+                }
             }
             if (pieza8.getMATERIAPRIMAidmateriaprima() != null) {
-                getFacade2().create(pieza8);
+                if (pieza8.getCantidad() == null) {
+                    JsfUtil.addErrorMessage("Ingrese la cantidad de pieza 9.");
+                    return null;
+                } else {
+                    if (pieza8.getLongitud() == null) {
+                        JsfUtil.addErrorMessage("Ingrese la longitud de pieza 9.");
+                        return null;
+                    } else {
+                        flag9 = true;
+                    }
+                }
             }
             if (pieza9.getMATERIAPRIMAidmateriaprima() != null) {
+                if (pieza9.getCantidad() == null) {
+                    JsfUtil.addErrorMessage("Ingrese la cantidad de pieza 10.");
+                    return null;
+                } else {
+                    if (pieza9.getLongitud() == null) {
+                        JsfUtil.addErrorMessage("Ingrese la longitud de pieza 10.");
+                        return null;
+                    } else {
+                        flag10 = true;
+                    }
+                }
+            }
+
+            getFacade().create(current);
+            Plano planoById = ejbFacade.getPlanoById(Integer.parseInt(facade.getMaxId("id_plano", "PLANO")));
+            if (flag) {
+                pieza.setPLANOidplano(planoById);
+                getFacade2().create(pieza);
+            }
+            if (flag2) {
+                pieza1.setPLANOidplano(planoById);
+                getFacade2().create(pieza1);
+            }
+            if (flag3) {
+                pieza2.setPLANOidplano(planoById);
+                getFacade2().create(pieza2);
+            }
+            if (flag4) {
+                pieza3.setPLANOidplano(planoById);
+                getFacade2().create(pieza3);
+            }
+
+            if (flag5) {
+                pieza4.setPLANOidplano(planoById);
+                getFacade2().create(pieza4);
+            }
+
+            if (flag6) {
+                pieza5.setPLANOidplano(planoById);
+                getFacade2().create(pieza5);
+            }
+
+            if (flag7) {
+                pieza6.setPLANOidplano(planoById);
+                getFacade2().create(pieza6);
+            }
+
+            if (flag8) {
+                pieza7.setPLANOidplano(planoById);
+                getFacade2().create(pieza7);
+            }
+
+            if (flag9) {
+                pieza8.setPLANOidplano(planoById);
+                getFacade2().create(pieza8);
+            }
+            if (flag10) {
+                pieza9.setPLANOidplano(planoById);
                 getFacade2().create(pieza9);
             }
+
+
             JsfUtil.addSuccessMessage("Plano creado con multiples piezas.");
             return prepareCreatePlanoPieza();
         } catch (Exception e) {

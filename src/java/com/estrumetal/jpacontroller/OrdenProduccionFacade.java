@@ -6,6 +6,9 @@
 package com.estrumetal.jpacontroller;
 
 import com.estrumetal.jpa.OrdenProduccion;
+import com.estrumetal.jpa.Pieza;
+import com.estrumetal.jpa.Plano;
+import com.estrumetal.jpa.Ruta;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -13,6 +16,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -56,21 +60,21 @@ public class OrdenProduccionFacade extends AbstractFacade<OrdenProduccion> {
             EntityManagerFactory factory;
             factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
             EntityManager emx = factory.createEntityManager();
-            String sql = "SELECT fecha_inicio FROM REGISTRO_PRODUCCION WHERE USUARIO_id_usuario = "+idUsuario;
+            String sql = "SELECT fecha_inicio FROM REGISTRO_PRODUCCION WHERE USUARIO_id_usuario = " + idUsuario;
             Query q = emx.createNativeQuery(sql);
             return q.getResultList();
         } catch (Exception e) {
             return null;
         }
     }
-    
-        public List<Date> datesOPUsuarioTerminacion(int idUsuario) {
+
+    public List<Date> datesOPUsuarioTerminacion(int idUsuario) {
         try {
             String PERSISTENCE_UNIT_NAME = "projectEstrumetalPU";
             EntityManagerFactory factory;
             factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
             EntityManager emx = factory.createEntityManager();
-            String sql = "SELECT fecha_terminacion FROM REGISTRO_PRODUCCION WHERE USUARIO_id_usuario = "+idUsuario;
+            String sql = "SELECT fecha_terminacion FROM REGISTRO_PRODUCCION WHERE USUARIO_id_usuario = " + idUsuario;
             Query q = emx.createNativeQuery(sql);
             return q.getResultList();
         } catch (Exception e) {
@@ -112,7 +116,6 @@ public class OrdenProduccionFacade extends AbstractFacade<OrdenProduccion> {
         } catch (Exception e) {
             System.out.println(e + "");
             return 0;
-
         }
     }
 
@@ -127,6 +130,54 @@ public class OrdenProduccionFacade extends AbstractFacade<OrdenProduccion> {
             return (int) q.getSingleResult();
         } catch (Exception e) {
             return 0;
+        }
+    }
+
+    public int validateRuta(int idRuta) {
+        try {
+            String PERSISTENCE_UNIT_NAME = "projectEstrumetalPU";
+            EntityManagerFactory factory;
+            factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+            EntityManager emx = factory.createEntityManager();
+            String sql = "SELECT id_ordenproduccion FROM ORDEN_PRODUCCION WHERE RUTA_id_ruta = " + idRuta;
+            Query q = emx.createNativeQuery(sql);
+            return (int) q.getSingleResult();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public OrdenProduccion getOrdenProduccionById(Ruta r) {
+        String PERSISTENCE_UNIT_NAME = "projectEstrumetalPU";
+        EntityManagerFactory factory;
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        EntityManager emx = factory.createEntityManager();
+        Query q = emx.createQuery("SELECT o FROM OrdenProduccion o WHERE o.rUTAidruta = :rutaIdRuta");
+        q.setParameter("rutaIdRuta", r);
+        try {
+            OrdenProduccion ordenProduccion;
+            ordenProduccion = (OrdenProduccion) q.getSingleResult();
+            return ordenProduccion;
+        } catch (NoResultException e) {
+            System.out.println("OrdenProduccionFacade.getOrdenProduccionById " + e);
+            return null;
+        }
+    }
+
+    public List<Pieza> getPiezasById(Plano idPlano) {
+        String PERSISTENCE_UNIT_NAME = "projectEstrumetalPU";
+        EntityManagerFactory factory;
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        EntityManager emx = factory.createEntityManager();
+        Query q = emx.createQuery("SELECT p FROM Pieza p WHERE p.pLANOidplano = :planoIdPlano");
+        q.setParameter("planoIdPlano", idPlano);
+        try {
+            List<Pieza> l;
+            l = q.getResultList();
+            return l;
+        } catch (NoResultException e) {
+            System.out.println("OrdenProduccionFacade.getPiezasById " + e);
+            return null;
         }
     }
 
