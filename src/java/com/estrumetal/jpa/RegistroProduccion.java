@@ -153,7 +153,7 @@ public class RegistroProduccion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.estrumetal.jpa.RegistroProduccion[ idRegistroproduccion=" + idRegistroproduccion + " ]";
+        return "Codigo : "+idRegistroproduccion +" - Nombre : "+ uSUARIOidusuario.getNombre()+ " - Fecha : " + fechaInicio ;
     }
 
     public String getEstado() {

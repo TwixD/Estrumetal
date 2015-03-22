@@ -5,6 +5,7 @@
  */
 package com.estrumetal.jpacontroller;
 
+import com.estrumetal.jpa.DetRegProduccion;
 import com.estrumetal.jpa.OrdenProduccion;
 import com.estrumetal.jpa.Pieza;
 import com.estrumetal.jpa.Plano;
@@ -164,19 +165,34 @@ public class OrdenProduccionFacade extends AbstractFacade<OrdenProduccion> {
         }
     }
 
-    public List<Pieza> getPiezasById(Plano idPlano) {
+    public List<Pieza> getPiezasById(Plano idPlano, String cods) {
         String PERSISTENCE_UNIT_NAME = "projectEstrumetalPU";
         EntityManagerFactory factory;
         factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         EntityManager emx = factory.createEntityManager();
-        Query q = emx.createQuery("SELECT p FROM Pieza p WHERE p.pLANOidplano = :planoIdPlano");
+        String sql = "SELECT p FROM Pieza p WHERE p.pLANOidplano = :planoIdPlano AND p.idPieza NOT IN(" + cods + ")";
+        Query q = emx.createQuery(sql);
         q.setParameter("planoIdPlano", idPlano);
         try {
-            List<Pieza> l;
+            return q.getResultList();
+        } catch (NoResultException e) {
+            System.out.println("OrdenProduccionFacade.getPiezasById " + e);
+            return null;
+        }
+    }
+
+    public List<DetRegProduccion> getDetRegProduccion() {
+        String PERSISTENCE_UNIT_NAME = "projectEstrumetalPU";
+        EntityManagerFactory factory;
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        EntityManager emx = factory.createEntityManager();
+        Query q = emx.createQuery("SELECT d FROM DetRegProduccion d");
+        try {
+            List<DetRegProduccion> l;
             l = q.getResultList();
             return l;
         } catch (NoResultException e) {
-            System.out.println("OrdenProduccionFacade.getPiezasById " + e);
+            System.out.println("OrdenProduccionFacade.getDetRegProduccion " + e);
             return null;
         }
     }

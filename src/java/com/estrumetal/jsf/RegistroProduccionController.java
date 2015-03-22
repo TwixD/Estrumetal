@@ -166,7 +166,7 @@ public class RegistroProduccionController implements Serializable {
             current.setTotalProduccion(0);
             current.setEstado("A");
             maquinaFacacade = new MaquinaFacade();
-            String idMazi = maquinaFacacade.getMaxId("id_registroproduccion","REGISTRO_PRODUCCION");
+            String idMazi = maquinaFacacade.getMaxId("id_registroproduccion", "REGISTRO_PRODUCCION");
             int x = Integer.parseInt(idMazi);
             x++;
             getFacade().create(current);
@@ -311,7 +311,24 @@ public class RegistroProduccionController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        //return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        List<RegistroProduccion> findAll = ejbFacade.findAll();
+        System.out.println(findAll.size());
+        for (int i = 0; i < findAll.size(); i++) {
+            System.out.println();
+            if (findAll.get(i).getEstado() == null || findAll.get(i).getEstado().equalsIgnoreCase("I")) {
+                System.out.println(findAll.get(i).getEstado() + " REMOVE CODE:" + findAll.get(i).getIdRegistroproduccion());
+                findAll.remove(i);
+            }
+//            if (!findAll.get(i).getEstado().equalsIgnoreCase("A")) {
+//               
+//                System.out.println(findAll.get(i).getEstado());
+//                
+//                //
+//            }
+        }
+        return JsfUtil.getSelectItems(findAll, true);
+
     }
 
     @FacesConverter(forClass = RegistroProduccion.class)
@@ -411,7 +428,17 @@ public class RegistroProduccionController implements Serializable {
     }
 
     public List<Pieza> getListaPieza(Plano idPlano) {
-        return facade.getPiezasById(idPlano);
+        String cods = "";
+        List<DetRegProduccion> detRegProduccion1 = facade.getDetRegProduccion();
+        if (!detRegProduccion1.isEmpty()) {
+            for (int i = 0; i < detRegProduccion1.size(); i++) {
+                cods += detRegProduccion1.get(i).getCodPieza();
+                if (i != detRegProduccion1.size() - 1) {
+                    cods += ",";
+                }
+            }
+        }
+        return facade.getPiezasById(idPlano, cods);
     }
 
     public void setListaPieza(List<Pieza> listaPieza) {
