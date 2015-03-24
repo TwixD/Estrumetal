@@ -105,7 +105,66 @@ public class LoginBean implements Serializable {
         return rol;
     }
 
-    public boolean admin() {
+    public boolean admin(String vista) {
+        switch (vista) {
+            case "maquina":
+                if (rol == 1 || rol == 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case "materiaprima":
+                if (rol == 1 || rol == 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case "obra":
+                if (rol == 1 || rol == 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case "ordenproduccion":
+                if (rol == 1 || rol == 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case "pieza":
+                if (rol == 1 || rol == 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case "plano":
+                if (rol == 1 || rol == 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case "registroproduccion":
+                return true;
+            case "ruta":
+                if (rol == 1 || rol == 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case "rol":
+                if (rol == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case "usuario":
+                if (rol == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+        }
+
         if (rol == 1) {
             return true;
         } else {
@@ -132,8 +191,8 @@ public class LoginBean implements Serializable {
     public String getUserName() {
         return usuarioFacade.getUsername();
     }
-    
-    public int getUserId(){
+
+    public int getUserId() {
         return usuarioFacade.getId();
     }
 

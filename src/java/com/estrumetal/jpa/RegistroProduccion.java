@@ -153,7 +153,7 @@ public class RegistroProduccion implements Serializable {
 
     @Override
     public String toString() {
-        return "Codigo : "+idRegistroproduccion +" - Nombre : "+ uSUARIOidusuario.getNombre()+ " - Fecha : " + fechaInicio ;
+        return "Codigo : "+idRegistroproduccion;
     }
 
     public String getEstado() {

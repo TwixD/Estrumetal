@@ -20,19 +20,25 @@
                     <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_idRegistroproduccion}" for="idRegistroproduccion" />
                     <p:inputText id="idRegistroproduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.idRegistroproduccion}" title="#{bundle.EditRegistroProduccionTitle_idRegistroproduccion}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_idRegistroproduccion}" disabled="true" style="width: 220px;"/>
                     <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_RUTAidruta}" for="RUTAidruta" />
-                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="RUTAidruta" value="#{registroProduccionController.selected.RUTAidruta}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_RUTAidruta}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="RUTAidruta" value="#{registroProduccionController.selected.RUTAidruta}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_RUTAidruta}" style="width: 230px;" disabled="true">
                         <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_USUARIOidusuario}" for="USUARIOidusuario" />
-                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="USUARIOidusuario" value="#{registroProduccionController.selected.USUARIOidusuario}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_USUARIOidusuario}" style="width: 230px;">
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="USUARIOidusuario" value="#{registroProduccionController.selected.USUARIOidusuario}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_USUARIOidusuario}" style="width: 230px;" disabled="true">
                         <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>    
                     <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_fechaInicio}" for="fechaInicio" />
-                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaInicio" locale="es" value="#{registroProduccionController.selected.fechaInicio}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_fechaInicio}"/>     
+                    <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaInicio" locale="es" value="#{registroProduccionController.selected.fechaInicio}" navigator="true" pattern="MM/dd/yyyy" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_fechaInicio}" disabled="true"/>     
                     <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_fechaTerminacion}" for="fechaTerminacion" />
                     <p:calendar styleClass="calendar" readonlyInput="true" mindate="#{ordenProduccionController.currentDate}" id="fechaTerminacion" locale="es" value="#{registroProduccionController.selected.fechaTerminacion}" navigator="true" pattern="MM/dd/yyyy" />
                     <p:outputLabel value="#{bundle.EditRegistroProduccionLabel_totalProduccion}" for="totalProduccion" />
                     <p:inputText id="totalProduccion" onkeypress="if(event.which &lt;  48 || event.which &gt; 57) return false;" value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.EditRegistroProduccionTitle_totalProduccion}" required="true" requiredMessage="#{bundle.EditRegistroProduccionRequiredMessage_totalProduccion}" style="width: 220px;"/>
+                    <p:outputLabel value="Estado:" for="estado" />
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" id="estado" value="#{registroProduccionController.selected.estado}" required="true" requiredMessage="Seleccione el estado." style="width: 230px;">
+                        <f:selectItem itemValue="" itemLabel="Elija un estado" />
+                        <f:selectItem itemValue="A" itemLabel="A" />
+                        <f:selectItem itemValue="I" itemLabel="I" />
+                    </p:selectOneMenu>  
                 </h:panelGrid>
                 <h:panelGrid columns="3" styleClass="link">
                     <p:commandButton action="#{registroProduccionController.update}" value="#{bundle.EditRegistroProduccionSaveLink}" ajax="false" icon="ui-icon-pencil" rendered="#{loginBean.admin()}"/>

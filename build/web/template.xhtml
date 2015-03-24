@@ -67,7 +67,7 @@
                 </p:layoutUnit>
                 <p:layoutUnit id="menuLayout" position="west" size="230" header="Menú" collapsible="true">
                     <h:form>
-                        <p:accordionPanel id="menuPanel" activeIndex="null">
+                        <p:accordionPanel id="menuPanel" activeIndex="null" rendered='#{loginBean.admin("maquina")}' >
                             <p:tab id="tabMaquina" title="Máquina">
                                 <p:menu style="height: 53px; width: 190px;">
                                     <p:menuitem value="Crear máquina"  icon="ui-icon-disk" outcome="/maquina/Create"/>
@@ -76,7 +76,7 @@
                             </p:tab>
                         </p:accordionPanel> 
 
-                        <p:accordionPanel id="menuPanel2" activeIndex="null">
+                        <p:accordionPanel id="menuPanel2" activeIndex="null" rendered='#{loginBean.admin("materiaprima")}'>
                             <p:tab id="tabMateriaPrima" title="Materia prima">
                                 <p:menu style="height: 53px; width: 190px;">
                                     <p:menuitem value="Crear materia prima"  icon="ui-icon-disk" outcome="/materiaPrima/Create"/>
@@ -85,7 +85,7 @@
                             </p:tab>
                         </p:accordionPanel> 
 
-                        <p:accordionPanel id="menuPanel3" activeIndex="null">
+                        <p:accordionPanel id="menuPanel3" activeIndex="null" rendered='#{loginBean.admin("obra")}'>
                             <p:tab id="tabObra" title="Obra">
                                 <p:menu style="height: 53px; width: 190px;">
                                     <p:menuitem value="Crear obra"  icon="ui-icon-disk" outcome="/obra/Create"/>
@@ -94,7 +94,7 @@
                             </p:tab>
                         </p:accordionPanel> 
 
-                        <p:accordionPanel id="menuPanel4" activeIndex="null">
+                        <p:accordionPanel id="menuPanel4" activeIndex="null" rendered='#{loginBean.admin("ordenproduccion")}'>
                             <p:tab id="tabOrdenDeProduccion" title="Orden de producción">
                                 <p:menu style="height: 80px; width: 190px;">
                                     <p:menuitem value="Crear orden de producción"  icon="ui-icon-disk" outcome="/ordenProduccion/Create"/>
@@ -103,15 +103,15 @@
                                 </p:menu>
                             </p:tab>
                         </p:accordionPanel> 
-                        <p:accordionPanel id="menuPanel5" activeIndex="null">
-                            <p:tab id="tabOrdenDeProduccion" title="Pieza">
+                        <p:accordionPanel id="menuPanel5" activeIndex="null" rendered='#{loginBean.admin("pieza")}'>
+                            <p:tab id="tabPieza" title="Pieza" >
                                 <p:menu style="height: 53px; width: 190px;">
                                     <p:menuitem value="Crear pieza"  icon="ui-icon-disk" outcome="/pieza/Create"/>
                                     <p:menuitem value="Listar pieza"  icon="ui-icon-clipboard" outcome="/pieza/List"/>
                                 </p:menu>
                             </p:tab>
                         </p:accordionPanel> 
-                        <p:accordionPanel id="menuPanel6" activeIndex="null">
+                        <p:accordionPanel id="menuPanel6" activeIndex="null" rendered='#{loginBean.admin("plano")}'>
                             <p:tab id="tabPlano" title="Plano">
                                 <p:menu style="height: 133px; width: 190px;">
                                     <p:menuitem value="Crear plano"  icon="ui-icon-disk" outcome="/plano/Create"/>
@@ -125,11 +125,10 @@
                                 </p:menu>
                             </p:tab>
                         </p:accordionPanel> 
-                        <p:accordionPanel id="menuPanel7" activeIndex="null">
+                        <p:accordionPanel id="menuPanel7" activeIndex="null" rendered='#{loginBean.admin("registroproduccion")}'>
                             <p:tab id="tabRegistroProduccion" title="Registro producción">
-                                <p:menu style="height: 209px; width: 190px;">
+                                <p:menu style="height: 190px; width: 190px;">
                                     <p:menuitem value="Programar producción"  icon="ui-icon-disk" outcome="/registroProduccion/Create"/>
-                                    <p:menuitem value="Registro producción"  icon="ui-icon-disk" outcome="/registroProduccion/RegistroProduccion"/>
                                     <p:menuitem value="Listar registro producción"  icon="ui-icon-clipboard" outcome="/registroProduccion/List"/>
                                     <p:menuitem value="Programación de producción"  icon="ui-icon-clock" outcome="/registroProduccion/ProgramacionProduccion"/>
                                     <p:menuitem value="Pendiente por producción"  icon="ui-icon-calculator" outcome="/registroProduccion/PendienteProduccion"/>
@@ -139,7 +138,7 @@
                                 </p:menu>
                             </p:tab>
                         </p:accordionPanel> 
-                        <p:accordionPanel id="menuPanel8" activeIndex="null" rendered="#{loginBean.admin()}">
+                        <p:accordionPanel id="menuPanel8" activeIndex="null" rendered='#{loginBean.admin("rol")}'>
                             <p:tab id="tabRol" title="Rol">
                                 <p:menu style="height: 53px; width: 190px;">
                                     <p:menuitem value="Crear rol"  icon="ui-icon-disk" outcome="/rol/Create"/>
@@ -147,7 +146,7 @@
                                 </p:menu>
                             </p:tab>
                         </p:accordionPanel> 
-                        <p:accordionPanel id="menuPanel9" activeIndex="null">
+                        <p:accordionPanel id="menuPanel9" activeIndex="null" rendered='#{loginBean.admin("ruta")}'>
                             <p:tab id="tabRuta" title="Ruta">
                                 <p:menu style="height: 53px; width: 190px;">
                                     <p:menuitem value="Crear ruta"  icon="ui-icon-disk" outcome="/ruta/Create"/>
@@ -155,7 +154,7 @@
                                 </p:menu>
                             </p:tab>
                         </p:accordionPanel> 
-                        <p:accordionPanel id="menuPanel10" activeIndex="null" rendered="#{loginBean.admin()}">
+                        <p:accordionPanel id="menuPanel10" activeIndex="null" rendered='#{loginBean.admin("usuario")}'>
                             <p:tab id="tabUsuario" title="Usuario">
                                 <p:menu style="height: 53px; width: 190px;">
                                     <p:menuitem value="Crear usuario" icon="ui-icon-person" outcome="/usuario/Create"/>

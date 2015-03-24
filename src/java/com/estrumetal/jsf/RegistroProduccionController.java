@@ -313,22 +313,24 @@ public class RegistroProduccionController implements Serializable {
     public SelectItem[] getItemsAvailableSelectOne() {
         //return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
         List<RegistroProduccion> findAll = ejbFacade.findAll();
-        System.out.println(findAll.size());
-        for (int i = 0; i < findAll.size(); i++) {
-            System.out.println();
-            if (findAll.get(i).getEstado() == null || findAll.get(i).getEstado().equalsIgnoreCase("I")) {
-                System.out.println(findAll.get(i).getEstado() + " REMOVE CODE:" + findAll.get(i).getIdRegistroproduccion());
-                findAll.remove(i);
+        int x = 0, i = 0;
+        do {
+            if (i != findAll.size() - 1) {
+                if (findAll.get(i).getEstado() == null) {
+                    findAll.remove(i);
+                } else {
+                    if (findAll.get(i).getEstado().equalsIgnoreCase("I")) {
+                        findAll.remove(i);
+                    } else {
+                        i++;
+                    }
+                }
+            } else {
+                x = 1;
             }
-//            if (!findAll.get(i).getEstado().equalsIgnoreCase("A")) {
-//               
-//                System.out.println(findAll.get(i).getEstado());
-//                
-//                //
-//            }
-        }
-        return JsfUtil.getSelectItems(findAll, true);
 
+        } while (x != 1);
+        return JsfUtil.getSelectItems(findAll, true);
     }
 
     @FacesConverter(forClass = RegistroProduccion.class)

@@ -34,6 +34,14 @@
                     <p:outputLabel value="#{bundle.ViewRegistroProduccionLabel_totalProduccion}"/>
                     <p:outputLabel value="#{registroProduccionController.selected.totalProduccion}" title="#{bundle.ViewRegistroProduccionTitle_totalProduccion}"/>
                 </h:panelGrid>
+                <h3>Estado : A</h3>
+                <h4>Activo : Se encuentra todavia en producción</h4>
+                <h3>Estado : I</h3>
+                <h4>Inactivo : Se encuentra finalizado.</h4>
+                <h:panelGrid columns="2" style="font-size: 30px;">
+                    <p:outputLabel value="Estado :"/>
+                    <p:outputLabel value="#{registroProduccionController.selected.estado}" title="Estado" style="color: red;"/>          
+                </h:panelGrid>   
                 <h:panelGrid columns="4" styleClass="link">
                     <p:commandButton action="#{registroProduccionController.destroyAndView}"  value="#{bundle.ViewRegistroProduccionDestroyLink}" ajax="false" icon="ui-icon-trash" rendered="false"/>
                     <p:button outcome="Edit" value="#{bundle.ViewRegistroProduccionEditLink}" icon="ui-icon-pencil"/>
